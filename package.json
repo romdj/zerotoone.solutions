@@ -1,0 +1,21 @@
+{
+  "name": "zerotoone.solutions",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romdj/zerotoone.solutions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/romdj/zerotoone.solutions/issues"
+  },
+  "homepage": "https://github.com/romdj/zerotoone.solutions#readme"
+}
