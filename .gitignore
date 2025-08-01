@@ -27,3 +27,12 @@ inspirations/
 **.log
 *.log
 
+# Test results
+test-results/
+
+# Playwright reports
+playwright-report/
+
+# Additional generated files
+.last-run.json
+
