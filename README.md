@@ -87,6 +87,9 @@ Comprehensive automated tests cover:
 # Run all tests
 npm run test
 
+# Run quick tests (Chrome only)
+npm run test:quick
+
 # Run tests with UI
 npm run test:ui
 
@@ -95,6 +98,28 @@ npm run test:report
 
 # Run specific test
 npm run test -- --grep "homepage"
+```
+
+### Git Hooks & Quality Assurance
+
+Automated quality checks run on every commit and push:
+
+**Pre-commit hooks:**
+- ✅ TypeScript/Svelte syntax checking on modified files only
+- ✅ Streamlined quality validation
+- ✅ Fast execution for development workflow
+
+**Pre-push hooks:**
+- ✅ Full project build
+- ✅ Comprehensive test suite (Playwright)
+- ✅ Cross-browser compatibility verification
+
+```bash
+# Hooks are automatically installed with:
+npm install
+
+# Manual hook setup (if needed):
+npx husky init
 ```
 
 ## 🏗 Development
