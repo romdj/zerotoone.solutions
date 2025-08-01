@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .brand-gradient-text {
+            background: linear-gradient(135deg, #F11759 0%, #8333C5 50%, #D67D21 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #F11759;
+        }
+        
+        @supports (-webkit-background-clip: text) {
+            .brand-gradient-text {
+                color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="brand-gradient-text">Test Zero to One Solutions</h1>
+    <p>This should show the gradient text</p>
+</body>
+</html>
