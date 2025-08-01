@@ -8,7 +8,6 @@
 	<title>Zero to One Solutions - Creating Tomorrow, Today</title>
 	
 	<!-- Favicon - multiple formats for best compatibility -->
-	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 	<link rel="icon" href="/favicon.png" type="image/png" />
 	<link rel="apple-touch-icon" href="/favicon.png" />
 	
