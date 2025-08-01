@@ -24,4 +24,6 @@ vite.config.ts.timestamp-*
 
 inspirations/
 
-assets/Delivery 27_02_2024/
+**.log
+*.log
+
