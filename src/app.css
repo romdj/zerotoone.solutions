@@ -1,0 +1,63 @@
+/* Import custom components first */
+@import './lib/styles/components.css';
+@import './lib/styles/animations.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+}
+
+/* Custom component layer - outside @layer to ensure loading */
+.brand-gradient-text {
+  background: linear-gradient(135deg, #F11759 0%, #8333C5 50%, #D67D21 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* Always show readable text first */
+  color: #F11759 !important;
+}
+
+/* Only make transparent if gradient clipping works */
+@supports (-webkit-background-clip: text) {
+  .brand-gradient-text {
+    color: transparent !important;
+  }
+}
+
+.floating-elements {
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-elements::before,
+.floating-elements::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.floating-elements::before {
+  width: 12rem;
+  height: 12rem;
+  top: -6rem;
+  right: -6rem;
+}
+
+.floating-elements::after {
+  width: 18rem;
+  height: 18rem;
+  bottom: -9rem;
+  left: -9rem;
+}
