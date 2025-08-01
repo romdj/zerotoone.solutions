@@ -287,6 +287,32 @@
 					<div style="color: white; font-size: 3rem;">🏥</div>
 				</div>
 			</div>
+			<div style="flex: 1;">
+				<div style="font-size: 4rem; font-weight: 900; margin-bottom: 2rem; color: #FF5722; text-transform: uppercase; letter-spacing: 0.1em;">
+					ABVV-FGTB
+				</div>
+				<h3 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; color: white;">
+					30-Year Legacy Modernization
+				</h3>
+				<p style="font-size: 1.3rem; line-height: 1.6; color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem;">
+					Transformed three decades of AS400 mainframe systems into modern, secure architecture. Preserved institutional knowledge while enabling digital transformation.
+				</p>
+				<div style="background: rgba(255, 87, 34, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #FF5722;">
+					<p style="font-weight: 600; color: #FF5722; margin-bottom: 0.5rem;">Solidarity & Progress</p>
+					<p style="color: rgba(255, 255, 255, 0.9);">Bridging generations of institutional knowledge</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Transition back to main navigation -->
+<section style="min-height: 50vh; background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); color: white; display: flex; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem;">
+	<div>
+		<div style="margin-bottom: 3rem;">
+			<p class="brand-gradient-text" style="font-size: 1.2rem; opacity: 0.8; font-weight: 500; margin-bottom: 2rem;">
+				Zero to One Solutions
+			</p>
 		</div>
 	</div>
 </section>
