@@ -13,7 +13,8 @@ variable "domain_name" {
 variable "additional_domains" {
   description = "Additional domains that should point to the same website"
   type        = list(string)
-  default     = ["zero-to-one.eu","brabanconne.solutions","brabanconne.io", "romdj.xyz"]
+  default     = []
+  # default     = ["zero-to-one.eu","brabanconne.solutions","brabanconne.io", "romdj.xyz"]
 }
 
 variable "environment" {
