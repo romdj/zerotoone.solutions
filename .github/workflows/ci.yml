@@ -3,12 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - main
       - dev
       - feature/*
   pull_request:
     branches:
-      - main
       - dev
       - feature/*
 
@@ -29,16 +27,15 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-
-    - name: Run tests
-      run: npm run test
-
+      
     - name: Build application
       run: npm run build
-
+      
+    - name: Run tests
+      run: npm run test
     - name: Upload production build (optional)
       if: success()
       uses: actions/upload-artifact@v4.6.2
       with:
         name: production-build
-        path: dist/
+        path: build/

@@ -1,12 +1,12 @@
-name: CD
+name: Deploy to AWS S3
 permissions:
   id-token: write
+  contents: read
 
 on:
   push:
     branches:
       - main
-
 
 jobs:
   build-and-test:
@@ -28,29 +28,64 @@ jobs:
     - name: Run tests
       run: npm run test
 
-    - name: Build application
-      run: npm run build
+    - name: Build application in a static setup
+      run: npm run build:static
 
-    - name: Upload production build (optional)
-      if: success()
+    - name: Upload production build
       uses: actions/upload-artifact@v4.6.2
       with:
         name: production-build
-        path: dist/
+        path: build/
 
-        
-  # only run this job if the previous one was successful
-  # Need ID token write permission to use OIDC
-  run_job_with_aws:
-    if: success()
+  deploy:
+    needs: build-and-test
     runs-on: ubuntu-latest
+    environment: production
+    
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.2
+        
+      - name: Download production build
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: production-build
+          path: build/
+
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@main # Or a specific version
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE }}
           aws-region: ${{ secrets.AWS_REGION }}
-      - name: Additional steps
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ~1.7
+
+      - name: Terraform Init
+        working-directory: ./infra/terraform
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ./infra/terraform
+        run: terraform plan
+        env:
+          TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
+          TF_VAR_domain_name: ${{ secrets.DOMAIN_NAME }}
+
+      - name: Terraform Apply
+        working-directory: ./infra/terraform
+        run: terraform apply -auto-approve
+        env:
+          TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
+          TF_VAR_domain_name: ${{ secrets.DOMAIN_NAME }}
+
+      - name: Sync files to S3
         run: |
-          # Your commands that require AWS credentials
-          aws sts get-caller-identity 
+          aws s3 sync build/ s3://${{ secrets.DOMAIN_NAME }}/ --delete --exact-timestamps
+          
+      - name: Invalidate CloudFront
+        run: |
+          DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items[0]=='${{ secrets.DOMAIN_NAME }}'].Id" --output text)
+          aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*" 
