@@ -20,11 +20,11 @@
 				style="width: 32rem; height: auto; margin: 0 auto; display: block; filter: drop-shadow(0 8px 40px rgba(255, 255, 255, 0.4)); max-width: 90vw;"
 			/>
 		</div>
-		<h1 class="hero-title" style="color: white; margin-bottom: 1rem; font-size: 3.5rem; line-height: 1.1;">
-			Creating Tomorrow, Today
+		<h1 class="hero-title" style="color: white; margin-bottom: 1.5rem; font-size: 3.5rem; line-height: 1.1;">
+			The Biggest Risks Aren't Technical—They're Strategic
 		</h1>
-		<p style="color: rgba(255, 255, 255, 0.8); font-size: 1.4rem; margin-bottom: 4rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-			Empowering Those Who Shape the Future
+		<p style="color: rgba(255, 255, 255, 0.8); font-size: 1.4rem; margin-bottom: 4rem; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.4;">
+			We help you see what others miss and build what others can't
 		</p>
 		
 		<!-- Scroll indicator -->
@@ -98,13 +98,28 @@
 	</div>
 </section>
 
+<!-- Narrative Bridge -->
+<section style="min-height: 40vh; background: linear-gradient(135deg, #2d2d2d 0%, #0f1419 100%); color: white; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem;">
+	<div style="max-width: 800px; text-align: center;">
+		<p style="font-size: 1.6rem; line-height: 1.5; color: rgba(255, 255, 255, 0.9); font-weight: 300;">
+			But knowing <em style="color: #F11759;">where to focus</em> is only half the battle.
+		</p>
+		<p style="font-size: 1.4rem; line-height: 1.5; color: rgba(255, 255, 255, 0.7); margin-top: 1rem;">
+			Sometimes winning means doing the <strong style="color: #8333C5;">opposite</strong> of everyone else...
+		</p>
+	</div>
+</section>
+
 <!-- Story Section 2: Counter Positioning -->
 <section class="story-section" style="min-height: 100vh; background: linear-gradient(135deg, #0f1419 0%, #1a2332 100%); color: white; display: flex; align-items: center; padding: 4rem 2rem;">
 	<div style="max-width: 1200px; margin: 0 auto; width: 100%;">
 		<div class="story-content">
-			<h2 style="font-size: 4rem; font-weight: 700; margin-bottom: 2rem; background: linear-gradient(135deg, #8333C5, #D67D21); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+			<h2 style="font-size: 3.2rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(135deg, #8333C5, #D67D21); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
 				Counter Positioning
 			</h2>
+			<h3 style="font-size: 1.8rem; font-weight: 400; margin-bottom: 2rem; color: rgba(255, 255, 255, 0.9); font-style: italic;">
+				Competing on everyone's terms means playing to lose
+			</h3>
 			<p style="font-size: 1.5rem; line-height: 1.6; margin-bottom: 3rem; color: rgba(255, 255, 255, 0.8);">
 				Sometimes the best move is to go against conventional wisdom. Dropbox's bold migration from AWS to their own infrastructure shows how counter-positioning can create competitive advantage at scale.
 			</p>
@@ -134,6 +149,18 @@
 				</div>
 			{/if}
 		</div>
+	</div>
+</section>
+
+<!-- Second Narrative Bridge -->
+<section style="min-height: 40vh; background: linear-gradient(135deg, #1a2332 0%, #2d1b4e 100%); color: white; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem;">
+	<div style="max-width: 800px; text-align: center;">
+		<p style="font-size: 1.6rem; line-height: 1.5; color: rgba(255, 255, 255, 0.9); font-weight: 300;">
+			Bold moves create advantage, but <em style="color: #D67D21;">every choice</em> has consequences.
+		</p>
+		<p style="font-size: 1.4rem; line-height: 1.5; color: rgba(255, 255, 255, 0.7); margin-top: 1rem;">
+			The question isn't <em>whether</em> to change—it's <strong style="color: #F11759;">when and how</strong>.
+		</p>
 	</div>
 </section>
 
@@ -189,18 +216,44 @@
 	</div>
 </section>
 
+<!-- Strategic Synthesis Section -->
+<section style="min-height: 80vh; background: linear-gradient(135deg, #1a1a2e 0%, #000 50%, #1a1a1a 100%); color: white; display: flex; align-items: center; padding: 4rem 2rem;">
+	<div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+		<h2 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 3rem; background: linear-gradient(135deg, #F11759, #8333C5, #D67D21); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+			Three Strategic Principles That Separate Winners from Everyone Else
+		</h2>
+		
+		<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin-bottom: 4rem;">
+			<div style="padding: 2rem; background: rgba(241, 23, 89, 0.1); border-radius: 12px; border-left: 4px solid #F11759;">
+				<h3 style="color: #F11759; font-size: 1.4rem; margin-bottom: 1rem;">Focus Relentlessly</h3>
+				<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">Distinguish between what must be bespoke and what can be commoditized. Invest only in what customers notice and value.</p>
+			</div>
+			<div style="padding: 2rem; background: rgba(131, 51, 197, 0.1); border-radius: 12px; border-left: 4px solid #8333C5;">
+				<h3 style="color: #8333C5; font-size: 1.4rem; margin-bottom: 1rem;">Think Differently</h3>
+				<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">Counter-positioning creates advantage. Sometimes the winning move is doing the opposite of conventional wisdom.</p>
+			</div>
+			<div style="padding: 2rem; background: rgba(214, 125, 33, 0.1); border-radius: 12px; border-left: 4px solid #D67D21;">
+				<h3 style="color: #D67D21; font-size: 1.4rem; margin-bottom: 1rem;">Choose Wisely</h3>
+				<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">Every decision has switching costs. Success comes from knowing when to evolve and when to revolutionize.</p>
+			</div>
+		</div>
+		
+		<p style="font-size: 1.3rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 3rem; font-style: italic;">
+			We've applied these principles across Fortune 500 companies and emerging startups alike
+		</p>
+		
+		<div style="color: rgba(255, 255, 255, 0.5); animation: bounce 2s infinite;">
+			See these principles in action ↓
+		</div>
+	</div>
+</section>
+
 <!-- Company Sections Start Here -->
-<section id="companies-intro" style="min-height: 50vh; background: #000; color: white; display: flex; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem;">
+<section id="companies-intro" style="min-height: 30vh; background: #000; color: white; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
 	<div>
-		<h2 style="font-size: 3rem; margin-bottom: 2rem; background: linear-gradient(135deg, #F11759, #8333C5, #D67D21); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+		<h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: rgba(255, 255, 255, 0.9);">
 			Trusted by Industry Leaders
 		</h2>
-		<p style="font-size: 1.3rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem;">
-			Experience these principles in action across different enterprises
-		</p>
-		<div style="color: rgba(255, 255, 255, 0.5); animation: bounce 2s infinite;">
-			Continue scrolling to explore ↓
-		</div>
 	</div>
 </section>
 
