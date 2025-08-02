@@ -89,7 +89,7 @@
 						<div class="info-card">
 							<h4 class="info-title">📸 Photography Studio</h4>
 							<p class="info-text">
-								<a href="~/TestZone/tempsdarret.studio/" style="color: #F11759; text-decoration: none;">tempsdarret.studio</a> - Creative visual storytelling demonstrating aesthetic sense and attention to detail that enhances solution design.
+								<span style="color: #F11759;">tempsdarret.studio</span> - Creative visual storytelling demonstrating aesthetic sense and attention to detail that enhances solution design.
 							</p>
 						</div>
 

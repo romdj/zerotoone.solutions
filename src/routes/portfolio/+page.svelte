@@ -57,7 +57,7 @@
 		},
 		{
 			name: "Photography Studio",
-			link: "~/TestZone/tempsdarret.studio/",
+			link: "#",
 			description: "Creative visual storytelling through photography - demonstrating aesthetic sense and attention to detail.",
 			tech: ["Photography", "Visual Design", "Creative Arts"],
 			type: "Creative Portfolio"
