@@ -357,12 +357,8 @@
 		transform: translateY(-2px);
 	}
 	
-	.story-section {
-		scroll-snap-align: start;
-	}
 	
 	:global(html) {
-		scroll-snap-type: y mandatory;
 		scroll-behavior: smooth;
 	}
 	

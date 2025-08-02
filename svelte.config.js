@@ -9,12 +9,18 @@ const config = {
 
 	kit: {
 		// Static adapter for S3 hosting
+		// adapter: adapter({
+		// 	pages: 'build',
+		// 	assets: 'build',
+		// 	fallback: '404.html',
+		// 	precompress: false,
+		// 	strict: true
+		// })
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build',
-			fallback: '404.html',
-			precompress: false,
-			strict: true
+			fallback: 'index.html', // SPA fallback
+			precompress: false
 		})
 	}
 };
