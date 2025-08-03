@@ -9,10 +9,10 @@ test.describe('Zero to One Solutions Website', () => {
     
     // Check page title and main heading (updated to current content)
     await expect(page).toHaveTitle(/Zero to One Solutions/);
-    await expect(page.locator('h1')).toContainText('The Biggest Risks Aren\'t Technical—They\'re Strategic');
+    await expect(page.locator('h1')).toContainText('Engineering Wins Aren\’t Enough  —  Vision Is');
     
     // Check tagline
-    await expect(page.locator('text=We help you see what others miss and build what others can\'t')).toBeVisible();
+    await expect(page.locator('text=By turning ideas into actionable plans, We connect vision to delivery.')).toBeVisible();
     
     // Check logo is present
     await expect(page.locator('img[alt="Zero to One Solutions"]')).toBeVisible();
@@ -175,7 +175,7 @@ test.describe('Zero to One Solutions Website', () => {
     await page.goto(BASE_URL);
     
     // Check that content is still visible and accessible
-    await expect(page.locator('h1')).toContainText('The Biggest Risks Aren\'t Technical—They\'re Strategic');
+    await expect(page.locator('h1')).toContainText('Engineering Wins Aren\’t Enough  —  Vision Is');
     await expect(page.locator('img[alt="Zero to One Solutions"]')).toBeVisible();
     
     // Check storytelling sections are responsive
