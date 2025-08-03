@@ -4,8 +4,8 @@
 		<!-- IBM CIC Header -->
 		<div style="text-align: center; margin-bottom: 4rem;">
 			<!-- IBM Logo -->
-			<div style="margin-bottom: 2rem;">
-				<img src="/logos/ibm-logo-multicolor.png" alt="IBM" style="height: 80px; object-fit: contain;" />
+			<div style="margin-bottom: 2rem; padding: 1rem; background: transparent;">
+				<img src="/logos/IBM.svg" alt="IBM" style="height: 80px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1));" />
 				<div style="width: 80px; height: 3px; background: #0f62fe; margin: 1rem auto;"></div>
 			</div>
 			

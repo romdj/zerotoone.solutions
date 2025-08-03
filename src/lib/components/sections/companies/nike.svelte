@@ -3,8 +3,8 @@
 	<div style="max-width: 1200px; margin: 0 auto; width: 100%;">
 		<!-- Corporate Header -->
 		<div style="text-align: center; margin-bottom: 4rem;">
-			<div style="display: inline-block; margin-bottom: 2rem;">
-				<img src="/logos/nike-swoosh-logo-black.jpeg" alt="Nike" style="height: 60px; object-fit: contain;" />
+			<div style="display: inline-block; margin-bottom: 2rem; padding: 1rem; background: transparent;">
+				<img src="/logos/NIKE_SWOOSH.svg" alt="Nike" style="height: 60px; object-fit: contain;" />
 			</div>
 			<h2 style="font-size: 2.8rem; font-weight: 300; color: #1a1a1a; margin-bottom: 1rem;">
 				Supply Chain Revolution
