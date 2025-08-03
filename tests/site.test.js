@@ -1,7 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = 'http://localhost:5173';
+const BASE_URL = 'http://localhost:12000';
 
 test.describe('Zero to One Solutions Website', () => {
   test('homepage loads with correct styling and content', async ({ page }) => {

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	
 	let expandedStory: string | null = null;
 	
 	function toggleStory(storyId: string) {
@@ -8,6 +10,24 @@
 			expandedStory = storyId;
 		}
 	}
+	
+	// Bilingual switching for FGTB/ABVV
+	onMount(() => {
+		const unionNameElement = document.getElementById('union-name');
+		if (unionNameElement) {
+			const names = ['FGTB', 'ABVV'];
+			let currentIndex = 0;
+			
+			// Set initial name
+			unionNameElement.textContent = names[currentIndex];
+			
+			// Switch every 10 seconds
+			setInterval(() => {
+				currentIndex = (currentIndex + 1) % names.length;
+				unionNameElement.textContent = names[currentIndex];
+			}, 10000);
+		}
+	});
 </script>
 
 <!-- Hero Section -->
@@ -500,92 +520,93 @@
 	</div>
 </section>
 
-<!-- ABVV-FGTB Section - Institutional IR Style -->
-<section class="company-section abvv-section" style="min-height: 100vh; background: #f9f9f9; color: #1a1a1a; display: flex; align-items: center; padding: 4rem 2rem;">
+<!-- ABVV-FGTB Section - Authentic Union Design -->
+<section class="company-section abvv-section" style="min-height: 100vh; background: #ffffff; color: #1a1a1a; display: flex; align-items: center; padding: 4rem 2rem; border-top: 1px solid #e8e8e8;">
 	<div style="max-width: 1200px; margin: 0 auto; width: 100%;">
-		<!-- Corporate Header -->
+		<!-- Bilingual Header -->
 		<div style="text-align: center; margin-bottom: 4rem;">
-			<div style="display: inline-block; padding: 0.5rem 1.5rem; background: #e75420; color: white; border-radius: 4px; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">
-				ABVV-FGTB
+			<div id="union-name" style="display: inline-block; padding: 0.75rem 2rem; background: #333; color: white; border-radius: 2px; font-size: 1.1rem; font-weight: 600; letter-spacing: 1px; margin-bottom: 1.5rem; font-family: system-ui;">
+				FGTB
 			</div>
-			<h2 style="font-size: 2.8rem; font-weight: 300; color: #1a1a1a; margin-bottom: 1rem;">
-				Legacy System Transformation
+			<h2 style="font-size: 2.6rem; font-weight: 400; color: #1a1a1a; margin-bottom: 1rem; font-family: system-ui;">
+				Modernisation des Systèmes Legacy
 			</h2>
-			<p style="font-size: 1.1rem; color: #666; max-width: 600px; margin: 0 auto;">
-				Three decades of institutional knowledge modernized for the digital age
+			<p style="font-size: 1.1rem; color: #666; max-width: 650px; margin: 0 auto; line-height: 1.5;">
+				Transformation numérique de trois décennies de connaissances institutionnelles pour le plus grand syndicat de Belgique
 			</p>
 		</div>
 
-		<!-- Content Grid -->
-		<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start;">
-			<!-- Transformation Story Card -->
-			<div style="background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(231,84,32,0.08); border-left: 4px solid #e75420;">
-				<h3 style="font-size: 1.3rem; font-weight: 600; color: #e75420; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.5px;">
-					Modernization Impact
+		<!-- Clean Content Layout -->
+		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
+			<!-- Project Overview -->
+			<div style="background: #f8f9fa; padding: 2.5rem; border-radius: 2px; border-left: 4px solid #333;">
+				<h3 style="font-size: 1.2rem; font-weight: 600; color: #333; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.5px; font-family: system-ui;">
+					Transformation Institutionnelle
 				</h3>
 				
-				<p style="font-size: 1.1rem; line-height: 1.7; color: #333; margin-bottom: 2rem;">
-					Successfully transformed three decades of AS400 mainframe systems into modern, secure architecture. This comprehensive modernization preserved critical institutional knowledge while enabling digital transformation for Belgium's largest trade union.
+				<p style="font-size: 1.05rem; line-height: 1.6; color: #444; margin-bottom: 2rem;">
+					Modernisation complète de trois décennies de systèmes AS400 vers une architecture moderne et sécurisée. Cette transformation préserve les connaissances institutionnelles cruciales tout en permettant la digitalisation du plus grand syndicat de Belgique.
 				</p>
 
 				<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
-					<div style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; border-top: 3px solid #e75420;">
-						<h4 style="font-size: 0.9rem; font-weight: 600; color: #e75420; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
-							Legacy Systems
+					<div style="background: white; padding: 1.5rem; border-radius: 2px; border: 1px solid #e8e8e8;">
+						<h4 style="font-size: 0.85rem; font-weight: 600; color: #666; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
+							Systèmes Legacy
 						</h4>
-						<p style="font-size: 1.2rem; font-weight: 300; color: #1a1a1a; margin: 0;">
-							30+ Years AS400
+						<p style="font-size: 1.1rem; font-weight: 400; color: #1a1a1a; margin: 0;">
+							30+ Années AS400
 						</p>
 					</div>
-					<div style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; border-top: 3px solid #e75420;">
-						<h4 style="font-size: 0.9rem; font-weight: 600; color: #e75420; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
-							Transformation
+					<div style="background: white; padding: 1.5rem; border-radius: 2px; border: 1px solid #e8e8e8;">
+						<h4 style="font-size: 0.85rem; font-weight: 600; color: #666; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
+							Modernisation
 						</h4>
-						<p style="font-size: 1.2rem; font-weight: 300; color: #1a1a1a; margin: 0;">
-							Modern Architecture
+						<p style="font-size: 1.1rem; font-weight: 400; color: #1a1a1a; margin: 0;">
+							Architecture Moderne
 						</p>
 					</div>
 				</div>
 
-				<div style="background: #e75420; color: white; padding: 1.5rem; border-radius: 8px; text-align: center;">
-					<div style="font-size: 0.95rem; margin-bottom: 0.5rem; font-style: italic;">
-						"Bridging generations of institutional knowledge with modern technology"
-					</div>
-					<div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">
-						Solidarity & Progress
-					</div>
+				<div style="background: #333; color: white; padding: 1.5rem; border-radius: 2px;">
+					<p style="font-size: 0.9rem; margin: 0; font-style: italic; text-align: center;">
+						"Préserver les connaissances, moderniser l'avenir"
+					</p>
 				</div>
 			</div>
 
-			<!-- Organization Profile Card -->
-			<div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); border: 1px solid #e8e8e8;">
-				<h3 style="font-size: 1.1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
-					Organization Profile
+			<!-- Union Profile -->
+			<div style="background: white; padding: 2.5rem; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e8e8e8;">
+				<h3 style="font-size: 1.1rem; font-weight: 600; color: #333; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.5px; font-family: system-ui;">
+					Profil Organisationnel
 				</h3>
 				
 				<div style="margin-bottom: 2rem;">
-					<div style="padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0;">
-						<div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Sector</div>
-						<div style="font-size: 0.95rem; color: #1a1a1a; font-weight: 500;">Trade Union Federation</div>
+					<div style="padding: 1rem 0; border-bottom: 1px solid #f0f0f0;">
+						<div style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Secteur</div>
+						<div style="font-size: 1rem; color: #1a1a1a; font-weight: 500;">Confédération Syndicale</div>
 					</div>
-					<div style="padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0;">
-						<div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Members</div>
-						<div style="font-size: 0.95rem; color: #1a1a1a; font-weight: 500;">1.5+ Million</div>
+					<div style="padding: 1rem 0; border-bottom: 1px solid #f0f0f0;">
+						<div style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Membres</div>
+						<div style="font-size: 1rem; color: #1a1a1a; font-weight: 500;">1,5+ Million</div>
 					</div>
-					<div style="padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0;">
-						<div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Founded</div>
-						<div style="font-size: 0.95rem; color: #1a1a1a; font-weight: 500;">1945</div>
+					<div style="padding: 1rem 0; border-bottom: 1px solid #f0f0f0;">
+						<div style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Fondée</div>
+						<div style="font-size: 1rem; color: #1a1a1a; font-weight: 500;">1945</div>
 					</div>
-					<div style="padding: 0.75rem 0;">
-						<div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Scope</div>
-						<div style="font-size: 0.95rem; color: #1a1a1a; font-weight: 500;">National (Belgium)</div>
+					<div style="padding: 1rem 0; border-bottom: 1px solid #f0f0f0;">
+						<div style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Portée</div>
+						<div style="font-size: 1rem; color: #1a1a1a; font-weight: 500;">Nationale (Belgique)</div>
+					</div>
+					<div style="padding: 1rem 0;">
+						<div style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Mission</div>
+						<div style="font-size: 1rem; color: #1a1a1a; font-weight: 500;">Syndicat de Combat</div>
 					</div>
 				</div>
 
-				<div style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; border-left: 3px solid #e75420;">
-					<div style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">Key Challenge</div>
-					<div style="font-size: 0.95rem; color: #1a1a1a; line-height: 1.4;">
-						Modernizing critical systems while preserving decades of institutional knowledge and member data integrity
+				<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 2px; border-left: 3px solid #333;">
+					<div style="font-size: 0.85rem; color: #666; margin-bottom: 0.5rem; font-weight: 600;">Défi Technique</div>
+					<div style="font-size: 0.9rem; color: #1a1a1a; line-height: 1.4;">
+						Moderniser les systèmes critiques tout en préservant l'intégrité des données des membres et des décennies de connaissances institutionnelles
 					</div>
 				</div>
 			</div>
