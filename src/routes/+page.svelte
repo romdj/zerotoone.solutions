@@ -30,10 +30,10 @@
 			/>
 		</div>
 		<h1 class="hero-title" style="color: white; margin-bottom: 1.5rem; font-size: 3.5rem; line-height: 1.1;">
-			The Biggest Risks Aren't Technical—They're Strategic
+			Engineering Wins Aren’t Enough  —  Vision Is
 		</h1>
 		<p style="color: rgba(255, 255, 255, 0.8); font-size: 1.4rem; margin-bottom: 4rem; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.4;">
-			We help you see what others miss and build what others can't
+			By turning ideas into actionable plans, We connect vision to delivery.
 		</p>
 		
 		<!-- Scroll indicator -->
