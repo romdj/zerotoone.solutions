@@ -29,17 +29,28 @@
 				style="width: 32rem; height: auto; margin: 0 auto; display: block; filter: drop-shadow(0 8px 40px rgba(255, 255, 255, 0.4)); max-width: 90vw;"
 			/>
 		</div>
-		<h1 class="hero-title" style="color: white; margin-bottom: 1.5rem; font-size: 3.5rem; line-height: 1.1;">
-			Engineering Wins Aren’t Enough  —  Vision Is
+		<h1 class="hero-title" style="color: white; margin-bottom: 1.5rem; font-size: 3.5rem; line-height: 1.1; text-align: center;">
+			Engineering Wins Aren't Enough&nbsp;&nbsp;—&nbsp;&nbsp;Vision Is
 		</h1>
 		<p style="color: rgba(255, 255, 255, 0.8); font-size: 1.4rem; margin-bottom: 4rem; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.4;">
 			By turning ideas into actionable plans, We connect vision to delivery.
 		</p>
 		
 		<!-- Scroll indicator -->
-		<div style="position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255, 255, 255, 0.6);">
+		<button 
+			style="position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255, 255, 255, 0.6); background: none; border: none; cursor: pointer; font-size: 2rem; transition: color 0.3s ease;"
+			on:click={() => document.querySelector('.story-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+			on:mouseenter={(e) => {
+				const target = e.target as HTMLElement;
+				if (target) target.style.color = 'rgba(255, 255, 255, 0.9)';
+			}}
+			on:mouseleave={(e) => {
+				const target = e.target as HTMLElement;
+				if (target) target.style.color = 'rgba(255, 255, 255, 0.6)';
+			}}
+		>
 			<div style="animation: bounce 2s infinite;">↓</div>
-		</div>
+		</button>
 	</div>
 </section>
 
@@ -193,8 +204,8 @@
 				<div class="expanded-story" style="margin-top: 3rem;">
 					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
 						<div style="padding: 2rem; background: white; border-radius: 12px; border-left: 4px solid #D67D21; color: #1a1a1a; position: relative;">
-							<div style="position: absolute; top: 1rem; right: 1rem;">
-								<img src="https://logos-world.net/wp-content/uploads/2021/02/SAP-Logo.png" alt="SAP" style="height: 40px; object-fit: contain; opacity: 0.8;" />
+							<div style="position: absolute; top: 1rem; right: 1rem; padding: 0.5rem; background: transparent;">
+								<img src="/logos/SAP.svg" alt="SAP" style="height: 40px; object-fit: contain; opacity: 0.8; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.1));" />
 							</div>
 							<h3 style="color: #D67D21; margin-bottom: 1.5rem; font-size: 1.5rem; padding-right: 60px;">Success Story:<br><br>Massive Cloud Migration Strategy</h3>
 							<div style="font-size: 1.1rem; line-height: 1.7; color: #333;">
@@ -209,8 +220,8 @@
 						</div>
 						
 						<div style="padding: 2rem; background: white; border-radius: 12px; border-left: 4px solid #F11759; color: #1a1a1a; position: relative;">
-							<div style="position: absolute; top: 1rem; right: 1rem;">
-								<img src="https://logoeps.com/wp-content/uploads/2013/03/netflix-vector-logo.png" alt="Netflix" style="height: 40px; object-fit: contain; opacity: 0.8;" />
+							<div style="position: absolute; top: 1rem; right: 1rem; padding: 0.5rem; background: transparent;">
+								<img src="/logos/Netflix.svg" alt="Netflix" style="height: 40px; object-fit: contain; opacity: 0.8; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.1));" />
 							</div>
 							<h3 style="color: #F11759; margin-bottom: 1.5rem; font-size: 1.5rem; padding-right: 60px;">Alternative Success:<br><br>Continuous Technical Investment Strategy</h3>
 							<div style="font-size: 1.1rem; line-height: 1.7; color: #333;">
