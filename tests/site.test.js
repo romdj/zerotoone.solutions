@@ -7,12 +7,12 @@ test.describe('Zero to One Solutions Website', () => {
   test('homepage loads with correct styling and content', async ({ page }) => {
     await page.goto(BASE_URL);
     
-    // Check page title and main heading (now "Creating Tomorrow, Today")
+    // Check page title and main heading (updated to current content)
     await expect(page).toHaveTitle(/Zero to One Solutions/);
-    await expect(page.locator('h1')).toContainText('Creating Tomorrow, Today');
+    await expect(page.locator('h1')).toContainText('The Biggest Risks Aren\'t Technical—They\'re Strategic');
     
     // Check tagline
-    await expect(page.locator('text=Empowering Those Who Shape the Future')).toBeVisible();
+    await expect(page.locator('text=We help you see what others miss and build what others can\'t')).toBeVisible();
     
     // Check logo is present
     await expect(page.locator('img[alt="Zero to One Solutions"]')).toBeVisible();
@@ -22,12 +22,12 @@ test.describe('Zero to One Solutions Website', () => {
     await expect(page.locator('text=Counter Positioning')).toBeVisible();
     await expect(page.locator('text=Switching costs do and will impact your business')).toBeVisible();
     
-    // Check company sections
+    // Check company sections (now using logos instead of text)
     await expect(page.locator('text=Trusted by Industry Leaders')).toBeVisible();
-    await expect(page.locator('text=Nike').first()).toBeVisible();
-    await expect(page.locator('text=IBM').first()).toBeVisible();
-    await expect(page.locator('text=PHILIPS').first()).toBeVisible();
-    await expect(page.locator('text=ABVV-FGTB').first()).toBeVisible();
+    await expect(page.locator('img[alt="Nike"]')).toBeVisible();
+    await expect(page.locator('img[alt="IBM"]')).toBeVisible();
+    await expect(page.locator('img[alt="Philips"]')).toBeVisible();
+    await expect(page.locator('img[alt="ABVV-FGTB"]')).toBeVisible();
     
     // Check final navigation section
     await expect(page.locator('text=Ready to write your story?')).toBeVisible();
@@ -175,11 +175,19 @@ test.describe('Zero to One Solutions Website', () => {
     await page.goto(BASE_URL);
     
     // Check that content is still visible and accessible
-    await expect(page.locator('h1')).toBeVisible();
+    await expect(page.locator('h1')).toContainText('The Biggest Risks Aren\'t Technical—They\'re Strategic');
     await expect(page.locator('img[alt="Zero to One Solutions"]')).toBeVisible();
     
     // Check storytelling sections are responsive
     await expect(page.locator('text=Focus on making your beer taste better')).toBeVisible();
+    
+    // Test scroll functionality works on mobile
+    const scrollBtn = page.locator('button:has-text("See these principles in action")');
+    if (await scrollBtn.isVisible()) {
+      await scrollBtn.click();
+      await page.waitForTimeout(1000);
+      await expect(page.locator('text=Trusted by Industry Leaders')).toBeVisible();
+    }
     
     // Scroll to bottom for navigation
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
