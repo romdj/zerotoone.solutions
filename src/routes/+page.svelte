@@ -10,6 +10,13 @@
 			expandedStory = storyId;
 		}
 	}
+	
+	function scrollToCompanies() {
+		document.getElementById('companies-intro')?.scrollIntoView({ 
+			behavior: 'smooth',
+			block: 'start'
+		});
+	}
 </script>
 
 <!-- Hero Section -->
@@ -244,9 +251,20 @@
 			We've applied these principles across Fortune 500 companies and emerging startups alike
 		</p>
 		
-		<div style="color: rgba(255, 255, 255, 0.5); animation: bounce 2s infinite;">
+		<button 
+			on:click={scrollToCompanies}
+			style="background: none; border: none; color: rgba(255, 255, 255, 0.5); animation: bounce 2s infinite; cursor: pointer; font-size: inherit; transition: color 0.3s ease;"
+			on:mouseenter={(e) => {
+				const target = e.target as HTMLElement;
+				if (target) target.style.color = 'rgba(255, 255, 255, 0.8)';
+			}}
+			on:mouseleave={(e) => {
+				const target = e.target as HTMLElement;
+				if (target) target.style.color = 'rgba(255, 255, 255, 0.5)';
+			}}
+		>
 			See these principles in action ↓
-		</div>
+		</button>
 	</div>
 </section>
 
