@@ -98,9 +98,6 @@
 			<div style="display: flex; justify-content: center; align-items: center;">
 				<div style="position: relative;">
 					<img src="/orval.png" alt="Orval Trappist Beer" style="width: 300px; height: auto; border-radius: 12px; box-shadow: 0 20px 60px rgba(241, 23, 89, 0.3); filter: brightness(1.1) contrast(1.1);" />
-					<div style="position: absolute; -bottom: 1rem; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.8); color: white; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.9rem; white-space: nowrap;">
-						Orval Trappist Ale
-					</div>
 				</div>
 			</div>
 		</div>
@@ -194,29 +191,31 @@
 			
 			{#if expandedStory === 'switching'}
 				<div class="expanded-story" style="margin-top: 3rem;">
-					<div style="padding: 2rem; background: rgba(0, 0, 0, 0.5); border-radius: 12px; border-left: 4px solid #D67D21; margin-bottom: 2rem;">
-						<h3 style="color: #D67D21; margin-bottom: 1.5rem; font-size: 1.5rem;">Success Story: SAP's Massive Cloud Migration</h3>
-						<div style="font-size: 1.1rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9);">
-							<p style="margin-bottom: 1.5rem;">SAP made a bold decision to move from on-premises to cloud by migrating nine large data centers onto a resilient, scalable cloud platform over a short timeframe.</p>
-							<h4 style="color: #F11759; margin: 2rem 0 1rem 0;">Business Impact:</h4>
-							<ul style="margin-bottom: 1.5rem; padding-left: 1.5rem;">
-								<li style="margin-bottom: 1rem;">Post-migration, complexity dropped drastically from nine data centers to three cloud platforms, streamlining operations.</li>
-								<li style="margin-bottom: 1rem;">SAP significantly improved scalability, security, and performance, enabling rapid innovation in their SuccessFactors cloud HR applications.</li>
-								<li style="margin-bottom: 1rem;">Despite short-term switching costs, this long-term move ensured SAP remained a market leader and innovation driver.</li>
-							</ul>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
+						<div style="padding: 2rem; background: white; border-radius: 12px; border-left: 4px solid #D67D21; color: #1a1a1a;">
+							<h3 style="color: #D67D21; margin-bottom: 1.5rem; font-size: 1.5rem;">Success Story: SAP's Massive Cloud Migration</h3>
+							<div style="font-size: 1.1rem; line-height: 1.7; color: #333;">
+								<p style="margin-bottom: 1.5rem;">SAP made a bold decision to move from on-premises to cloud by migrating nine large data centers onto a resilient, scalable cloud platform over a short timeframe.</p>
+								<h4 style="color: #F11759; margin: 2rem 0 1rem 0;">Business Impact:</h4>
+								<ul style="margin-bottom: 1.5rem; padding-left: 1.5rem;">
+									<li style="margin-bottom: 1rem;">Post-migration, complexity dropped drastically from nine data centers to three cloud platforms, streamlining operations.</li>
+									<li style="margin-bottom: 1rem;">SAP significantly improved scalability, security, and performance, enabling rapid innovation in their SuccessFactors cloud HR applications.</li>
+									<li style="margin-bottom: 1rem;">Despite short-term switching costs, this long-term move ensured SAP remained a market leader and innovation driver.</li>
+								</ul>
+							</div>
 						</div>
-					</div>
-					
-					<div style="padding: 2rem; background: rgba(0, 0, 0, 0.5); border-radius: 12px; border-left: 4px solid #F11759;">
-						<h3 style="color: #F11759; margin-bottom: 1.5rem; font-size: 1.5rem;">Alternative Success: Netflix's Continuous Investment</h3>
-						<div style="font-size: 1.1rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9);">
-							<p style="margin-bottom: 1.5rem;">Netflix chose continuous investment over switching, developing advanced proprietary tools (Chaos Monkey, Spinnaker, Atlas) that made their cloud infrastructure highly resilient and scalable.</p>
-							<h4 style="color: #8333C5; margin: 2rem 0 1rem 0;">Business Impact:</h4>
-							<ul style="margin-bottom: 1.5rem; padding-left: 1.5rem;">
-								<li style="margin-bottom: 1rem;">Continuous investments significantly improved deployment speed, service reliability, and customer experience without disruption.</li>
-								<li style="margin-bottom: 1rem;">This approach reduced technical debt by incrementally evolving architecture with new technologies.</li>
-								<li style="margin-bottom: 1rem;">Led Netflix to dominate streaming services globally, continuously innovating with high ROI on their cloud investment.</li>
-							</ul>
+						
+						<div style="padding: 2rem; background: white; border-radius: 12px; border-left: 4px solid #F11759; color: #1a1a1a;">
+							<h3 style="color: #F11759; margin-bottom: 1.5rem; font-size: 1.5rem;">Alternative Success: Netflix's Continuous Investment</h3>
+							<div style="font-size: 1.1rem; line-height: 1.7; color: #333;">
+								<p style="margin-bottom: 1.5rem;">Netflix chose continuous investment over switching, developing advanced proprietary tools (Chaos Monkey, Spinnaker, Atlas) that made their cloud infrastructure highly resilient and scalable.</p>
+								<h4 style="color: #8333C5; margin: 2rem 0 1rem 0;">Business Impact:</h4>
+								<ul style="margin-bottom: 1.5rem; padding-left: 1.5rem;">
+									<li style="margin-bottom: 1rem;">Continuous investments significantly improved deployment speed, service reliability, and customer experience without disruption.</li>
+									<li style="margin-bottom: 1rem;">This approach reduced technical debt by incrementally evolving architecture with new technologies.</li>
+									<li style="margin-bottom: 1rem;">Led Netflix to dominate streaming services globally, continuously innovating with high ROI on their cloud investment.</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
