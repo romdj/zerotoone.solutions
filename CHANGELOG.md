@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://github.com/romdj/zerotoone.solutions/compare/v1.0.1...v1.0.2) (2025-08-03)
+
+
+### 🐛 Bug Fixes
+
+* redesign beer story section with professional monochromatic styling ([98756c1](https://github.com/romdj/zerotoone.solutions/commit/98756c1ae5bbf87a7da0b3518189b8c161bb4568)), closes [#F11759](https://github.com/romdj/zerotoone.solutions/issues/F11759) [#8333C5](https://github.com/romdj/zerotoone.solutions/issues/8333C5) [#D67D21](https://github.com/romdj/zerotoone.solutions/issues/D67D21)
+
 ### [1.0.1](https://github.com/romdj/zerotoone.solutions/compare/v1.0.0...v1.0.1) (2025-08-03)
 
 
