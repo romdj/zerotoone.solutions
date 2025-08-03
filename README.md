@@ -140,6 +140,34 @@ npm run build
 npm run preview
 ```
 
+### 🌳 Trunk-Based Development
+
+This project follows **trunk-based development** practices:
+
+- **Main branch is always deployable**
+- **Short-lived feature branches** (max 2-3 days)
+- **Continuous integration** on every push to main
+- **Automated testing and deployment**
+
+See [TRUNK_BASED_DEVELOPMENT.md](.github/TRUNK_BASED_DEVELOPMENT.md) for detailed guidelines.
+
+### Release Management
+
+Automated changelog generation from conventional commits:
+
+```bash
+# Update changelog only
+npm run changelog
+
+# Full release (version bump + changelog + tag)
+npm run release
+
+# Specific version bumps
+npm run release:patch  # 0.0.1 → 0.0.2
+npm run release:minor  # 0.0.1 → 0.1.0
+npm run release:major  # 0.0.1 → 1.0.0
+```
+
 ### Project Structure
 
 ```
