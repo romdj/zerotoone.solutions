@@ -4,8 +4,8 @@
 		<!-- Philips Corporate Header -->
 		<div style="text-align: center; margin-bottom: 4rem;">
 			<!-- Philips Logo -->
-			<div style="margin-bottom: 2rem;">
-				<img src="/logos/Philips.png" alt="Philips" style="height: 70px; object-fit: contain;" />
+			<div style="margin-bottom: 2rem; padding: 1rem; background: transparent;">
+				<img src="/logos/Philips_plain-text.svg" alt="Philips" style="height: 70px; object-fit: contain;" />
 				<div style="width: 60px; height: 2px; background: #00629B; margin: 1rem auto;"></div>
 			</div>
 			
