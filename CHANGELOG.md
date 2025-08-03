@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/romdj/zerotoone.solutions/compare/v1.0.0...v1.0.1) (2025-08-03)
+
+
+### 🐛 Bug Fixes
+
+* added more padding to the first page slider ([7aa7dca](https://github.com/romdj/zerotoone.solutions/commit/7aa7dca823c666df8650a5a29f16a05b4d376a32))
+
 ## 1.0.0 (2025-08-03)
 
 
