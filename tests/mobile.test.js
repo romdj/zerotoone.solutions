@@ -12,7 +12,7 @@ test.describe('Mobile Navigation and Functionality', () => {
     await page.goto(BASE_URL);
     
     // Check core content is visible
-    await expect(page.locator('h1')).toContainText('Engineering Wins Aren\’t Enough  —  Vision Is');
+    await expect(page.locator('h1')).toContainText("Engineering Wins Aren't Enough  —  Vision Is");
     await expect(page.locator('img[alt="Zero to One Solutions"]')).toBeVisible();
     
     // Check hero content is properly displayed
@@ -28,7 +28,7 @@ test.describe('Mobile Navigation and Functionality', () => {
     await page.goto(BASE_URL);
     
     // Check core content is visible
-    await expect(page.locator('h1')).toContainText('Engineering Wins Aren\’t Enough  —  Vision Is');
+    await expect(page.locator('h1')).toContainText("Engineering Wins Aren't Enough  —  Vision Is");
     await expect(page.locator('img[alt="Zero to One Solutions"]')).toBeVisible();
     
     // Check hero content is properly displayed
@@ -180,7 +180,9 @@ test.describe('Mobile Navigation and Functionality', () => {
     await expect(page.locator('img[alt="Nike"]')).toBeVisible();
     await expect(page.locator('img[alt="IBM"]')).toBeVisible();
     await expect(page.locator('img[alt="Philips"]')).toBeVisible();
-    await expect(page.locator('img[alt="ABVV-FGTB"]')).toBeVisible();
+    // Scroll to ABVV section first, then check for ABVV text (no logo)
+    await page.locator('text=ABVV').first().scrollIntoViewIfNeeded();
+    await expect(page.locator('text=ABVV')).toBeVisible();
     
     // Check company section content is readable
     await expect(page.locator('text=Supply Chain Revolution')).toBeVisible();

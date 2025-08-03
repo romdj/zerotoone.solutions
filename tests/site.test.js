@@ -9,7 +9,7 @@ test.describe('Zero to One Solutions Website', () => {
     
     // Check page title and main heading (updated to current content)
     await expect(page).toHaveTitle(/Zero to One Solutions/);
-    await expect(page.locator('h1')).toContainText('Engineering Wins Aren\’t Enough  —  Vision Is');
+    await expect(page.locator('h1')).toContainText("Engineering Wins Aren't Enough  —  Vision Is");
     
     // Check tagline
     await expect(page.locator('text=By turning ideas into actionable plans, We connect vision to delivery.')).toBeVisible();
@@ -27,7 +27,9 @@ test.describe('Zero to One Solutions Website', () => {
     await expect(page.locator('img[alt="Nike"]')).toBeVisible();
     await expect(page.locator('img[alt="IBM"]')).toBeVisible();
     await expect(page.locator('img[alt="Philips"]')).toBeVisible();
-    await expect(page.locator('img[alt="ABVV-FGTB"]')).toBeVisible();
+    // Scroll to ABVV section first, then check for ABVV text (no logo)
+    await page.locator('text=ABVV').first().scrollIntoViewIfNeeded();
+    await expect(page.locator('text=ABVV')).toBeVisible();
     
     // Check final navigation section
     await expect(page.locator('text=Ready to write your story?')).toBeVisible();
@@ -175,7 +177,7 @@ test.describe('Zero to One Solutions Website', () => {
     await page.goto(BASE_URL);
     
     // Check that content is still visible and accessible
-    await expect(page.locator('h1')).toContainText('Engineering Wins Aren\’t Enough  —  Vision Is');
+    await expect(page.locator('h1')).toContainText("Engineering Wins Aren't Enough  —  Vision Is");
     await expect(page.locator('img[alt="Zero to One Solutions"]')).toBeVisible();
     
     // Check storytelling sections are responsive

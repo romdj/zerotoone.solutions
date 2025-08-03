@@ -160,6 +160,10 @@ I'm switching the branching model to trunk based, are there any changes that nee
 
 Right now, in the top (so both `Engineering Wins Aren’t Enough — Vision Is` & `By turning ideas into actionable plans, We connect vision to delivery.`), there's a new line/carriage return in the middle of the sentence. Can you correct that?
 
+In the section `Focus on making your beer taste better` there are too many colors in the story.
+Please remove the `Orval Trappist Ale` text that doesn't bring any value.
+
+
 TODO
 
 I think we need some kind of menu, sidebar or navbar for navigation, it can be minimalistic, but I do think we need to add that component. Can you think of something that works well keeping the responsive design principles?
@@ -167,9 +171,6 @@ I think we need some kind of menu, sidebar or navbar for navigation, it can be m
 Let's focus on the Nike card:
 I've incorporated the nike folder under inspirations/ for you to get a grasp on the corporate culture and layout when reporting. **This** is the font, the color scheme, I want in place for the nike section. can you adapt this?
 
-
-In the section `Focus on making your beer taste better` there are too many colors in the story.
-Please remove the `Orval Trappist Ale` text that doesn't bring any value.
 
 
 in the `Switching costs do and will impact your business`, when expanding the stories, I'd like to see them side-by-side instead of one after another. (unless we reach a horizontal size of the page, that makes it impossible to read, it needs to switch between the two depending on screen width). those story frames to be black on white.
