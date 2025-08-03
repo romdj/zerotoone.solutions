@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.4](https://github.com/romdj/zerotoone.solutions/compare/v1.0.3...v1.0.4) (2025-08-03)
+
+
+### 🐛 Bug Fixes
+
+* cicd terraform deployment pipeline ([815aa3d](https://github.com/romdj/zerotoone.solutions/commit/815aa3d9ea9dacc5120242a7486de19701458e97))
+
 ### [1.0.3](https://github.com/romdj/zerotoone.solutions/compare/v1.0.2...v1.0.3) (2025-08-03)
 
 
