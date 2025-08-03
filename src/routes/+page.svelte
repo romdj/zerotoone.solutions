@@ -257,102 +257,232 @@
 	</div>
 </section>
 
-<!-- Nike Section - Bold and Athletic -->
-<section class="company-section nike-section" style="min-height: 100vh; background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%); color: white; display: flex; align-items: center; padding: 4rem 2rem; position: relative; overflow: hidden;">
-	<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 0%, rgba(255, 165, 0, 0.05) 50%, transparent 100%);"></div>
-	<div style="max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 1;">
-		<div style="display: flex; align-items: center; gap: 4rem;">
-			<div style="flex: 1;">
-				<div style="font-size: 6rem; font-weight: 900; margin-bottom: 2rem; color: #FF6B35; text-transform: uppercase; letter-spacing: -0.05em; font-style: italic;">
-					Nike
-				</div>
-				<h3 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; color: white;">
-					Supply Chain Revolution
+<!-- Nike Section - Athletic Performance IR Style -->
+<section class="company-section nike-section" style="min-height: 100vh; background: #f8f9fa; color: #1a1a1a; display: flex; align-items: center; padding: 4rem 2rem;">
+	<div style="max-width: 1200px; margin: 0 auto; width: 100%;">
+		<!-- Corporate Header -->
+		<div style="text-align: center; margin-bottom: 4rem;">
+			<div style="display: inline-block; padding: 0.5rem 1.5rem; background: #FF6B35; color: white; border-radius: 4px; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">
+				Nike Inc.
+			</div>
+			<h2 style="font-size: 2.8rem; font-weight: 300; color: #1a1a1a; margin-bottom: 1rem;">
+				Supply Chain Revolution
+			</h2>
+			<p style="font-size: 1.1rem; color: #666; max-width: 600px; margin: 0 auto;">
+				Architecting next-generation supply chain infrastructure for global athletic performance
+			</p>
+		</div>
+
+		<!-- Content Grid -->
+		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+			<!-- Key Metrics Card -->
+			<div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border-left: 4px solid #FF6B35;">
+				<h3 style="font-size: 1.2rem; font-weight: 600; color: #FF6B35; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
+					Project Impact
 				</h3>
-				<p style="font-size: 1.3rem; line-height: 1.6; color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem;">
-					Led a 12-person team to architect Nike's next-generation supply chain platform. Event-driven architecture enabled real-time inventory management across global operations.
-				</p>
-				<div style="background: rgba(255, 107, 53, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #FF6B35;">
-					<p style="font-weight: 600; color: #FF6B35; margin-bottom: 0.5rem;">Just Do It</p>
-					<p style="color: rgba(255, 255, 255, 0.9);">Transforming complex logistics into seamless customer experiences</p>
+				<div style="margin-bottom: 2rem;">
+					<div style="display: flex; justify-content: between; margin-bottom: 1rem;">
+						<span style="color: #666; font-size: 0.95rem;">Team Size:</span>
+						<span style="font-weight: 600; color: #1a1a1a;">12 Engineers</span>
+					</div>
+					<div style="display: flex; justify-content: between; margin-bottom: 1rem;">
+						<span style="color: #666; font-size: 0.95rem;">Architecture:</span>
+						<span style="font-weight: 600; color: #1a1a1a;">Event-Driven</span>
+					</div>
+					<div style="display: flex; justify-content: between;">
+						<span style="color: #666; font-size: 0.95rem;">Scale:</span>
+						<span style="font-weight: 600; color: #1a1a1a;">Global Operations</span>
+					</div>
+				</div>
+				<div style="padding: 1rem; background: #f8f9fa; border-radius: 4px; border-left: 3px solid #FF6B35;">
+					<p style="font-size: 0.9rem; color: #1a1a1a; margin: 0; font-style: italic;">
+						"Enabling real-time inventory visibility across Nike's global supply network"
+					</p>
 				</div>
 			</div>
-			<div style="flex: 1; text-align: center;">
-				<div style="width: 200px; height: 200px; background: linear-gradient(135deg, #FF6B35, #FF8C42); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);">
-					<div style="color: white; font-size: 4rem; font-weight: 900;">✓</div>
+
+			<!-- Technical Details Card -->
+			<div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+				<h3 style="font-size: 1.2rem; font-weight: 600; color: #1a1a1a; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
+					Technical Excellence
+				</h3>
+				<ul style="list-style: none; padding: 0; margin: 0;">
+					<li style="padding: 0.75rem 0; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+						<span style="width: 8px; height: 8px; background: #FF6B35; border-radius: 50%; margin-right: 1rem;"></span>
+						<span style="color: #1a1a1a; font-size: 0.95rem;">Microservices Architecture</span>
+					</li>
+					<li style="padding: 0.75rem 0; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+						<span style="width: 8px; height: 8px; background: #FF6B35; border-radius: 50%; margin-right: 1rem;"></span>
+						<span style="color: #1a1a1a; font-size: 0.95rem;">Real-time Data Processing</span>
+					</li>
+					<li style="padding: 0.75rem 0; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+						<span style="width: 8px; height: 8px; background: #FF6B35; border-radius: 50%; margin-right: 1rem;"></span>
+						<span style="color: #1a1a1a; font-size: 0.95rem;">Global Scalability</span>
+					</li>
+					<li style="padding: 0.75rem 0; display: flex; align-items: center;">
+						<span style="width: 8px; height: 8px; background: #FF6B35; border-radius: 50%; margin-right: 1rem;"></span>
+						<span style="color: #1a1a1a; font-size: 0.95rem;">Enterprise Integration</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- IBM Section - Corporate Blue IR Style -->
+<section class="company-section ibm-section" style="min-height: 100vh; background: #ffffff; color: #1a1a1a; display: flex; align-items: center; padding: 4rem 2rem;">
+	<div style="max-width: 1200px; margin: 0 auto; width: 100%;">
+		<!-- Corporate Header -->
+		<div style="text-align: center; margin-bottom: 4rem;">
+			<div style="display: inline-block; padding: 0.5rem 1.5rem; background: #0530AD; color: white; border-radius: 2px; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; font-family: 'IBM Plex Sans', sans-serif;">
+				IBM Corporation
+			</div>
+			<h2 style="font-size: 2.8rem; font-weight: 300; color: #1a1a1a; margin-bottom: 1rem; font-family: 'IBM Plex Sans', sans-serif;">
+				Hybrid Cloud & AI Solutions
+			</h2>
+			<p style="font-size: 1.1rem; color: #666; max-width: 600px; margin: 0 auto;">
+				Enterprise-grade IoT and data pipeline architecture for mission-critical operations
+			</p>
+		</div>
+
+		<!-- Content Grid -->
+		<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start;">
+			<!-- Main Content Card -->
+			<div style="background: #f8f9fa; padding: 2.5rem; border-radius: 2px; border-left: 4px solid #0530AD;">
+				<h3 style="font-size: 1.3rem; font-weight: 600; color: #0530AD; margin-bottom: 1.5rem; font-family: 'IBM Plex Sans', sans-serif;">
+					ENTERPRISE ARCHITECTURE
+				</h3>
+				<p style="font-size: 1.1rem; line-height: 1.7; color: #333; margin-bottom: 2rem;">
+					Designed and implemented enterprise-grade IoT solutions processing millions of sensor readings daily. Our architecture delivers the scale, reliability, and real-time analytics capabilities required for modern industrial operations.
+				</p>
+				
+				<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+					<div style="background: white; padding: 1.5rem; border-radius: 2px; border-top: 3px solid #0530AD;">
+						<h4 style="font-size: 0.9rem; font-weight: 600; color: #0530AD; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
+							Scale
+						</h4>
+						<p style="font-size: 1.4rem; font-weight: 300; color: #1a1a1a; margin: 0;">
+							Millions of daily transactions
+						</p>
+					</div>
+					<div style="background: white; padding: 1.5rem; border-radius: 2px; border-top: 3px solid #0530AD;">
+						<h4 style="font-size: 0.9rem; font-weight: 600; color: #0530AD; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
+							Reliability
+						</h4>
+						<p style="font-size: 1.4rem; font-weight: 300; color: #1a1a1a; margin: 0;">
+							99.9% uptime SLA
+						</p>
+					</div>
+				</div>
+
+				<div style="background: #0530AD; color: white; padding: 1.5rem; border-radius: 2px;">
+					<p style="font-size: 0.95rem; margin: 0; font-style: italic;">
+						"Powering digital transformation through intelligent infrastructure design"
+					</p>
+				</div>
+			</div>
+
+			<!-- Technical Stack Card -->
+			<div style="background: white; padding: 2rem; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e0e0e0;">
+				<h3 style="font-size: 1.1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
+					Technology Stack
+				</h3>
+				<div style="space-y: 1rem;">
+					<div style="padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0;">
+						<div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Cloud Platform</div>
+						<div style="font-size: 0.95rem; color: #1a1a1a; font-weight: 500;">IBM Cloud / Red Hat OpenShift</div>
+					</div>
+					<div style="padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0;">
+						<div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Data Processing</div>
+						<div style="font-size: 0.95rem; color: #1a1a1a; font-weight: 500;">Real-time Analytics</div>
+					</div>
+					<div style="padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0;">
+						<div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Integration</div>
+						<div style="font-size: 0.95rem; color: #1a1a1a; font-weight: 500;">Enterprise APIs</div>
+					</div>
+					<div style="padding: 0.75rem 0;">
+						<div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Security</div>
+						<div style="font-size: 0.95rem; color: #1a1a1a; font-weight: 500;">Zero Trust Architecture</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<!-- IBM Section - Professional and Technical -->
-<section class="company-section ibm-section" style="min-height: 100vh; background: linear-gradient(135deg, #0530AD 0%, #1e3d8b 50%, #0530AD 100%); color: white; display: flex; align-items: center; padding: 4rem 2rem; position: relative;">
-	<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20px 20px, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.3;"></div>
-	<div style="max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 1;">
-		<div style="display: flex; align-items: center; gap: 4rem;">
-			<div style="flex: 1; text-align: center;">
-				<div style="width: 200px; height: 200px; background: linear-gradient(135deg, #00B4D8, #0077B6); border-radius: 20px; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(0, 180, 216, 0.3);">
-					<div style="color: white; font-size: 3rem; font-weight: 900; font-family: 'IBM Plex Sans', sans-serif;">IBM</div>
-				</div>
+<!-- Philips Section - Healthcare IR Style -->
+<section class="company-section philips-section" style="min-height: 100vh; background: #f4f7f9; color: #1a1a1a; display: flex; align-items: center; padding: 4rem 2rem;">
+	<div style="max-width: 1200px; margin: 0 auto; width: 100%;">
+		<!-- Corporate Header -->
+		<div style="text-align: center; margin-bottom: 4rem;">
+			<div style="display: inline-block; padding: 0.5rem 1.5rem; background: #00A3E0; color: white; border-radius: 4px; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">
+				Royal Philips
 			</div>
-			<div style="flex: 1;">
-				<div style="font-size: 6rem; font-weight: 900; margin-bottom: 2rem; color: #00B4D8; font-family: 'IBM Plex Sans', sans-serif;">
-					IBM
-				</div>
-				<h3 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; color: white;">
-					IoT & Data Pipeline Architecture
-				</h3>
-				<p style="font-size: 1.3rem; line-height: 1.6; color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem;">
-					Designed enterprise-grade IoT solutions and data pipelines that process millions of sensor readings daily. Built for scale, reliability, and real-time analytics.
-				</p>
-				<div style="background: rgba(0, 180, 216, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #00B4D8;">
-					<p style="font-weight: 600; color: #00B4D8; margin-bottom: 0.5rem;">Think. Build. Scale.</p>
-					<p style="color: rgba(255, 255, 255, 0.9);">Enterprise solutions that power tomorrow's innovations</p>
-				</div>
-			</div>
+			<h2 style="font-size: 2.8rem; font-weight: 300; color: #1a1a1a; margin-bottom: 1rem;">
+				HealthSuite Digital Platform
+			</h2>
+			<p style="font-size: 1.1rem; color: #666; max-width: 600px; margin: 0 auto;">
+				Meaningful innovation in health technology - connecting care, patients and data
+			</p>
 		</div>
-	</div>
-</section>
 
-<!-- Philips Section - Healthcare and Innovation -->
-<section class="company-section philips-section" style="min-height: 100vh; background: linear-gradient(135deg, #0E4B6B 0%, #1e40af 50%, #0E4B6B 100%); color: white; display: flex; align-items: center; padding: 4rem 2rem; position: relative;">
-	<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 70%, rgba(0, 163, 224, 0.1) 0%, transparent 50%);"></div>
-	<div style="max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 1;">
-		<div style="display: flex; align-items: center; gap: 4rem;">
-			<div style="flex: 1;">
-				<div style="font-size: 6rem; font-weight: 900; margin-bottom: 2rem; color: #00A3E0; font-family: system-ui;">
-					PHILIPS
-				</div>
-				<h3 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; color: white;">
-					HealthSuite Digital Platform
+		<!-- Content Layout -->
+		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+			<!-- Healthcare Innovation Card -->
+			<div style="background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 16px rgba(0,163,224,0.1); border-left: 4px solid #00A3E0;">
+				<h3 style="font-size: 1.3rem; font-weight: 600; color: #00A3E0; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.5px;">
+					Platform Architecture
 				</h3>
-				<p style="font-size: 1.3rem; line-height: 1.6; color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem;">
-					Architected cloud-native healthcare solutions connecting medical devices to care providers. FHIR-compliant platform serving millions of patients worldwide.
-				</p>
-				<div style="background: rgba(0, 163, 224, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #00A3E0;">
-					<p style="font-weight: 600; color: #00A3E0; margin-bottom: 0.5rem;">Meaningful Innovation</p>
-					<p style="color: rgba(255, 255, 255, 0.9);">Improving lives through technology that cares</p>
+				
+				<div style="margin-bottom: 2rem;">
+					<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+						<div style="text-align: center; padding: 1rem; background: #f4f7f9; border-radius: 8px;">
+							<div style="font-size: 1.8rem; font-weight: 300; color: #00A3E0; margin-bottom: 0.25rem;">FHIR</div>
+							<div style="font-size: 0.85rem; color: #666; text-transform: uppercase;">Compliant</div>
+						</div>
+						<div style="text-align: center; padding: 1rem; background: #f4f7f9; border-radius: 8px;">
+							<div style="font-size: 1.8rem; font-weight: 300; color: #00A3E0; margin-bottom: 0.25rem;">Global</div>
+							<div style="font-size: 0.85rem; color: #666; text-transform: uppercase;">Scale</div>
+						</div>
+					</div>
+					
+					<ul style="list-style: none; padding: 0; margin: 0;">
+						<li style="padding: 0.5rem 0; border-bottom: 1px solid #e8ecef; display: flex; align-items: center; font-size: 0.95rem;">
+							<span style="width: 6px; height: 6px; background: #00A3E0; border-radius: 50%; margin-right: 1rem;"></span>
+							Cloud-native healthcare architecture
+						</li>
+						<li style="padding: 0.5rem 0; border-bottom: 1px solid #e8ecef; display: flex; align-items: center; font-size: 0.95rem;">
+							<span style="width: 6px; height: 6px; background: #00A3E0; border-radius: 50%; margin-right: 1rem;"></span>
+							Medical device connectivity
+						</li>
+						<li style="padding: 0.5rem 0; border-bottom: 1px solid #e8ecef; display: flex; align-items: center; font-size: 0.95rem;">
+							<span style="width: 6px; height: 6px; background: #00A3E0; border-radius: 50%; margin-right: 1rem;"></span>
+							Care provider integration
+						</li>
+						<li style="padding: 0.5rem 0; display: flex; align-items: center; font-size: 0.95rem;">
+							<span style="width: 6px; height: 6px; background: #00A3E0; border-radius: 50%; margin-right: 1rem;"></span>
+							Patient data management
+						</li>
+					</ul>
+				</div>
+
+				<div style="background: linear-gradient(135deg, #00A3E0, #0077B6); color: white; padding: 1.5rem; border-radius: 8px; text-align: center;">
+					<div style="font-size: 0.9rem; margin-bottom: 0.5rem; opacity: 0.9;">"Improving lives through technology that cares"</div>
+					<div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Meaningful Innovation</div>
 				</div>
 			</div>
-			<div style="flex: 1; text-align: center;">
-				<div style="width: 200px; height: 200px; background: linear-gradient(135deg, #00A3E0, #0077B6); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(0, 163, 224, 0.3); border: 3px solid rgba(255, 255, 255, 0.2);">
-					<div style="color: white; font-size: 3rem;">🏥</div>
+
+			<!-- Healthcare Impact Visual -->
+			<div style="text-align: center;">
+				<div style="width: 280px; height: 280px; background: linear-gradient(135deg, #00A3E0, #0077B6); border-radius: 12px; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0, 163, 224, 0.2); position: relative;">
+					<div style="color: white; font-size: 4rem; margin-bottom: 1rem;">🏥</div>
+					<div style="position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.9); color: #00A3E0; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600; white-space: nowrap;">
+						Healthcare Innovation
+					</div>
 				</div>
-			</div>
-			<div style="flex: 1;">
-				<div style="font-size: 4rem; font-weight: 900; margin-bottom: 2rem; color: #FF5722; text-transform: uppercase; letter-spacing: 0.1em;">
-					ABVV-FGTB
-				</div>
-				<h3 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; color: white;">
-					30-Year Legacy Modernization
-				</h3>
-				<p style="font-size: 1.3rem; line-height: 1.6; color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem;">
-					Transformed three decades of AS400 mainframe systems into modern, secure architecture. Preserved institutional knowledge while enabling digital transformation.
-				</p>
-				<div style="background: rgba(255, 87, 34, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #FF5722;">
-					<p style="font-weight: 600; color: #FF5722; margin-bottom: 0.5rem;">Solidarity & Progress</p>
-					<p style="color: rgba(255, 255, 255, 0.9);">Bridging generations of institutional knowledge</p>
+				<div style="margin-top: 2rem; text-align: center;">
+					<div style="font-size: 1.1rem; color: #666; margin-bottom: 0.5rem;">Serving patients worldwide</div>
+					<div style="font-size: 0.9rem; color: #999; text-transform: uppercase; letter-spacing: 0.5px;">Digital Health Platform</div>
 				</div>
 			</div>
 		</div>
@@ -370,29 +500,93 @@
 	</div>
 </section>
 
-<!-- ABVV-FGTB Section - Union and Legacy -->
-<section class="company-section abvv-section" style="min-height: 100vh; background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 50%, #D32F2F 100%); color: white; display: flex; align-items: center; padding: 4rem 2rem; position: relative;">
-	<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);"></div>
-	<div style="max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 1;">
-		<div style="display: flex; align-items: center; gap: 4rem;">
-			<div style="flex: 1; text-align: center;">
-				<div style="width: 200px; height: 200px; background: linear-gradient(135deg, #FF5722, #D32F2F); border-radius: 10px; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(211, 47, 47, 0.4); transform: rotate(5deg);">
-					<div style="color: white; font-size: 2rem; font-weight: 900; text-align: center; line-height: 1.2;">ABVV<br/>FGTB</div>
+<!-- ABVV-FGTB Section - Institutional IR Style -->
+<section class="company-section abvv-section" style="min-height: 100vh; background: #f9f9f9; color: #1a1a1a; display: flex; align-items: center; padding: 4rem 2rem;">
+	<div style="max-width: 1200px; margin: 0 auto; width: 100%;">
+		<!-- Corporate Header -->
+		<div style="text-align: center; margin-bottom: 4rem;">
+			<div style="display: inline-block; padding: 0.5rem 1.5rem; background: #e75420; color: white; border-radius: 4px; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">
+				ABVV-FGTB
+			</div>
+			<h2 style="font-size: 2.8rem; font-weight: 300; color: #1a1a1a; margin-bottom: 1rem;">
+				Legacy System Transformation
+			</h2>
+			<p style="font-size: 1.1rem; color: #666; max-width: 600px; margin: 0 auto;">
+				Three decades of institutional knowledge modernized for the digital age
+			</p>
+		</div>
+
+		<!-- Content Grid -->
+		<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start;">
+			<!-- Transformation Story Card -->
+			<div style="background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(231,84,32,0.08); border-left: 4px solid #e75420;">
+				<h3 style="font-size: 1.3rem; font-weight: 600; color: #e75420; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.5px;">
+					Modernization Impact
+				</h3>
+				
+				<p style="font-size: 1.1rem; line-height: 1.7; color: #333; margin-bottom: 2rem;">
+					Successfully transformed three decades of AS400 mainframe systems into modern, secure architecture. This comprehensive modernization preserved critical institutional knowledge while enabling digital transformation for Belgium's largest trade union.
+				</p>
+
+				<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+					<div style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; border-top: 3px solid #e75420;">
+						<h4 style="font-size: 0.9rem; font-weight: 600; color: #e75420; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
+							Legacy Systems
+						</h4>
+						<p style="font-size: 1.2rem; font-weight: 300; color: #1a1a1a; margin: 0;">
+							30+ Years AS400
+						</p>
+					</div>
+					<div style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; border-top: 3px solid #e75420;">
+						<h4 style="font-size: 0.9rem; font-weight: 600; color: #e75420; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
+							Transformation
+						</h4>
+						<p style="font-size: 1.2rem; font-weight: 300; color: #1a1a1a; margin: 0;">
+							Modern Architecture
+						</p>
+					</div>
+				</div>
+
+				<div style="background: #e75420; color: white; padding: 1.5rem; border-radius: 8px; text-align: center;">
+					<div style="font-size: 0.95rem; margin-bottom: 0.5rem; font-style: italic;">
+						"Bridging generations of institutional knowledge with modern technology"
+					</div>
+					<div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">
+						Solidarity & Progress
+					</div>
 				</div>
 			</div>
-			<div style="flex: 1;">
-				<div style="font-size: 4rem; font-weight: 900; margin-bottom: 2rem; color: #FF5722; text-transform: uppercase; letter-spacing: 0.1em;">
-					ABVV-FGTB
-				</div>
-				<h3 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; color: white;">
-					30-Year Legacy Modernization
+
+			<!-- Organization Profile Card -->
+			<div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); border: 1px solid #e8e8e8;">
+				<h3 style="font-size: 1.1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
+					Organization Profile
 				</h3>
-				<p style="font-size: 1.3rem; line-height: 1.6; color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem;">
-					Transformed three decades of AS400 mainframe systems into modern, secure architecture. Preserved institutional knowledge while enabling digital transformation.
-				</p>
-				<div style="background: rgba(255, 87, 34, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #FF5722;">
-					<p style="font-weight: 600; color: #FF5722; margin-bottom: 0.5rem;">Solidarity & Progress</p>
-					<p style="color: rgba(255, 255, 255, 0.9);">Bridging generations of institutional knowledge</p>
+				
+				<div style="margin-bottom: 2rem;">
+					<div style="padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0;">
+						<div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Sector</div>
+						<div style="font-size: 0.95rem; color: #1a1a1a; font-weight: 500;">Trade Union Federation</div>
+					</div>
+					<div style="padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0;">
+						<div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Members</div>
+						<div style="font-size: 0.95rem; color: #1a1a1a; font-weight: 500;">1.5+ Million</div>
+					</div>
+					<div style="padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0;">
+						<div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Founded</div>
+						<div style="font-size: 0.95rem; color: #1a1a1a; font-weight: 500;">1945</div>
+					</div>
+					<div style="padding: 0.75rem 0;">
+						<div style="font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Scope</div>
+						<div style="font-size: 0.95rem; color: #1a1a1a; font-weight: 500;">National (Belgium)</div>
+					</div>
+				</div>
+
+				<div style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; border-left: 3px solid #e75420;">
+					<div style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">Key Challenge</div>
+					<div style="font-size: 0.95rem; color: #1a1a1a; line-height: 1.4;">
+						Modernizing critical systems while preserving decades of institutional knowledge and member data integrity
+					</div>
 				</div>
 			</div>
 		</div>
