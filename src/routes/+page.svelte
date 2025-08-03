@@ -22,18 +22,18 @@
 <!-- Hero Section -->
 <section class="hero-gradient floating-elements animate-gradient" style="min-height: 100vh; display: flex; align-items: center; position: relative;">
 	<div class="hero-content">
-		<div style="margin-bottom: 3rem;" class="animate-float">
+		<div style="margin-bottom: 5.33rem;" class="animate-float">
 			<img 
 				src="/logo.png" 
 				alt="Zero to One Solutions" 
 				style="width: 32rem; height: auto; margin: 0 auto; display: block; filter: drop-shadow(0 8px 40px rgba(255, 255, 255, 0.4)); max-width: 90vw;"
 			/>
 		</div>
-		<h1 class="hero-title" style="color: white; margin-bottom: 1.5rem; font-size: 3.5rem; line-height: 1.1; text-align: center;">
-			Engineering Wins Aren't Enough&nbsp;&nbsp;—&nbsp;&nbsp;Vision Is
+		<h1 class="hero-title" style="color: white; margin-bottom: 3.33rem; font-size: 3.5rem; line-height: 1.1; text-align: center;">
+			<span style="white-space: nowrap;">Engineering Wins Aren't Enough</span>&nbsp;&nbsp;—&nbsp;&nbsp;<span style="white-space: nowrap;">Vision Is</span>
 		</h1>
-		<p style="color: rgba(255, 255, 255, 0.8); font-size: 1.4rem; margin-bottom: 4rem; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.4;">
-			By turning ideas into actionable plans, We connect vision to delivery.
+		<p style="color: rgba(255, 255, 255, 0.8); font-size: 1.4rem; margin-bottom: 6.67rem; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.4; text-align: center;">
+			<span style="white-space: nowrap;">By turning ideas into actionable plans,</span>&nbsp;<span style="white-space: nowrap;">We connect vision to delivery.</span>
 		</p>
 		
 		<!-- Scroll indicator -->
