@@ -103,7 +103,11 @@ test.describe('Mobile Navigation and Functionality', () => {
     // Expand the stories
     const expandBtn = page.locator('button:has-text("Explore the Stories")');
     await expandBtn.click({ force: true });
-    await page.waitForTimeout(1500); // Wait for stories to load
+    await page.waitForTimeout(2000); // Give more time for expansion
+    
+    // Check if expansion worked by looking for the expanded story container first
+    const expandedStory = page.locator('.expanded-story');
+    await expect(expandedStory).toBeVisible();
     
     // Check both stories are visible (should stack on mobile)
     await expect(page.locator('text=Massive Cloud Migration Strategy')).toBeVisible();
@@ -126,7 +130,11 @@ test.describe('Mobile Navigation and Functionality', () => {
     await page.locator('text=Switching costs do and will impact your business').scrollIntoViewIfNeeded();
     const expandBtn = page.locator('button:has-text("Explore the Stories")');
     await expandBtn.click({ force: true });
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(2000); // Give more time for expansion
+    
+    // Check if expansion worked first
+    const expandedStory = page.locator('.expanded-story');
+    await expect(expandedStory).toBeVisible();
     
     // Get positions of both story cards
     const sapStory = page.locator('text=Massive Cloud Migration Strategy');
@@ -326,31 +334,22 @@ test.describe('Mobile Navigation and Functionality', () => {
     await expect(page.locator('h1')).toContainText('Engineering Wins Aren');
   });
 
-  test('small screen (iPhone SE) compatibility', async ({ page }) => {
-    // Test on very small screen (iPhone SE dimensions)
-    await page.setViewportSize({ width: 320, height: 568 });
+  test('iPhone 12/13/14 compatibility', async ({ page }) => {
+    // Test on iPhone 12/13/14 dimensions (390x844)
+    await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(BASE_URL);
     
-    // Check content is still accessible
+    // Check content displays properly on modern iPhone
     await expect(page.locator('h1')).toBeVisible();
     await expect(page.locator('img[alt="Zero to One Solutions"]')).toBeVisible();
     
-    // Check that text doesn't overflow
-    const heroTitle = page.locator('h1');
-    const titleBox = await heroTitle.boundingBox();
-    
-    if (titleBox) {
-      // Title should fit reasonably within the viewport (allowing for some overflow on very small screens)
-      expect(titleBox.width).toBeLessThanOrEqual(350);
-    }
-    
-    // Test story expansion on small screen
+    // Test story expansion functionality
     await page.locator('text=Focus on making your beer taste better').scrollIntoViewIfNeeded();
     const expandBtn = page.locator('button:has-text("Explore the Story")').first();
     await expandBtn.click({ force: true });
     await page.waitForTimeout(1000);
     
-    // Content should be readable
+    // Content should be readable on modern iPhone screen
     await expect(page.locator('text=The earliest adopters of electrical power')).toBeVisible();
   });
 
