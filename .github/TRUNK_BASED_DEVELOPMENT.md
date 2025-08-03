@@ -38,19 +38,16 @@ git push origin feature/short-descriptive-name
 - **Fast feedback loops** - CI must complete in <10 minutes
 - **Immediate fixes** for broken main branch
 
-## 🔄 CI/CD Pipeline
+## 🔄 Continuous Deployment Pipeline
 
-### Continuous Integration (on every push to main)
-- ✅ Automated testing (unit, integration, e2e)
-- ✅ Code quality checks (linting, type checking)
-- ✅ Build verification
-- ✅ Mobile navigation testing
+### Single Pipeline (on every push to main)
+- ✅ **Build & Test**: Automated testing, linting, type checking, mobile tests
+- 🚀 **Deploy**: Automatic deployment to production
+- 📦 **Release**: Version bumping and changelog generation (manual)
+- ☁️ **Infrastructure**: AWS S3 sync and CloudFront invalidation
+- 🔍 **Provisioning**: Terraform infrastructure management
 
-### Continuous Deployment (on main branch)
-- 🚀 Automatic deployment to production
-- 📦 Version bumping and changelog generation
-- ☁️ AWS S3 sync and CloudFront invalidation
-- 🔍 Infrastructure provisioning with Terraform
+*No separate CI pipeline - testing and deployment are integrated for faster feedback.*
 
 ## 📋 Pull Request Guidelines
 
@@ -61,11 +58,10 @@ git push origin feature/short-descriptive-name
 - **Ready to merge** - No "draft" PRs sitting for days
 
 ### PR Requirements
-- ✅ All CI checks passing
 - ✅ Code review approval
 - ✅ Conventional commit format
 - ✅ No merge conflicts with main
-- ✅ Mobile tests passing
+- ✅ Local tests passing before push
 
 ## 🛡️ Quality Gates
 
@@ -125,8 +121,8 @@ npm run test:mobile
 ## 📈 Success Metrics
 
 ### Development Velocity
-- **Lead time** from code commit to production: <2 hours
-- **Deployment frequency**: Multiple times per day
+- **Lead time** from code commit to production: <30 minutes
+- **Deployment frequency**: Every push to main
 - **PR merge time**: <24 hours average
 - **Failed deployment rate**: <5%
 
