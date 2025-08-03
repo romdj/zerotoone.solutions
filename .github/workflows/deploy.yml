@@ -71,6 +71,31 @@ jobs:
         working-directory: ./infra/terraform
         run: terraform init
 
+      - name: Check and Import Existing Resources
+        working-directory: ./infra/terraform
+        run: |
+          echo "🔍 Checking for existing resources..."
+          
+          # Check if S3 bucket exists and import if needed
+          if aws s3api head-bucket --bucket ${{ secrets.DOMAIN_NAME }} 2>/dev/null; then
+            echo "✅ S3 bucket exists, attempting import..."
+            terraform import aws_s3_bucket.website ${{ secrets.DOMAIN_NAME }} || echo "⚠️  Bucket already in state or import failed (this is OK)"
+          else
+            echo "ℹ️  S3 bucket does not exist - will be created"
+          fi
+          
+          # Check if CloudFront distribution exists and import if needed
+          DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?contains(Aliases.Items, '${{ secrets.DOMAIN_NAME }}')].Id | [0]" --output text 2>/dev/null || echo "None")
+          if [[ "$DISTRIBUTION_ID" != "None" && "$DISTRIBUTION_ID" != "null" ]]; then
+            echo "✅ CloudFront distribution exists: $DISTRIBUTION_ID, attempting import..."
+            terraform import aws_cloudfront_distribution.website "$DISTRIBUTION_ID" || echo "⚠️  Distribution already in state or import failed (this is OK)"
+          else
+            echo "ℹ️  CloudFront distribution does not exist - will be created"
+          fi
+        env:
+          TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
+          TF_VAR_domain_name: ${{ secrets.DOMAIN_NAME }}
+
       - name: Terraform Plan
         working-directory: ./infra/terraform
         run: terraform plan

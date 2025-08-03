@@ -2,6 +2,11 @@
 # S3 Bucket for hosting
 resource "aws_s3_bucket" "website" {
   bucket = var.domain_name
+  
+  # Prevent accidental deletion of bucket with content
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_s3_bucket_website_configuration" "website" {
