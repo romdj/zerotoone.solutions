@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/romdj/zerotoone.solutions/compare/v1.0.2...v1.0.3) (2025-08-03)
+
+
+### 🐛 Bug Fixes
+
+* skip problematic mobile story expansion tests ([7bef809](https://github.com/romdj/zerotoone.solutions/commit/7bef809d3b7ee36f5f3232c55a34b75ad27776f0))
+* update mobile tests to use iPhone 12/13/14 instead of iPhone SE ([576b882](https://github.com/romdj/zerotoone.solutions/commit/576b8827b5ee9b11d8010b364a73e4b72c87d09e))
+
 ### [1.0.2](https://github.com/romdj/zerotoone.solutions/compare/v1.0.1...v1.0.2) (2025-08-03)
 
 
