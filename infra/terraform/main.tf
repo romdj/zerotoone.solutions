@@ -180,6 +180,10 @@ resource "aws_route53_record" "website_validation" {
   ttl             = 60
   type            = each.value.type
   zone_id         = data.aws_route53_zone.website.zone_id
+  
+  depends_on = [
+    aws_acm_certificate.website
+  ]
 }
 
 resource "aws_route53_record" "website" {

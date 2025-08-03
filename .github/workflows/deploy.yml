@@ -71,41 +71,18 @@ jobs:
         working-directory: ./infra/terraform
         run: terraform init
 
-      - name: Check and Import Existing Resources
+      - name: Import Existing S3 Bucket if Needed
         working-directory: ./infra/terraform
         run: |
-          echo "🔍 Checking for existing resources..."
+          echo "🔍 Checking for existing S3 bucket..."
           
-          # Function to check if resource exists in Terraform state
-          check_state() {
-            terraform state list | grep -q "$1" && echo "exists" || echo "missing"
-          }
-          
-          # Check if S3 bucket exists in AWS and import if not in Terraform state
+          # Check if S3 bucket exists in AWS and attempt import
           if aws s3api head-bucket --bucket ${{ secrets.DOMAIN_NAME }} 2>/dev/null; then
-            echo "✅ S3 bucket exists in AWS"
-            if [[ "$(check_state aws_s3_bucket.website)" == "missing" ]]; then
-              echo "📦 Importing S3 bucket into Terraform state..."
-              terraform import aws_s3_bucket.website ${{ secrets.DOMAIN_NAME }}
-            else
-              echo "ℹ️  S3 bucket already in Terraform state"
-            fi
+            echo "✅ S3 bucket exists in AWS, attempting import..."
+            # Try to import, but don't fail if it's already imported
+            terraform import aws_s3_bucket.website ${{ secrets.DOMAIN_NAME }} || echo "ℹ️  Bucket already imported or import failed (continuing)"
           else
-            echo "ℹ️  S3 bucket does not exist - will be created"
-          fi
-          
-          # Check if CloudFront distribution exists and import if needed
-          DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?contains(Aliases.Items, '${{ secrets.DOMAIN_NAME }}')].Id | [0]" --output text 2>/dev/null || echo "None")
-          if [[ "$DISTRIBUTION_ID" != "None" && "$DISTRIBUTION_ID" != "null" ]]; then
-            echo "✅ CloudFront distribution exists: $DISTRIBUTION_ID"
-            if [[ "$(check_state aws_cloudfront_distribution.website)" == "missing" ]]; then
-              echo "📦 Importing CloudFront distribution into Terraform state..."
-              terraform import aws_cloudfront_distribution.website "$DISTRIBUTION_ID"
-            else
-              echo "ℹ️  CloudFront distribution already in Terraform state"
-            fi
-          else
-            echo "ℹ️  CloudFront distribution does not exist - will be created"
+            echo "ℹ️  S3 bucket does not exist - will be created by Terraform"
           fi
         env:
           TF_VAR_aws_region: ${{ secrets.AWS_REGION }}

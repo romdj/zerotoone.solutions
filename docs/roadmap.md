@@ -171,7 +171,7 @@ I think we need some kind of menu, sidebar or navbar for navigation, it can be m
 Let's focus on the Nike card:
 I've incorporated the nike folder under inspirations/ for you to get a grasp on the corporate culture and layout when reporting. **This** is the font, the color scheme, I want in place for the nike section. can you adapt this?
 
-
+parallel run of the npm run test for multiple devices if possible?
 
 in the `Switching costs do and will impact your business`, when expanding the stories, I'd like to see them side-by-side instead of one after another. (unless we reach a horizontal size of the page, that makes it impossible to read, it needs to switch between the two depending on screen width). those story frames to be black on white.
 
@@ -194,5 +194,7 @@ Sometimes the best move is to go against conventional wisdom. Dropbox's bold mig
 
 can you teardown the portfolio page? I don't think it brings any value. You can keep and rework it to only contain the mentioned side projects. But the overall companies and experience. That's irrelevant
 
+
+so when running npm run test, the workflow add the end launches a server to review the test cases. I'm afraid that since that track never finishes, it can end up in an unresolved state? perhaps we should have a test:ui and test:ci to differentiate the 2?
 
 basic optimization (e.g., proper meta tags, descriptive titles, and alt text for images) is a good practice. It ensures your site is accessible and provides a better user experience.
