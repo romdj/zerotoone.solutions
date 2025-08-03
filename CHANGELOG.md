@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.5](https://github.com/romdj/zerotoone.solutions/compare/v1.0.4...v1.0.5) (2025-08-03)
+
+
+### 🐛 Bug Fixes
+
+* improve terraform resource import logic in deployment pipeline ([7eaee0e](https://github.com/romdj/zerotoone.solutions/commit/7eaee0eb9f1a27e917a3ccb34cd324abca4d80e1))
+
 ### [1.0.4](https://github.com/romdj/zerotoone.solutions/compare/v1.0.3...v1.0.4) (2025-08-03)
 
 
