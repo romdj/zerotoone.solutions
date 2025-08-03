@@ -131,3 +131,8 @@ npm run typecheck    # TypeScript checking (if configured)
 - Technology framework recommendations  
 - Migration checklists and templates
 - Newsletter signup functionality
+
+## Development Memories
+
+### Server Configuration
+- Always check if something is running on port 12000 before running the server
