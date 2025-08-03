@@ -25,9 +25,6 @@
 	<div style="max-width: 1200px; margin: 0 auto; width: 100%;">
 		<!-- Bilingual Header -->
 		<div style="text-align: center; margin-bottom: 4rem;">
-			<div style="margin-bottom: 2rem;">
-				<img src="/logos/abvv-fgtb.png" alt="ABVV-FGTB" style="height: 80px; object-fit: contain;" />
-			</div>
 			<div id="union-name" style="display: inline-block; padding: 0.75rem 2rem; background: #333; color: white; border-radius: 2px; font-size: 1.1rem; font-weight: 600; letter-spacing: 1px; margin-bottom: 1.5rem; font-family: system-ui;">
 				FGTB
 			</div>
