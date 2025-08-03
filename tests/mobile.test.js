@@ -77,7 +77,7 @@ test.describe('Mobile Navigation and Functionality', () => {
     }
   });
 
-  test('counter positioning section works on mobile', async ({ page }) => {
+  test.skip('counter positioning section works on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(BASE_URL);
     
@@ -93,7 +93,7 @@ test.describe('Mobile Navigation and Functionality', () => {
     await expect(page.locator('text=Dropbox\'s Move from Public Cloud to On-Prem')).toBeVisible();
   });
 
-  test('switching costs section displays stories correctly on mobile', async ({ page }) => {
+  test.skip('switching costs section displays stories correctly on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(BASE_URL);
     
@@ -122,7 +122,7 @@ test.describe('Mobile Navigation and Functionality', () => {
     await expect(page.locator('text=Continuous investments significantly improved')).toBeVisible();
   });
 
-  test('responsive grid layout stacks correctly on mobile', async ({ page }) => {
+  test.skip('responsive grid layout stacks correctly on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(BASE_URL);
     

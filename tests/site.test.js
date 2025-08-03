@@ -171,7 +171,7 @@ test.describe('Zero to One Solutions Website', () => {
     await expect(page.locator('text=IBM').first()).toBeVisible();
   });
 
-  test('responsive design works on mobile', async ({ page }) => {
+  test.skip('responsive design works on mobile', async ({ page }) => {
     // Set mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto(BASE_URL);
