@@ -112,9 +112,38 @@ jobs:
           TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
           TF_VAR_domain_name: ${{ secrets.DOMAIN_NAME }}
 
-      - name: Terraform Apply (Full)
+      - name: Terraform Apply (Full) with CloudFront Import Handling
         working-directory: ./infra/terraform
-        run: terraform apply -auto-approve
+        run: |
+          set +e  # Don't exit on error, we want to handle it
+          echo "🚀 Applying full infrastructure..."
+          
+          # Try full apply - this may fail if CloudFront distribution exists
+          terraform apply -auto-approve
+          APPLY_RESULT=$?
+          
+          if [ $APPLY_RESULT -ne 0 ]; then
+            echo "⚠️  Full apply failed - checking for existing CloudFront distribution..."
+            
+            # Find existing CloudFront distribution for this domain
+            DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?contains(Aliases.Items, '${{ secrets.DOMAIN_NAME }}')].Id | [0]" --output text 2>/dev/null || echo "None")
+            
+            if [[ "$DISTRIBUTION_ID" != "None" && "$DISTRIBUTION_ID" != "null" && "$DISTRIBUTION_ID" != "" ]]; then
+              echo "✅ CloudFront distribution exists: $DISTRIBUTION_ID, importing..."
+              terraform import aws_cloudfront_distribution.website "$DISTRIBUTION_ID"
+              
+              # Now retry the full apply
+              echo "🔄 Retrying full infrastructure apply..."
+              set -e  # Re-enable exit on error for the retry
+              terraform apply -auto-approve
+            else
+              echo "❌ Apply failed but no existing CloudFront distribution found"
+              set -e
+              exit 1
+            fi
+          else
+            echo "✅ Full infrastructure applied successfully"
+          fi
         env:
           TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
           TF_VAR_domain_name: ${{ secrets.DOMAIN_NAME }}
