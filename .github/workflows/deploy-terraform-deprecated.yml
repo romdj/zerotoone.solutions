@@ -1,12 +1,13 @@
-name: Deploy to AWS S3
+name: "[DEPRECATED] Deploy to AWS S3 with Terraform"
+# ⚠️  DEPRECATED: This workflow is deprecated in favor of deploy-pulumi.yml
+# This file is kept for reference but should not be used for new deployments
 permissions:
   id-token: write
   contents: read
 
 on:
-  push:
-    branches:
-      - main
+  # Disabled - use deploy-pulumi.yml instead
+  workflow_dispatch: # Manual trigger only
 
 jobs:
   build-and-test:

@@ -166,6 +166,8 @@ Please remove the `Orval Trappist Ale` text that doesn't bring any value.
 
 TODO
 
+the npm run test step in the cicd pipeline is talking 7 minutes to complete. can you look into optimizing the script to execute faster?
+
 I think we need some kind of menu, sidebar or navbar for navigation, it can be minimalistic, but I do think we need to add that component. Can you think of something that works well keeping the responsive design principles?
 
 Let's focus on the Nike card:
