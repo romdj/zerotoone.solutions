@@ -80,17 +80,14 @@ jobs:
       - name: Configure Pulumi stack
         working-directory: ./pulumi
         run: |
+          pulumi login --local
           pulumi stack select production --create
           pulumi config set aws:region ${{ secrets.AWS_REGION }}
           pulumi config set zerotoone-solutions:domainName ${{ secrets.DOMAIN_NAME }}
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
       - name: Deploy infrastructure
         working-directory: ./pulumi
         run: pulumi up --yes
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
       - name: Sync files to S3
         run: |
@@ -101,5 +98,3 @@ jobs:
         run: |
           DISTRIBUTION_ID=$(pulumi stack output distributionId)
           aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}

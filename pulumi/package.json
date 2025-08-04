@@ -5,6 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "build": "tsc",
+    "lint": "tsc --noEmit",
+    "validate": "npm run lint",
     "preview": "pulumi preview",
     "up": "pulumi up",
     "destroy": "pulumi destroy"

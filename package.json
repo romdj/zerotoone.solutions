@@ -21,7 +21,8 @@
 		"release": "standard-version",
 		"release:patch": "standard-version --release-as patch",
 		"release:minor": "standard-version --release-as minor",
-		"release:major": "standard-version --release-as major"
+		"release:major": "standard-version --release-as major",
+		"pulumi:validate": "cd pulumi && npm run validate"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.8.1",
@@ -47,6 +48,9 @@
 	"lint-staged": {
 		"*.{js,ts,svelte}": [
 			"svelte-check --tsconfig ./tsconfig.json"
+		],
+		"pulumi/**/*.{ts,js,json,yaml}": [
+			"cd pulumi && npm run lint"
 		]
 	}
 }
