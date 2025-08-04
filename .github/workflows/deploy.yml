@@ -29,8 +29,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm run test
+    - name: Run tests (CI optimized)
+      run: npm run test:ci
 
     - name: Build application in a static setup
       run: npm run build:static
