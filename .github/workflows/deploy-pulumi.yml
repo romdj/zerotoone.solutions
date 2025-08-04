@@ -1,0 +1,105 @@
+name: Deploy with Pulumi
+permissions:
+  id-token: write
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4.2.2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4.4.0
+      with:
+        node-version: '24'
+        cache: 'npm'
+
+    - name: Install playwright && machine dependencies
+      run: npx playwright install --with-deps
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests (CI optimized)
+      run: npm run test:ci
+
+    - name: Build application in a static setup
+      run: npm run build:static
+
+    - name: Upload production build
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: production-build
+        path: build/
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.2
+        
+      - name: Download production build
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: production-build
+          path: build/
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: pulumi/package-lock.json
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Install Pulumi CLI
+        uses: pulumi/actions@v5
+        with:
+          command: version
+
+      - name: Install Pulumi dependencies
+        working-directory: ./pulumi
+        run: npm install
+
+      - name: Configure Pulumi stack
+        working-directory: ./pulumi
+        run: |
+          pulumi stack select production --create
+          pulumi config set aws:region ${{ secrets.AWS_REGION }}
+          pulumi config set zerotoone-solutions:domainName ${{ secrets.DOMAIN_NAME }}
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+
+      - name: Deploy infrastructure
+        working-directory: ./pulumi
+        run: pulumi up --yes
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+
+      - name: Sync files to S3
+        run: |
+          aws s3 sync build/ s3://${{ secrets.DOMAIN_NAME }}/ --delete --exact-timestamps
+          
+      - name: Invalidate CloudFront
+        working-directory: ./pulumi
+        run: |
+          DISTRIBUTION_ID=$(pulumi stack output distributionId)
+          aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}

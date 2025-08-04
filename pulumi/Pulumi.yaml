@@ -1,0 +1,13 @@
+name: zerotoone-solutions
+runtime: nodejs
+description: Zero to One Solutions website infrastructure
+
+config:
+  aws:region:
+    description: AWS region for resources
+    default: us-east-1
+  zerotoone-solutions:domainName:
+    description: Primary domain name for the website
+  zerotoone-solutions:additionalDomains:
+    description: Additional domains (optional)
+    default: []
