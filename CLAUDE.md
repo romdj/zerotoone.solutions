@@ -136,3 +136,6 @@ npm run typecheck    # TypeScript checking (if configured)
 
 ### Server Configuration
 - Always check if something is running on port 12000 before running the server
+
+### Resource Configuration
+- Checked the official Pulumi GitHub Action setup page: The latest version of `pulumi/setup@v2` is the correct reference, but it's recommended to always verify the current version in the official documentation to ensure compatibility and access to the latest features
