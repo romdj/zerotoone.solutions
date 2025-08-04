@@ -71,28 +71,30 @@ jobs:
         working-directory: ./infra/terraform
         run: terraform init
 
-      - name: Import Existing S3 Bucket if Needed
+      - name: Apply Basic Infrastructure with Import Handling
         working-directory: ./infra/terraform
         run: |
-          echo "🔍 Checking for existing S3 bucket..."
+          echo "🎯 Applying basic infrastructure first..."
           
-          # Check if S3 bucket exists in AWS and attempt import
-          if aws s3api head-bucket --bucket ${{ secrets.DOMAIN_NAME }} 2>/dev/null; then
-            echo "✅ S3 bucket exists in AWS, attempting import..."
-            # Try to import, but don't fail if it's already imported
-            terraform import aws_s3_bucket.website ${{ secrets.DOMAIN_NAME }} || echo "ℹ️  Bucket already imported or import failed (continuing)"
+          # Try targeted apply first - this will fail if bucket exists but isn't imported
+          if ! terraform apply -target=aws_s3_bucket.website -target=aws_s3_bucket_website_configuration.website -target=aws_s3_bucket_public_access_block.website -target=aws_s3_bucket_policy.website -target=aws_acm_certificate.website -auto-approve; then
+            echo "⚠️  Apply failed - likely due to existing S3 bucket. Attempting import..."
+            
+            # Check if S3 bucket exists and import it
+            if aws s3api head-bucket --bucket ${{ secrets.DOMAIN_NAME }} 2>/dev/null; then
+              echo "✅ S3 bucket exists, importing..."
+              terraform import aws_s3_bucket.website ${{ secrets.DOMAIN_NAME }}
+              
+              # Now retry the targeted apply
+              echo "🔄 Retrying basic infrastructure apply..."
+              terraform apply -target=aws_s3_bucket.website -target=aws_s3_bucket_website_configuration.website -target=aws_s3_bucket_public_access_block.website -target=aws_s3_bucket_policy.website -target=aws_acm_certificate.website -auto-approve
+            else
+              echo "❌ Apply failed and bucket doesn't exist - this is unexpected"
+              exit 1
+            fi
           else
-            echo "ℹ️  S3 bucket does not exist - will be created by Terraform"
+            echo "✅ Basic infrastructure applied successfully"
           fi
-        env:
-          TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
-          TF_VAR_domain_name: ${{ secrets.DOMAIN_NAME }}
-
-      - name: Apply Basic Infrastructure First
-        working-directory: ./infra/terraform
-        run: |
-          echo "🎯 Applying basic infrastructure first (S3 and ACM certificate)..."
-          terraform apply -target=aws_s3_bucket.website -target=aws_s3_bucket_website_configuration.website -target=aws_s3_bucket_public_access_block.website -target=aws_s3_bucket_policy.website -target=aws_acm_certificate.website -auto-approve
         env:
           TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
           TF_VAR_domain_name: ${{ secrets.DOMAIN_NAME }}
