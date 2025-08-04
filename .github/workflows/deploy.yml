@@ -131,16 +131,32 @@ jobs:
             if [[ "$DISTRIBUTION_ID" != "None" && "$DISTRIBUTION_ID" != "null" && "$DISTRIBUTION_ID" != "" ]]; then
               echo "✅ CloudFront distribution exists: $DISTRIBUTION_ID, importing..."
               terraform import aws_cloudfront_distribution.website "$DISTRIBUTION_ID"
-              
-              # Now retry the full apply
-              echo "🔄 Retrying full infrastructure apply..."
-              set -e  # Re-enable exit on error for the retry
-              terraform apply -auto-approve
-            else
-              echo "❌ Apply failed but no existing CloudFront distribution found"
-              set -e
-              exit 1
             fi
+            
+            # Check for existing Route53 records and import them
+            echo "🔍 Checking for existing Route53 records..."
+            HOSTED_ZONE_ID=$(aws route53 list-hosted-zones-by-name --dns-name "${{ secrets.DOMAIN_NAME }}" --query "HostedZones[?Name=='${{ secrets.DOMAIN_NAME }}.'].Id | [0]" --output text 2>/dev/null | sed 's|/hostedzone/||')
+            
+            if [[ "$HOSTED_ZONE_ID" != "None" && "$HOSTED_ZONE_ID" != "null" && "$HOSTED_ZONE_ID" != "" ]]; then
+              echo "✅ Found hosted zone: $HOSTED_ZONE_ID"
+              
+              # Check and import main domain A record
+              if aws route53 list-resource-record-sets --hosted-zone-id "$HOSTED_ZONE_ID" --query "ResourceRecordSets[?Name=='${{ secrets.DOMAIN_NAME }}.' && Type=='A']" --output text | grep -q "ALIAS"; then
+                echo "✅ Main domain A record exists, importing..."
+                terraform import aws_route53_record.website "${HOSTED_ZONE_ID}_${{ secrets.DOMAIN_NAME }}_A" || echo "⚠️ Main domain record import failed (continuing)"
+              fi
+              
+              # Check and import www subdomain A record
+              if aws route53 list-resource-record-sets --hosted-zone-id "$HOSTED_ZONE_ID" --query "ResourceRecordSets[?Name=='www.${{ secrets.DOMAIN_NAME }}.' && Type=='A']" --output text | grep -q "ALIAS"; then
+                echo "✅ WWW subdomain A record exists, importing..."
+                terraform import aws_route53_record.website_www "${HOSTED_ZONE_ID}_www.${{ secrets.DOMAIN_NAME }}_A" || echo "⚠️ WWW record import failed (continuing)"
+              fi
+            fi
+            
+            # Now retry the full apply
+            echo "🔄 Retrying full infrastructure apply..."
+            set -e  # Re-enable exit on error for the retry
+            terraform apply -auto-approve
           else
             echo "✅ Full infrastructure applied successfully"
           fi
