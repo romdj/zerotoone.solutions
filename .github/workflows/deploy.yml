@@ -140,17 +140,23 @@ jobs:
             if [[ "$HOSTED_ZONE_ID" != "None" && "$HOSTED_ZONE_ID" != "null" && "$HOSTED_ZONE_ID" != "" ]]; then
               echo "✅ Found hosted zone: $HOSTED_ZONE_ID"
               
-              # Check and import main domain A record
-              if aws route53 list-resource-record-sets --hosted-zone-id "$HOSTED_ZONE_ID" --query "ResourceRecordSets[?Name=='${{ secrets.DOMAIN_NAME }}.' && Type=='A']" --output text | grep -q "ALIAS"; then
+              # List existing records for debugging
+              echo "📝 Existing A records in zone:"
+              aws route53 list-resource-record-sets --hosted-zone-id "$HOSTED_ZONE_ID" --query "ResourceRecordSets[?Type=='A'].{Name:Name,Type:Type}" --output table || true
+              
+              # Import main domain A record if it exists
+              if aws route53 list-resource-record-sets --hosted-zone-id "$HOSTED_ZONE_ID" --query "ResourceRecordSets[?Name=='${{ secrets.DOMAIN_NAME }}.' && Type=='A']" --output text | grep -q .; then
                 echo "✅ Main domain A record exists, importing..."
                 terraform import aws_route53_record.website "${HOSTED_ZONE_ID}_${{ secrets.DOMAIN_NAME }}_A" || echo "⚠️ Main domain record import failed (continuing)"
               fi
               
-              # Check and import www subdomain A record
-              if aws route53 list-resource-record-sets --hosted-zone-id "$HOSTED_ZONE_ID" --query "ResourceRecordSets[?Name=='www.${{ secrets.DOMAIN_NAME }}.' && Type=='A']" --output text | grep -q "ALIAS"; then
+              # Import www subdomain A record if it exists  
+              if aws route53 list-resource-record-sets --hosted-zone-id "$HOSTED_ZONE_ID" --query "ResourceRecordSets[?Name=='www.${{ secrets.DOMAIN_NAME }}.' && Type=='A']" --output text | grep -q .; then
                 echo "✅ WWW subdomain A record exists, importing..."
                 terraform import aws_route53_record.website_www "${HOSTED_ZONE_ID}_www.${{ secrets.DOMAIN_NAME }}_A" || echo "⚠️ WWW record import failed (continuing)"
               fi
+            else
+              echo "⚠️ No hosted zone found for ${{ secrets.DOMAIN_NAME }}"
             fi
             
             # Now retry the full apply
