@@ -74,10 +74,14 @@ jobs:
       - name: Apply Basic Infrastructure with Import Handling
         working-directory: ./infra/terraform
         run: |
+          set +e  # Don't exit on error, we want to handle it
           echo "🎯 Applying basic infrastructure first..."
           
           # Try targeted apply first - this will fail if bucket exists but isn't imported
-          if ! terraform apply -target=aws_s3_bucket.website -target=aws_s3_bucket_website_configuration.website -target=aws_s3_bucket_public_access_block.website -target=aws_s3_bucket_policy.website -target=aws_acm_certificate.website -auto-approve; then
+          terraform apply -target=aws_s3_bucket.website -target=aws_s3_bucket_website_configuration.website -target=aws_s3_bucket_public_access_block.website -target=aws_s3_bucket_policy.website -target=aws_acm_certificate.website -auto-approve
+          APPLY_RESULT=$?
+          
+          if [ $APPLY_RESULT -ne 0 ]; then
             echo "⚠️  Apply failed - likely due to existing S3 bucket. Attempting import..."
             
             # Check if S3 bucket exists and import it
@@ -87,9 +91,11 @@ jobs:
               
               # Now retry the targeted apply
               echo "🔄 Retrying basic infrastructure apply..."
+              set -e  # Re-enable exit on error for the retry
               terraform apply -target=aws_s3_bucket.website -target=aws_s3_bucket_website_configuration.website -target=aws_s3_bucket_public_access_block.website -target=aws_s3_bucket_policy.website -target=aws_acm_certificate.website -auto-approve
             else
               echo "❌ Apply failed and bucket doesn't exist - this is unexpected"
+              set -e
               exit 1
             fi
           else
