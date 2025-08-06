@@ -7,6 +7,7 @@
     "build": "tsc",
     "lint": "tsc --noEmit",
     "validate": "npm run lint",
+    "check": "node pre-commit-check.js",
     "preview": "pulumi preview",
     "up": "pulumi up",
     "destroy": "pulumi destroy"
