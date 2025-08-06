@@ -3,8 +3,6 @@ runtime: nodejs
 description: Zero to One Solutions website infrastructure
 
 config:
-  aws:region:
-    description: AWS region for resources
   zerotoone-solutions:domainName:
     description: Primary domain name for the website
   zerotoone-solutions:additionalDomains:
