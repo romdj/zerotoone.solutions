@@ -76,7 +76,4 @@
 		</div>
 	</section>
 
-	<nav class="nav-back">
-		<a href="/" class="btn btn-secondary">← Home</a>
-	</nav>
 </main>
