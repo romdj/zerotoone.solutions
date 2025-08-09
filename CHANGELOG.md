@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/romdj/zerotoone.solutions/compare/v1.0.5...v1.1.0) (2025-08-09)
+
+
+### ⚡ Performance Improvements
+
+* optimize CI test execution for faster pipeline ([9c07be2](https://github.com/romdj/zerotoone.solutions/commit/9c07be2d6f8176a139cd0e46776ab2dae07f4316))
+
+
+### 📚 Documentation
+
+* add Pulumi documentation and deprecate Terraform workflow ([f30dd05](https://github.com/romdj/zerotoone.solutions/commit/f30dd0575fb572ad09258661873cc836a5c50470))
+
+
+### 🐛 Bug Fixes
+
+* add CloudFront distribution import handling to deployment pipeline ([2a2722f](https://github.com/romdj/zerotoone.solutions/commit/2a2722fddf9fff7d4f089168653f7457f376fd03))
+* add PULUMI_ACCESS_TOKEN to all Pulumi workflow steps ([ae0d228](https://github.com/romdj/zerotoone.solutions/commit/ae0d22831fb79ddbb579633511fd829eec991802))
+* add Route53 record import handling to complete deployment pipeline ([f715231](https://github.com/romdj/zerotoone.solutions/commit/f7152310dd289c6c005b7ae6197295b46b5c4eca))
+* correct Pulumi GitHub Action usage ([d58b4b2](https://github.com/romdj/zerotoone.solutions/commit/d58b4b229f9d05c6f4f2c36786d32299504f6734))
+* improve Route53 record detection and import logic ([3846b44](https://github.com/romdj/zerotoone.solutions/commit/3846b4431de1e1fbc16aa495a001818dbd1540e6))
+* improve terraform import logic to avoid ACM dependency issues ([5e4e52e](https://github.com/romdj/zerotoone.solutions/commit/5e4e52e326853ea924d29df2eca1c966d98f8584))
+* properly handle terraform apply failures in CI pipeline ([53305c9](https://github.com/romdj/zerotoone.solutions/commit/53305c9bb4e62c73b6a4e605146a2be8e98c74f6))
+* remove aws:region from static config files ([429a24b](https://github.com/romdj/zerotoone.solutions/commit/429a24ba3ba8dba4353623e7d91adaf9d856ffd8))
+* remove invalid default value for aws:region config ([e273326](https://github.com/romdj/zerotoone.solutions/commit/e2733267d49946651eddfc3b73e8c6c30f37a7af))
+* removed pulumi secrets in the pipeline ([5535645](https://github.com/romdj/zerotoone.solutions/commit/553564507d148afa24d6cce547c8b676b59c32e5))
+* resolve terraform import and dependency issues ([d7b5856](https://github.com/romdj/zerotoone.solutions/commit/d7b5856eb04065dd8a822f55513971a2df3c4761))
+* use correct Pulumi GitHub Action version ([e974c3e](https://github.com/romdj/zerotoone.solutions/commit/e974c3eba562524317b3c8750e7ce726d9bd4a3a))
+* use targeted terraform apply to resolve ACM certificate dependency issue ([eb4be45](https://github.com/romdj/zerotoone.solutions/commit/eb4be454e6b6e951d86fa096d9627394ad67798b))
+
+
+### 🔧 Chores
+
+* clean up Terraform references and rename deployment workflow ([4116dc4](https://github.com/romdj/zerotoone.solutions/commit/4116dc40a755366185d096e6eb1a10fb420082e9))
+* remove Terraform infrastructure files ([2619fba](https://github.com/romdj/zerotoone.solutions/commit/2619fba3aea458c2ea43cc7fb500a26fad4d73db))
+
+
+### ✨ Features
+
+* add Pulumi deployment validation and fix passphrase issue ([28efdff](https://github.com/romdj/zerotoone.solutions/commit/28efdffd55766ee9d628c7d40670e95660efd2a8))
+* add responsive navigation component ([6db7b65](https://github.com/romdj/zerotoone.solutions/commit/6db7b652c9f2cb8b5e62d8c4bf9b6ce3c97cf3a9))
+* complete clean Pulumi infrastructure with latest versions ([62cd8f5](https://github.com/romdj/zerotoone.solutions/commit/62cd8f54ab3fbbba54a9ac8a25ca83c22ed9f93a))
+* finalize Pulumi setup with OIDC authentication and clean validation ([8274e8d](https://github.com/romdj/zerotoone.solutions/commit/8274e8df71c55e1688e67200af3aa00343e91d53))
+* migrate from Terraform to Pulumi infrastructure ([e9fb565](https://github.com/romdj/zerotoone.solutions/commit/e9fb5655fb4c8d3a1f69fe9e20a00cdd49f015b6))
+* switch from local Pulumi state to Pulumi Cloud OIDC ([4f8d5fe](https://github.com/romdj/zerotoone.solutions/commit/4f8d5fea7018a591a12483bf3dfd9f7bbc4d0e77))
+
+
+### ♻️ Code Refactoring
+
+* modularize navigation component for better maintainability ([df2c0e3](https://github.com/romdj/zerotoone.solutions/commit/df2c0e3128254d66000007b9f375caf6edca583c))
+* simplify portfolio page to focus on side projects only ([3f51494](https://github.com/romdj/zerotoone.solutions/commit/3f5149423f78d00b40374004d62ac9b035ca63a6))
+
 ### [1.0.5](https://github.com/romdj/zerotoone.solutions/compare/v1.0.4...v1.0.5) (2025-08-03)
 
 
