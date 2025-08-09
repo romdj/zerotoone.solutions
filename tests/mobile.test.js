@@ -225,10 +225,10 @@ test.describe('Mobile Navigation and Functionality', () => {
     await page.locator('text=Ready to write your story?').scrollIntoViewIfNeeded();
     await page.waitForTimeout(1000);
     
-    // Check navigation buttons are visible and tappable
-    const solutionsBtn = page.locator('a[href="/solutions"]');
-    const portfolioBtn = page.locator('a[href="/portfolio"]');
-    const aboutBtn = page.locator('a[href="/about"]');
+    // Check navigation buttons are visible and tappable - use specific selectors to avoid nav conflicts
+    const solutionsBtn = page.locator('.cta-section a[href="/solutions"]');
+    const portfolioBtn = page.locator('.cta-section a[href="/portfolio"]');
+    const aboutBtn = page.locator('.cta-section a[href="/about"]');
     
     await expect(solutionsBtn).toBeVisible();
     await expect(portfolioBtn).toBeVisible();
@@ -310,10 +310,10 @@ test.describe('Mobile Navigation and Functionality', () => {
     await page.goto(BASE_URL);
     await expect(page.locator('h1')).toContainText('Engineering Wins Aren');
     
-    // Navigate to solutions
+    // Navigate to solutions - use specific selector
     await page.locator('text=Ready to write your story?').scrollIntoViewIfNeeded();
     await page.waitForTimeout(1000);
-    await page.locator('a[href="/solutions"]').click({ force: true });
+    await page.locator('.cta-section a[href="/solutions"]').click({ force: true });
     await page.waitForLoadState('networkidle');
     await expect(page).toHaveURL(`${BASE_URL}/solutions`);
     await expect(page.locator('h1')).toContainText('Enterprise Solutions');
@@ -321,7 +321,7 @@ test.describe('Mobile Navigation and Functionality', () => {
     // Navigate to portfolio using direct navigation
     await page.goto(`${BASE_URL}/portfolio`);
     await page.waitForLoadState('networkidle');
-    await expect(page.locator('h1')).toContainText('Portfolio');
+    await expect(page.locator('h1')).toContainText('Side Projects');
     
     // Navigate to about
     await page.goto(`${BASE_URL}/about`);
