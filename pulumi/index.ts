@@ -1,6 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
-import * as awsx from "@pulumi/awsx";
 
 // Get configuration
 const config = new pulumi.Config();
@@ -16,47 +15,87 @@ const hostedZone = aws.route53.getZone({
     privateZone: false
 });
 
-// ACM Certificate for HTTPS (us-east-1 required for CloudFront)
+// US-East-1 provider for ACM certificates (required for CloudFront)
 const usEast1Provider = new aws.Provider("us-east-1", { region: "us-east-1" });
 
-const certificate = new aws.acm.Certificate("website", {
+// ACM Certificate for HTTPS
+const certificate = new aws.acm.Certificate("website-cert", {
     domainName: domainName,
     subjectAlternativeNames: allDomains.filter(d => d !== domainName),
     validationMethod: "DNS"
 }, { provider: usEast1Provider });
 
 // Certificate validation records
-const certificateValidationRecords = certificate.domainValidationOptions.apply(options => 
-    options.map(option => new aws.route53.Record(`validation-${option.domainName}`, {
-        allowOverwrite: true,
-        name: option.resourceRecordName,
-        records: [option.resourceRecordValue],
-        ttl: 60,
-        type: option.resourceRecordType,
-        zoneId: hostedZone.then(zone => zone.zoneId)
-    }))
-);
+const validationRecords = certificate.domainValidationOptions.apply(options => {
+    const records: aws.route53.Record[] = [];
+    options.forEach((option, index) => {
+        records.push(new aws.route53.Record(`cert-validation-${index}`, {
+            allowOverwrite: true,
+            name: option.resourceRecordName,
+            records: [option.resourceRecordValue],
+            ttl: 60,
+            type: option.resourceRecordType,
+            zoneId: hostedZone.then(zone => zone.zoneId)
+        }));
+    });
+    return records;
+});
 
 // Certificate validation
-const certificateValidation = new aws.acm.CertificateValidation("website", {
+const certificateValidation = new aws.acm.CertificateValidation("website-cert-validation", {
     certificateArn: certificate.arn,
-    validationRecordFqdns: pulumi.all(certificateValidationRecords).apply(records => 
+    validationRecordFqdns: validationRecords.apply(records => 
         records.map(record => record.fqdn)
     )
 }, { provider: usEast1Provider });
 
-// S3 Website Bucket using Crosswalk (much simpler!)
-const website = new awsx.s3.WebsiteBucket("website", {
-    name: domainName,
-    indexDocument: "index.html",
-    errorDocument: "404.html"
+// S3 bucket for static website hosting  
+const bucket = new aws.s3.Bucket("website-bucket", {
+    bucket: domainName,
+    forceDestroy: true // Allow Pulumi to delete non-empty bucket
 });
 
-// CloudFront Distribution using Crosswalk
-const distribution = new awsx.cloudfront.Distribution("website", {
+// Configure bucket for static website hosting
+const bucketWebsite = new aws.s3.BucketWebsiteConfiguration("website-config", {
+    bucket: bucket.id,
+    indexDocument: { suffix: "index.html" },
+    errorDocument: { key: "404.html" }
+});
+
+// Enable public access to the bucket
+const bucketPublicAccessBlock = new aws.s3.BucketPublicAccessBlock("website-public-access", {
+    bucket: bucket.id,
+    blockPublicAcls: false,
+    blockPublicPolicy: false,
+    ignorePublicAcls: false,
+    restrictPublicBuckets: false
+});
+
+// Bucket policy for public read access
+const bucketPolicy = new aws.s3.BucketPolicy("website-bucket-policy", {
+    bucket: bucket.id,
+    policy: bucket.arn.apply(bucketArn => JSON.stringify({
+        Version: "2012-10-17",
+        Statement: [{
+            Sid: "PublicReadGetObject",
+            Effect: "Allow",
+            Principal: "*",
+            Action: "s3:GetObject",
+            Resource: `${bucketArn}/*`
+        }]
+    }))
+}, { dependsOn: [bucketPublicAccessBlock] });
+
+// CloudFront distribution
+const distribution = new aws.cloudfront.Distribution("website-cdn", {
+    enabled: true,
+    isIpv6Enabled: true,
+    defaultRootObject: "index.html",
+    aliases: allDomains,
+    
     origins: [{
         originId: `S3-${domainName}`,
-        domainName: website.websiteEndpoint,
+        domainName: bucketWebsite.websiteEndpoint,
         customOriginConfig: {
             httpPort: 80,
             httpsPort: 443,
@@ -65,15 +104,10 @@ const distribution = new awsx.cloudfront.Distribution("website", {
         }
     }],
     
-    enabled: true,
-    isIpv6Enabled: true,
-    defaultRootObject: "index.html",
-    aliases: allDomains,
-    
     defaultCacheBehavior: {
         targetOriginId: `S3-${domainName}`,
         viewerProtocolPolicy: "redirect-to-https",
-        allowedMethods: ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"],
+        allowedMethods: ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"],
         cachedMethods: ["GET", "HEAD"],
         compress: true,
         forwardedValues: {
@@ -85,7 +119,7 @@ const distribution = new awsx.cloudfront.Distribution("website", {
         maxTtl: 86400
     },
     
-    // Cache behavior for static assets (long cache)
+    // Long-term caching for immutable assets
     orderedCacheBehaviors: [{
         pathPattern: "/_app/immutable/*",
         targetOriginId: `S3-${domainName}`,
@@ -102,7 +136,8 @@ const distribution = new awsx.cloudfront.Distribution("website", {
         maxTtl: 31536000
     }],
     
-    priceClass: "PriceClass_100",
+    priceClass: "PriceClass_100", // US, Canada, Europe
+    
     restrictions: {
         geoRestriction: { restrictionType: "none" }
     },
@@ -113,7 +148,7 @@ const distribution = new awsx.cloudfront.Distribution("website", {
         minimumProtocolVersion: "TLSv1.2_2021"
     },
     
-    // Custom error pages
+    // Custom error pages for SPA routing
     customErrorResponses: [
         {
             errorCode: 404,
@@ -123,13 +158,13 @@ const distribution = new awsx.cloudfront.Distribution("website", {
         {
             errorCode: 403,
             responseCode: 200,
-            responsePagePath: "/index.html" // SPA routing
+            responsePagePath: "/index.html" // Handle SPA client-side routing
         }
     ]
 });
 
-// Route53 records for main domain
-const websiteRecord = new aws.route53.Record("website", {
+// DNS records pointing to CloudFront
+const mainRecord = new aws.route53.Record("website-dns", {
     zoneId: hostedZone.then(zone => zone.zoneId),
     name: domainName,
     type: "A",
@@ -140,8 +175,7 @@ const websiteRecord = new aws.route53.Record("website", {
     }]
 });
 
-// Route53 records for www subdomain
-const websiteWwwRecord = new aws.route53.Record("website-www", {
+const wwwRecord = new aws.route53.Record("website-www-dns", {
     zoneId: hostedZone.then(zone => zone.zoneId),
     name: `www.${domainName}`,
     type: "A",
@@ -153,8 +187,9 @@ const websiteWwwRecord = new aws.route53.Record("website-www", {
 });
 
 // Export important values
-export const bucketName = website.bucketName;
-export const bucketWebsiteEndpoint = website.websiteEndpoint;
+export const bucketName = bucket.id;
+export const bucketWebsiteEndpoint = bucketWebsite.websiteEndpoint;
 export const distributionId = distribution.id;
 export const distributionDomainName = distribution.domainName;
+export const certificateArn = certificateValidation.certificateArn;
 export const websiteUrl = `https://${domainName}`;
