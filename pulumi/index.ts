@@ -1,5 +1,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
+import * as awsx from "@pulumi/awsx";
 
 // Get configuration
 const config = new pulumi.Config();
@@ -9,46 +10,6 @@ const additionalDomains = config.getObject<string[]>("additionalDomains") || [];
 // All domains (primary + additional)
 const allDomains = [domainName, `www.${domainName}`, ...additionalDomains, ...additionalDomains.map(d => `www.${d}`)];
 
-// S3 Bucket for website hosting
-const bucket = new aws.s3.Bucket("website", {
-    bucket: domainName
-});
-
-// S3 Bucket website configuration
-const bucketWebsite = new aws.s3.BucketWebsiteConfiguration("website", {
-    bucket: bucket.id,
-    indexDocument: {
-        suffix: "index.html"
-    },
-    errorDocument: {
-        key: "404.html"
-    }
-});
-
-// S3 Bucket public access configuration
-const bucketPublicAccess = new aws.s3.BucketPublicAccessBlock("website", {
-    bucket: bucket.id,
-    blockPublicAcls: false,
-    blockPublicPolicy: false,
-    ignorePublicAcls: false,
-    restrictPublicBuckets: false
-});
-
-// S3 Bucket policy for public read access
-const bucketPolicy = new aws.s3.BucketPolicy("website", {
-    bucket: bucket.id,
-    policy: bucket.arn.apply(arn => JSON.stringify({
-        Version: "2012-10-17",
-        Statement: [{
-            Sid: "PublicReadGetObject",
-            Effect: "Allow",
-            Principal: "*",
-            Action: "s3:GetObject",
-            Resource: `${arn}/*`
-        }]
-    }))
-});
-
 // Route53 hosted zone (data source - assumes it exists)
 const hostedZone = aws.route53.getZone({
     name: domainName,
@@ -56,13 +17,13 @@ const hostedZone = aws.route53.getZone({
 });
 
 // ACM Certificate for HTTPS (us-east-1 required for CloudFront)
+const usEast1Provider = new aws.Provider("us-east-1", { region: "us-east-1" });
+
 const certificate = new aws.acm.Certificate("website", {
     domainName: domainName,
     subjectAlternativeNames: allDomains.filter(d => d !== domainName),
     validationMethod: "DNS"
-}, {
-    provider: new aws.Provider("us-east-1", { region: "us-east-1" })
-});
+}, { provider: usEast1Provider });
 
 // Certificate validation records
 const certificateValidationRecords = certificate.domainValidationOptions.apply(options => 
@@ -82,15 +43,20 @@ const certificateValidation = new aws.acm.CertificateValidation("website", {
     validationRecordFqdns: pulumi.all(certificateValidationRecords).apply(records => 
         records.map(record => record.fqdn)
     )
-}, {
-    provider: new aws.Provider("us-east-1", { region: "us-east-1" })
+}, { provider: usEast1Provider });
+
+// S3 Website Bucket using Crosswalk (much simpler!)
+const website = new awsx.s3.WebsiteBucket("website", {
+    name: domainName,
+    indexDocument: "index.html",
+    errorDocument: "404.html"
 });
 
-// CloudFront Distribution
-const distribution = new aws.cloudfront.Distribution("website", {
+// CloudFront Distribution using Crosswalk
+const distribution = new awsx.cloudfront.Distribution("website", {
     origins: [{
-        domainName: bucketWebsite.websiteEndpoint,
         originId: `S3-${domainName}`,
+        domainName: website.websiteEndpoint,
         customOriginConfig: {
             httpPort: 80,
             httpsPort: 443,
@@ -98,22 +64,21 @@ const distribution = new aws.cloudfront.Distribution("website", {
             originSslProtocols: ["TLSv1.2"]
         }
     }],
+    
     enabled: true,
     isIpv6Enabled: true,
     defaultRootObject: "index.html",
     aliases: allDomains,
     
     defaultCacheBehavior: {
+        targetOriginId: `S3-${domainName}`,
+        viewerProtocolPolicy: "redirect-to-https",
         allowedMethods: ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"],
         cachedMethods: ["GET", "HEAD"],
-        targetOriginId: `S3-${domainName}`,
         compress: true,
-        viewerProtocolPolicy: "redirect-to-https",
         forwardedValues: {
             queryString: false,
-            cookies: {
-                forward: "none"
-            }
+            cookies: { forward: "none" }
         },
         minTtl: 0,
         defaultTtl: 3600,
@@ -123,27 +88,23 @@ const distribution = new aws.cloudfront.Distribution("website", {
     // Cache behavior for static assets (long cache)
     orderedCacheBehaviors: [{
         pathPattern: "/_app/immutable/*",
+        targetOriginId: `S3-${domainName}`,
+        viewerProtocolPolicy: "redirect-to-https",
         allowedMethods: ["GET", "HEAD", "OPTIONS"],
         cachedMethods: ["GET", "HEAD"],
-        targetOriginId: `S3-${domainName}`,
         compress: true,
         forwardedValues: {
             queryString: false,
-            cookies: {
-                forward: "none"
-            }
+            cookies: { forward: "none" }
         },
         minTtl: 31536000, // 1 year
         defaultTtl: 31536000,
-        maxTtl: 31536000,
-        viewerProtocolPolicy: "redirect-to-https"
+        maxTtl: 31536000
     }],
     
-    priceClass: "PriceClass_100", // North America and Europe only
+    priceClass: "PriceClass_100",
     restrictions: {
-        geoRestriction: {
-            restrictionType: "none"
-        }
+        geoRestriction: { restrictionType: "none" }
     },
     
     viewerCertificate: {
@@ -192,7 +153,8 @@ const websiteWwwRecord = new aws.route53.Record("website-www", {
 });
 
 // Export important values
-export const bucketName = bucket.id;
+export const bucketName = website.bucketName;
+export const bucketWebsiteEndpoint = website.websiteEndpoint;
 export const distributionId = distribution.id;
 export const distributionDomainName = distribution.domainName;
 export const websiteUrl = `https://${domainName}`;
