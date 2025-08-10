@@ -225,10 +225,10 @@ test.describe('Mobile Navigation and Functionality', () => {
     await page.locator('text=Ready to write your story?').scrollIntoViewIfNeeded();
     await page.waitForTimeout(1000);
     
-    // Check navigation buttons are visible and tappable - use specific selectors to avoid nav conflicts
-    const solutionsBtn = page.locator('.cta-section a[href="/solutions"]');
-    const portfolioBtn = page.locator('.cta-section a[href="/portfolio"]');
-    const aboutBtn = page.locator('.cta-section a[href="/about"]');
+    // Check navigation buttons are visible and tappable - use specific class selectors for bottom CTA
+    const solutionsBtn = page.locator('a.btn.btn-primary[href="/solutions"]');
+    const portfolioBtn = page.locator('a.btn.btn-secondary[href="/portfolio"]');
+    const aboutBtn = page.locator('a.btn.btn-secondary[href="/about"]');
     
     await expect(solutionsBtn).toBeVisible();
     await expect(portfolioBtn).toBeVisible();
@@ -313,7 +313,7 @@ test.describe('Mobile Navigation and Functionality', () => {
     // Navigate to solutions - use specific selector
     await page.locator('text=Ready to write your story?').scrollIntoViewIfNeeded();
     await page.waitForTimeout(1000);
-    await page.locator('.cta-section a[href="/solutions"]').click({ force: true });
+    await page.locator('a.btn.btn-primary[href="/solutions"]').click({ force: true });
     await page.waitForLoadState('networkidle');
     await expect(page).toHaveURL(`${BASE_URL}/solutions`);
     await expect(page.locator('h1')).toContainText('Enterprise Solutions');

@@ -31,11 +31,11 @@ test.describe('Zero to One Solutions Website', () => {
     await page.locator('text=ABVV').first().scrollIntoViewIfNeeded();
     await expect(page.locator('text=ABVV')).toBeVisible();
     
-    // Check final navigation section - use specific nav selector to avoid top navigation conflicts
+    // Check final navigation section - use specific selectors to target bottom CTA nav only
     await expect(page.locator('text=Ready to write your story?')).toBeVisible();
-    await expect(page.locator('nav a[href="/solutions"]')).toBeVisible();
-    await expect(page.locator('nav a[href="/portfolio"]')).toBeVisible();
-    await expect(page.locator('nav a[href="/about"]')).toBeVisible();
+    await expect(page.locator('a.btn.btn-primary[href="/solutions"]')).toBeVisible();
+    await expect(page.locator('a.btn.btn-secondary[href="/portfolio"]')).toBeVisible();
+    await expect(page.locator('a.btn.btn-secondary[href="/about"]')).toBeVisible();
   });
 
   test('solutions page loads and displays enterprise focus', async ({ page }) => {
@@ -68,8 +68,8 @@ test.describe('Zero to One Solutions Website', () => {
     await expect(page.locator('text=Photography Studio').first()).toBeVisible();
     await expect(page.locator('text=Eindhoven Technology Meetup').first()).toBeVisible();
     
-    // Check innovation projects section
-    await expect(page.locator('text=Innovation & Side Projects')).toBeVisible();
+    // Check side projects section header
+    await expect(page.locator('text=Personal Projects & Experiments')).toBeVisible();
     await expect(page.locator('text=3-Point NHL Standing System')).toBeVisible();
     await expect(page.locator('text=Photography Studio')).toBeVisible();
     
