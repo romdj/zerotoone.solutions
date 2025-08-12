@@ -24,6 +24,7 @@
 					href={item.href} 
 					label={item.label}
 					isActive={isActiveRoute(currentPath, item.href)}
+					isCTA={item.isCTA}
 					closeMenu={menuToggler.close}
 				/>
 			{/each}
@@ -43,6 +44,7 @@
 				label={item.label}
 				isActive={isActiveRoute(currentPath, item.href)}
 				isMobile={true}
+				isCTA={item.isCTA}
 				closeMenu={menuToggler.close}
 			/>
 		{/each}
