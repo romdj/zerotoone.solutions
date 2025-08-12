@@ -1,15 +1,13 @@
 export interface NavItem {
 	href: string;
 	label: string;
+	isCTA?: boolean;
 }
 
 export const navItems: NavItem[] = [
-	{ href: '/', label: 'Home' },
 	{ href: '/about', label: 'About' },
-	{ href: '/solutions', label: 'Solutions' },
-	{ href: '/portfolio', label: 'Portfolio' },
-	{ href: '/incubator', label: 'Incubator' },
-	{ href: '/resources', label: 'Resources' }
+	{ href: '/services', label: 'Services' },
+	{ href: '/contact', label: 'See how we work', isCTA: true }
 ];
 
 export function isActiveRoute(currentPath: string, itemPath: string): boolean {
