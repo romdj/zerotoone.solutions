@@ -18,8 +18,8 @@ test.describe('Mobile Navigation and Functionality', () => {
     // Check hero content is properly displayed
     await expect(page.locator('text=Complex challenges deserve elegant solutions.')).toBeVisible();
     
-    // Verify scroll indicator is present
-    await expect(page.locator('text=↓').first()).toBeVisible();
+    // Verify main CTA is visible
+    await expect(page.locator('a.cta')).toBeVisible();
   });
 
   test('homepage loads and displays correctly on Android', async ({ page }) => {
@@ -39,10 +39,11 @@ test.describe('Mobile Navigation and Functionality', () => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(BASE_URL);
     
-    // Test navigation items (should check if navigation is accessible on mobile)
-    await expect(page.locator('.desktop-menu a[href="/about"]')).toBeVisible();
-    await expect(page.locator('.desktop-menu a[href="/services"]')).toBeVisible();
-    await expect(page.locator('.desktop-menu a[href="/contact"]')).toBeVisible();
+    // Test navigation items (desktop menu should be hidden on mobile)
+    await expect(page.locator('.desktop-menu')).toBeHidden();
+    
+    // Check mobile navigation elements instead
+    await expect(page.locator('.hamburger')).toBeVisible();
     
     // Test main CTA button
     const ctaButton = page.locator('a.cta');
@@ -127,10 +128,10 @@ test.describe('Mobile Navigation and Functionality', () => {
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     });
     
-    // Wait for scroll to complete
+    // Wait for scroll to complete with shorter timeout
     await page.waitForFunction(() => {
       return Math.abs(window.scrollY + window.innerHeight - document.body.scrollHeight) < 100;
-    });
+    }, { timeout: 3000 });
     
     const scrollTime = Date.now() - startTime;
     
@@ -188,9 +189,8 @@ test.describe('Mobile Navigation and Functionality', () => {
     await expect(page.locator('.wrap')).toBeVisible();
     await expect(page.locator('.hero')).toBeVisible();
     
-    // Test navigation
-    await expect(page.locator('.desktop-menu a[href="/about"]')).toBeVisible();
-    await expect(page.locator('.desktop-menu a[href="/services"]')).toBeVisible();
-    await expect(page.locator('.desktop-menu a[href="/contact"]')).toBeVisible();
+    // Test navigation (desktop menu hidden on large phones too)
+    await expect(page.locator('.desktop-menu')).toBeHidden();
+    await expect(page.locator('.hamburger')).toBeVisible();
   });
 });
