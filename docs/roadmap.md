@@ -163,17 +163,22 @@ Right now, in the top (so both `Engineering Wins Aren’t Enough — Vision Is` 
 In the section `Focus on making your beer taste better` there are too many colors in the story.
 Please remove the `Orval Trappist Ale` text that doesn't bring any value.
 
-
-TODO
+parallel run of the npm run test for multiple devices if possible?
 
 the npm run test step in the cicd pipeline is talking 7 minutes to complete. can you look into optimizing the script to execute faster?
 
+
+can you teardown the portfolio page? I don't think it brings any value. You can keep and rework it to only contain the mentioned side projects. But the overall companies and experience. That's irrelevant
+
+
 I think we need some kind of menu, sidebar or navbar for navigation, it can be minimalistic, but I do think we need to add that component. Can you think of something that works well keeping the responsive design principles?
+
+
+What is the best way to collaborate with you when it comes to creating UI, screens and so on? I'm thinking that maybe some tools that use files would be better for you ?
+
 
 Let's focus on the Nike card:
 I've incorporated the nike folder under inspirations/ for you to get a grasp on the corporate culture and layout when reporting. **This** is the font, the color scheme, I want in place for the nike section. can you adapt this?
-
-parallel run of the npm run test for multiple devices if possible?
 
 in the `Switching costs do and will impact your business`, when expanding the stories, I'd like to see them side-by-side instead of one after another. (unless we reach a horizontal size of the page, that makes it impossible to read, it needs to switch between the two depending on screen width). those story frames to be black on white.
 
@@ -194,8 +199,8 @@ Competing on everyone's terms means playing to lose # increase the size of that 
 Sometimes the best move is to go against conventional wisdom. Dropbox's bold migration from AWS to their own infrastructure shows how counter-positioning can create competitive advantage at scale.
 ```
 
-can you teardown the portfolio page? I don't think it brings any value. You can keep and rework it to only contain the mentioned side projects. But the overall companies and experience. That's irrelevant
 
+TODO
 
 so when running npm run test, the workflow add the end launches a server to review the test cases. I'm afraid that since that track never finishes, it can end up in an unresolved state? perhaps we should have a test:ui and test:ci to differentiate the 2?
 

@@ -36,4 +36,3 @@ playwright-report/
 # Additional generated files
 .last-run.json
 
-# old/ directory removed - now using old-site/ which is tracked

@@ -6,8 +6,6 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"build:dual": "npm run build && npm run build:old",
-		"build:old": "(cd old-site && npm install && npm run build) && rm -rf build/old && cp -r old-site/build build/old",
 		"build:static": "vite build && cp -r static/* build/",
 		"preview": "vite preview",
 		"prepare": "husky",
