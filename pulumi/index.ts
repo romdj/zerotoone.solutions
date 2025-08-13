@@ -87,14 +87,7 @@ const bucketPolicy = new aws.s3.BucketPolicy("website-bucket-policy", {
     }))
 }, { dependsOn: [bucketPublicAccessBlock] });
 
-// CloudFront function for subdomain routing
-const subdomainRouterFunction = new aws.cloudfront.Function("subdomain-router", {
-    name: "subdomain-router",
-    runtime: "cloudfront-js-1.0",
-    comment: "Routes old.zerotoone.solutions to /old/ path",
-    publish: true,
-    code: fs.readFileSync(__dirname + "/subdomain-router.js", "utf8")
-});
+// Main distribution only serves the new site now
 
 // CloudFront distribution
 const distribution = new aws.cloudfront.Distribution("website-cdn", {
@@ -128,40 +121,16 @@ const distribution = new aws.cloudfront.Distribution("website-cdn", {
         minTtl: 0,
         defaultTtl: 3600,
         maxTtl: 86400,
-        functionAssociations: [{
-            eventType: "viewer-request",
-            functionArn: subdomainRouterFunction.arn
-        }]
+        // No function associations needed for main site
     },
     
-    // Route to old/ subdirectory for old.zerotoone.solutions
+    // Long-term caching for immutable assets
     orderedCacheBehaviors: [
         {
-            pathPattern: "/old/*",
-            targetOriginId: `S3-${domainName}`,
-            viewerProtocolPolicy: "redirect-to-https",
-            allowedMethods: ["GET", "HEAD", "OPTIONS"],
-            cachedMethods: ["GET", "HEAD"],
-            compress: true,
-            forwardedValues: {
-                queryString: false,
-                cookies: { forward: "none" },
-                headers: ["Host"]
-            },
-            minTtl: 0,
-            defaultTtl: 3600,
-            maxTtl: 86400,
-            functionAssociations: [{
-                eventType: "viewer-request",
-                functionArn: subdomainRouterFunction.arn
-            }]
-        },
-        {
-            // Long-term caching for immutable assets
             pathPattern: "/_app/immutable/*",
             targetOriginId: `S3-${domainName}`,
             viewerProtocolPolicy: "redirect-to-https",
-            allowedMethods: ["GET", "HEAD", "OPTIONS"],
+            allowedMethods: ["GET", "HEAD"],
             cachedMethods: ["GET", "HEAD"],
             compress: true,
             forwardedValues: {
@@ -224,14 +193,89 @@ const wwwRecord = new aws.route53.Record("website-www-dns", {
     }]
 });
 
-// DNS record for old subdomain
+// Old site infrastructure
+const oldBucketName = `old.${domainName}`;
+const oldBucket = new aws.s3.Bucket("old-website-bucket", {
+    bucket: oldBucketName
+});
+
+const oldBucketWebsite = new aws.s3.BucketWebsiteConfiguration("old-website-bucket-website", {
+    bucket: oldBucket.id,
+    indexDocument: {
+        suffix: "index.html"
+    },
+    errorDocument: {
+        key: "404.html"
+    }
+});
+
+const oldBucketPolicy = new aws.s3.BucketPolicy("old-bucket-policy", {
+    bucket: oldBucket.id,
+    policy: oldBucket.arn.apply(arn => JSON.stringify({
+        Version: "2012-10-17",
+        Statement: [{
+            Effect: "Allow",
+            Principal: "*",
+            Action: "s3:GetObject",
+            Resource: `${arn}/*`
+        }]
+    }))
+});
+
+// CloudFront distribution for old site
+const oldDistribution = new aws.cloudfront.Distribution("old-website-cdn", {
+    enabled: true,
+    isIpv6Enabled: true,
+    defaultRootObject: "index.html",
+    aliases: [oldBucketName],
+    
+    origins: [{
+        originId: `S3-${oldBucketName}`,
+        domainName: oldBucketWebsite.websiteEndpoint,
+        customOriginConfig: {
+            httpPort: 80,
+            httpsPort: 443,
+            originProtocolPolicy: "http-only",
+            originSslProtocols: ["TLSv1.2"]
+        }
+    }],
+    
+    defaultCacheBehavior: {
+        targetOriginId: `S3-${oldBucketName}`,
+        viewerProtocolPolicy: "redirect-to-https",
+        allowedMethods: ["GET", "HEAD", "OPTIONS"],
+        cachedMethods: ["GET", "HEAD"],
+        compress: true,
+        forwardedValues: {
+            queryString: false,
+            cookies: { forward: "none" }
+        },
+        minTtl: 0,
+        defaultTtl: 3600,
+        maxTtl: 86400
+    },
+    
+    viewerCertificate: {
+        acmCertificateArn: certificate.arn,
+        sslSupportMethod: "sni-only",
+        minimumProtocolVersion: "TLSv1.2_2021"
+    },
+    
+    restrictions: {
+        geoRestriction: {
+            restrictionType: "none"
+        }
+    }
+});
+
+// DNS record for old subdomain pointing to dedicated distribution
 const oldRecord = new aws.route53.Record("website-old-dns", {
     zoneId: hostedZone.then(zone => zone.zoneId),
     name: `old.${domainName}`,
     type: "A",
     aliases: [{
-        name: distribution.domainName,
-        zoneId: distribution.hostedZoneId,
+        name: oldDistribution.domainName,
+        zoneId: oldDistribution.hostedZoneId,
         evaluateTargetHealth: false
     }]
 });
@@ -243,3 +287,8 @@ export const distributionId = distribution.id;
 export const distributionDomainName = distribution.domainName;
 export const certificateArn = certificateValidation.certificateArn;
 export const websiteUrl = `https://${domainName}`;
+
+// Old site exports
+export const oldBucketName = oldBucket.id;
+export const oldDistributionId = oldDistribution.id;
+export const oldWebsiteUrl = `https://old.${domainName}`;

@@ -161,14 +161,23 @@ jobs:
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
-      - name: Sync files to S3
+      - name: Sync new site to main S3 bucket
         run: |
-          aws s3 sync build/ s3://${{ secrets.DOMAIN_NAME }}/ --delete --exact-timestamps
+          aws s3 sync build/ s3://${{ secrets.DOMAIN_NAME }}/ --exclude "old/*" --delete --exact-timestamps
           
-      - name: Invalidate CloudFront
+      - name: Sync old site to dedicated S3 bucket
+        run: |
+          aws s3 sync build/old/ s3://old.${{ secrets.DOMAIN_NAME }}/ --delete --exact-timestamps
+          
+      - name: Invalidate CloudFront distributions
         working-directory: ./pulumi
         run: |
-          DISTRIBUTION_ID=$(pulumi stack output distributionId)
-          aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
+          # Invalidate main site distribution
+          MAIN_DISTRIBUTION_ID=$(pulumi stack output distributionId)
+          aws cloudfront create-invalidation --distribution-id $MAIN_DISTRIBUTION_ID --paths "/*"
+          
+          # Invalidate old site distribution
+          OLD_DISTRIBUTION_ID=$(pulumi stack output oldDistributionId)
+          aws cloudfront create-invalidation --distribution-id $OLD_DISTRIBUTION_ID --paths "/*"
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
