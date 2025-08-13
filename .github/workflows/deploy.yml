@@ -9,8 +9,9 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  build-and-test-new-site:
     runs-on: ubuntu-latest
+    name: "Build and Test - New Site"
 
     steps:
     - name: Checkout code
@@ -28,20 +29,90 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests (CI optimized)
+    - name: Run tests (CI optimized) - New Site
       run: npm run test:ci
 
-    - name: Build application in a static setup
-      run: npm run build:static
+    - name: Build new site
+      run: npm run build
 
-    - name: Upload production build
+    - name: Upload new site build
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: new-site-build
+        path: build/
+
+  build-and-test-old-site:
+    runs-on: ubuntu-latest
+    name: "Build and Test - Old Site"
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4.2.2
+
+    - name: Setup Node.js for old site
+      uses: actions/setup-node@v4.4.0
+      with:
+        node-version: '24'
+        cache: 'npm'
+        cache-dependency-path: old-site/package-lock.json
+
+    - name: Install playwright && machine dependencies
+      run: npx playwright install --with-deps
+
+    - name: Install old site dependencies
+      working-directory: ./old-site
+      run: npm install
+
+    - name: Run tests - Old Site
+      working-directory: ./old-site
+      run: npm run test:quick
+
+    - name: Build old site
+      working-directory: ./old-site
+      run: npm run build
+
+    - name: Upload old site build
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: old-site-build
+        path: old-site/build/
+
+  build-dual-site:
+    needs: [build-and-test-new-site, build-and-test-old-site]
+    runs-on: ubuntu-latest
+    name: "Combine Sites for Deployment"
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4.2.2
+
+    - name: Download new site build
+      uses: actions/download-artifact@v4.1.7
+      with:
+        name: new-site-build
+        path: build/
+
+    - name: Download old site build
+      uses: actions/download-artifact@v4.1.7
+      with:
+        name: old-site-build
+        path: old-site-temp/
+
+    - name: Combine builds
+      run: |
+        mkdir -p build/old
+        cp -r old-site-temp/* build/old/
+        ls -la build/
+        ls -la build/old/
+
+    - name: Upload combined production build
       uses: actions/upload-artifact@v4.6.2
       with:
         name: production-build
         path: build/
 
   deploy:
-    needs: build-and-test
+    needs: build-dual-site
     runs-on: ubuntu-latest
     environment: production
     

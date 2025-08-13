@@ -22,10 +22,18 @@ test.describe('Zero to One Solutions Website', () => {
     // Check main CTA button
     await expect(page.locator('a.cta')).toContainText('Get in touch');
     
-    // Check navigation items (desktop navigation)
-    await expect(page.locator('.desktop-menu a[href="/about"]')).toBeVisible();
-    await expect(page.locator('.desktop-menu a[href="/services"]')).toBeVisible();
-    await expect(page.locator('.desktop-menu a[href="/contact"]')).toBeVisible();
+    // Check navigation items (responsive - desktop menu visible on larger screens)
+    const viewport = page.viewportSize();
+    if (viewport && viewport.width >= 769) {
+      // Desktop menu visible on larger screens
+      await expect(page.locator('.desktop-menu a[href="/about"]')).toBeVisible();
+      await expect(page.locator('.desktop-menu a[href="/services"]')).toBeVisible();
+      await expect(page.locator('.desktop-menu a[href="/contact"]')).toBeVisible();
+    } else {
+      // Mobile menu elements should be present on smaller screens
+      await expect(page.locator('.hamburger')).toBeVisible();
+      await expect(page.locator('.desktop-menu')).toBeHidden();
+    }
   });
 
   test('services page loads with new structure', async ({ page }) => {
