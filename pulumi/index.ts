@@ -209,6 +209,14 @@ const oldBucketWebsite = new aws.s3.BucketWebsiteConfiguration("old-website-buck
     }
 });
 
+const oldBucketPublicAccessBlock = new aws.s3.BucketPublicAccessBlock("old-bucket-public-access-block", {
+    bucket: oldBucket.id,
+    blockPublicAcls: false,
+    blockPublicPolicy: false,
+    ignorePublicAcls: false,
+    restrictPublicBuckets: false
+});
+
 const oldBucketPolicy = new aws.s3.BucketPolicy("old-bucket-policy", {
     bucket: oldBucket.id,
     policy: oldBucket.arn.apply(arn => JSON.stringify({
@@ -220,7 +228,7 @@ const oldBucketPolicy = new aws.s3.BucketPolicy("old-bucket-policy", {
             Resource: `${arn}/*`
         }]
     }))
-});
+}, { dependsOn: [oldBucketPublicAccessBlock] });
 
 // CloudFront distribution for old site
 const oldDistribution = new aws.cloudfront.Distribution("old-website-cdn", {
