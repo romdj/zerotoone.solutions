@@ -150,7 +150,11 @@ const distribution = new aws.cloudfront.Distribution("website-cdn", {
             },
             minTtl: 0,
             defaultTtl: 3600,
-            maxTtl: 86400
+            maxTtl: 86400,
+            functionAssociations: [{
+                eventType: "viewer-request",
+                functionArn: subdomainRouterFunction.arn
+            }]
         },
         {
             // Long-term caching for immutable assets
