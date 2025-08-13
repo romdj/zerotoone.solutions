@@ -36,3 +36,4 @@ playwright-report/
 # Additional generated files
 .last-run.json
 
+old/
