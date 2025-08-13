@@ -1,5 +1,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
+import * as fs from "fs";
 
 // Get configuration
 const config = new pulumi.Config();
@@ -86,6 +87,15 @@ const bucketPolicy = new aws.s3.BucketPolicy("website-bucket-policy", {
     }))
 }, { dependsOn: [bucketPublicAccessBlock] });
 
+// CloudFront function for subdomain routing
+const subdomainRouterFunction = new aws.cloudfront.Function("subdomain-router", {
+    name: "subdomain-router",
+    runtime: "cloudfront-js-1.0",
+    comment: "Routes old.zerotoone.solutions to /old/ path",
+    publish: true,
+    code: fs.readFileSync(__dirname + "/subdomain-router.js", "utf8")
+});
+
 // CloudFront distribution
 const distribution = new aws.cloudfront.Distribution("website-cdn", {
     enabled: true,
@@ -112,29 +122,53 @@ const distribution = new aws.cloudfront.Distribution("website-cdn", {
         compress: true,
         forwardedValues: {
             queryString: false,
-            cookies: { forward: "none" }
+            cookies: { forward: "none" },
+            headers: ["Host"]
         },
         minTtl: 0,
         defaultTtl: 3600,
-        maxTtl: 86400
+        maxTtl: 86400,
+        functionAssociations: [{
+            eventType: "viewer-request",
+            functionArn: subdomainRouterFunction.arn
+        }]
     },
     
-    // Long-term caching for immutable assets
-    orderedCacheBehaviors: [{
-        pathPattern: "/_app/immutable/*",
-        targetOriginId: `S3-${domainName}`,
-        viewerProtocolPolicy: "redirect-to-https",
-        allowedMethods: ["GET", "HEAD", "OPTIONS"],
-        cachedMethods: ["GET", "HEAD"],
-        compress: true,
-        forwardedValues: {
-            queryString: false,
-            cookies: { forward: "none" }
+    // Route to old/ subdirectory for old.zerotoone.solutions
+    orderedCacheBehaviors: [
+        {
+            pathPattern: "/old/*",
+            targetOriginId: `S3-${domainName}`,
+            viewerProtocolPolicy: "redirect-to-https",
+            allowedMethods: ["GET", "HEAD", "OPTIONS"],
+            cachedMethods: ["GET", "HEAD"],
+            compress: true,
+            forwardedValues: {
+                queryString: false,
+                cookies: { forward: "none" },
+                headers: ["Host"]
+            },
+            minTtl: 0,
+            defaultTtl: 3600,
+            maxTtl: 86400
         },
-        minTtl: 31536000, // 1 year
-        defaultTtl: 31536000,
-        maxTtl: 31536000
-    }],
+        {
+            // Long-term caching for immutable assets
+            pathPattern: "/_app/immutable/*",
+            targetOriginId: `S3-${domainName}`,
+            viewerProtocolPolicy: "redirect-to-https",
+            allowedMethods: ["GET", "HEAD", "OPTIONS"],
+            cachedMethods: ["GET", "HEAD"],
+            compress: true,
+            forwardedValues: {
+                queryString: false,
+                cookies: { forward: "none" }
+            },
+            minTtl: 31536000, // 1 year
+            defaultTtl: 31536000,
+            maxTtl: 31536000
+        }
+    ],
     
     priceClass: "PriceClass_100", // US, Canada, Europe
     
@@ -178,6 +212,18 @@ const mainRecord = new aws.route53.Record("website-dns", {
 const wwwRecord = new aws.route53.Record("website-www-dns", {
     zoneId: hostedZone.then(zone => zone.zoneId),
     name: `www.${domainName}`,
+    type: "A",
+    aliases: [{
+        name: distribution.domainName,
+        zoneId: distribution.hostedZoneId,
+        evaluateTargetHealth: false
+    }]
+});
+
+// DNS record for old subdomain
+const oldRecord = new aws.route53.Record("website-old-dns", {
+    zoneId: hostedZone.then(zone => zone.zoneId),
+    name: `old.${domainName}`,
     type: "A",
     aliases: [{
         name: distribution.domainName,
