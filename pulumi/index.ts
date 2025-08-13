@@ -289,6 +289,6 @@ export const certificateArn = certificateValidation.certificateArn;
 export const websiteUrl = `https://${domainName}`;
 
 // Old site exports
-export const oldBucketName = oldBucket.id;
+export const oldBucketId = oldBucket.id;
 export const oldDistributionId = oldDistribution.id;
 export const oldWebsiteUrl = `https://old.${domainName}`;
