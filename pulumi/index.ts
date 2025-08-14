@@ -22,7 +22,11 @@ const usEast1Provider = new aws.Provider("us-east-1", { region: "us-east-1" });
 // ACM Certificate for HTTPS
 const certificate = new aws.acm.Certificate("website-cert", {
     domainName: domainName,
-    subjectAlternativeNames: allDomains.filter(d => d !== domainName),
+    subjectAlternativeNames: [
+        `www.${domainName}`,
+        `old.${domainName}`,
+        ...allDomains.filter(d => d !== domainName && d !== `www.${domainName}`)
+    ],
     validationMethod: "DNS"
 }, { provider: usEast1Provider });
 
