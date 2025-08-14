@@ -1,4 +1,3 @@
 config:
   zerotoone-solutions:domainName: zerotoone.solutions
-  zerotoone-solutions:additionalDomains: 
-    - old.zerotoone.solutions
+  zerotoone-solutions:additionalDomains: []
