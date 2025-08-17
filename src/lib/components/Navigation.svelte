@@ -4,6 +4,7 @@
 	import NavLink from './navigation/NavLink.svelte';
 	import HamburgerButton from './navigation/HamburgerButton.svelte';
 	import NavigationStyles from './navigation/NavigationStyles.svelte';
+	import ThemeToggle from './ThemeToggle.svelte';
 	import { navItems, isActiveRoute, createMenuToggler } from './navigation/navigationUtils';
 	
 	const menuToggler = createMenuToggler();
@@ -30,10 +31,14 @@
 			{/each}
 		</div>
 		
-		<HamburgerButton 
-			isOpen={menuToggler.isOpen} 
-			toggle={menuToggler.toggle} 
-		/>
+		<!-- Theme Toggle and Mobile Button -->
+		<div class="nav-actions">
+			<ThemeToggle />
+			<HamburgerButton 
+				isOpen={menuToggler.isOpen} 
+				toggle={menuToggler.toggle} 
+			/>
+		</div>
 	</div>
 	
 	<!-- Mobile Menu -->
@@ -48,5 +53,10 @@
 				closeMenu={menuToggler.close}
 			/>
 		{/each}
+		
+		<!-- Theme toggle in mobile menu -->
+		<div class="mobile-theme-toggle">
+			<ThemeToggle />
+		</div>
 	</div>
 </nav>
