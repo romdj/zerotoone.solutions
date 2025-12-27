@@ -54,7 +54,31 @@ const certificateValidation = new aws.acm.CertificateValidation("website-cert-va
     )
 }, { provider: usEast1Provider });
 
-// S3 bucket for static website hosting  
+// S3 bucket for CloudFront access logs
+const loggingBucket = new aws.s3.Bucket("analytics-logs", {
+    bucket: `analytics-${domainName}`,
+    forceDestroy: true
+});
+
+// Lifecycle rule to delete old logs after 90 days (keep costs low)
+const loggingBucketLifecycle = new aws.s3.BucketLifecycleConfigurationV2("analytics-logs-lifecycle", {
+    bucket: loggingBucket.id,
+    rules: [{
+        id: "delete-old-logs",
+        status: "Enabled",
+        expiration: {
+            days: 90
+        }
+    }]
+});
+
+// Grant CloudFront permission to write logs
+const loggingBucketAcl = new aws.s3.BucketAclV2("analytics-logs-acl", {
+    bucket: loggingBucket.id,
+    acl: "log-delivery-write"
+});
+
+// S3 bucket for static website hosting
 const bucket = new aws.s3.Bucket("website-bucket", {
     bucket: domainName,
     forceDestroy: true // Allow Pulumi to delete non-empty bucket
@@ -99,7 +123,14 @@ const distribution = new aws.cloudfront.Distribution("website-cdn", {
     isIpv6Enabled: true,
     defaultRootObject: "index.html",
     aliases: allDomains,
-    
+
+    // Enable access logging for analytics
+    loggingConfig: {
+        bucket: loggingBucket.bucketDomainName,
+        prefix: "cloudfront-logs/",
+        includeCookies: false
+    },
+
     origins: [{
         originId: `S3-${domainName}`,
         domainName: bucketWebsite.websiteEndpoint,
@@ -304,3 +335,7 @@ export const websiteUrl = `https://${domainName}`;
 export const oldBucketId = oldBucket.id;
 export const oldDistributionId = oldDistribution.id;
 export const oldWebsiteUrl = `https://old.${domainName}`;
+
+// Analytics exports
+export const analyticsBucketName = loggingBucket.id;
+export const analyticsLogsPath = loggingBucket.id.apply(bucketId => `s3://${bucketId}/cloudfront-logs/`);
