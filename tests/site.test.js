@@ -6,29 +6,26 @@ const BASE_URL = 'http://localhost:12000';
 test.describe('Zero to One Solutions Website', () => {
   test('homepage loads with correct styling and content', async ({ page }) => {
     await page.goto(BASE_URL);
-    
-    // Check page title and main heading (updated to mature design)
-    await expect(page).toHaveTitle(/Zero to One Solutions — Simplicity at Scale/);
+
+    // Check page title and main heading
+    await expect(page).toHaveTitle(/Zero to One Solutions/);
     await expect(page.locator('h1')).toContainText("Simplicity at Scale");
-    
-    // Check tagline and content (updated to mature design)
+
+    // Check tagline
     await expect(page.locator('text=Complex challenges deserve elegant solutions.')).toBeVisible();
-    await expect(page.locator('text=By turning ideas into actionable plans, we connect vision to delivery')).toBeVisible();
-    
-    // Check C1 logo and brand text in navigation
+
+    // Check brand in navigation - now shows "01"
     await expect(page.locator('.brand')).toBeVisible();
-    await expect(page.locator('text=Zero to One')).toBeVisible();
-    
-    // Check main CTA button
-    await expect(page.locator('a.cta')).toContainText('Get in touch');
-    
-    // Check navigation items (responsive - desktop menu visible on larger screens)
+
+    // Check navigation items (Option 4 structure)
     const viewport = page.viewportSize();
     if (viewport && viewport.width >= 769) {
       // Desktop menu visible on larger screens
-      await expect(page.locator('.desktop-menu a[href="/about"]')).toBeVisible();
+      await expect(page.locator('.desktop-menu a[href="/portfolio"]')).toBeVisible();
       await expect(page.locator('.desktop-menu a[href="/services"]')).toBeVisible();
-      await expect(page.locator('.desktop-menu a[href="/contact"]')).toBeVisible();
+      await expect(page.locator('.desktop-menu a[href="/studio"]')).toBeVisible();
+      await expect(page.locator('.desktop-menu a[href="/insights"]')).toBeVisible();
+      await expect(page.locator('.desktop-menu a[href="/contact"]')).toContainText("Let's Build");
     } else {
       // Mobile menu elements should be present on smaller screens
       await expect(page.locator('.hamburger')).toBeVisible();
@@ -78,18 +75,13 @@ test.describe('Zero to One Solutions Website', () => {
 
   test('design elements and interactions work', async ({ page }) => {
     await page.goto(BASE_URL);
-    
+
     // Check main container and layout
     await expect(page.locator('.wrap')).toBeVisible();
     await expect(page.locator('.hero')).toBeVisible();
-    
-    // Check CTA button interaction
-    const ctaButton = page.locator('a.cta');
-    await expect(ctaButton).toBeVisible();
-    await expect(ctaButton).toContainText('Get in touch');
-    
-    // Check serpentine curve SVG
-    await expect(page.locator('.serpentine svg')).toBeVisible();
+
+    // Check wireframe reference (temporary during redesign)
+    await expect(page.locator('h2')).toContainText('Wireframe Reference');
   });
 
   test('responsive design works on mobile', async ({ page }) => {
