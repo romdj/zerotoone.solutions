@@ -10,54 +10,6 @@ const additionalDomains = config.getObject<string[]>("additionalDomains") || [];
 // All domains (primary + additional)
 const allDomains = [domainName, `www.${domainName}`, ...additionalDomains, ...additionalDomains.map(d => `www.${d}`)];
 
-// IAM policy to allow GitHub Actions to create and manage S3 buckets
-const githubActionsRole = aws.iam.getRole({
-    name: "github-actions-s3-website"
-});
-
-const githubActionsS3Policy = new aws.iam.RolePolicy("github-actions-s3-full-policy", {
-    role: githubActionsRole.then(role => role.name),
-    policy: JSON.stringify({
-        Version: "2012-10-17",
-        Statement: [
-            {
-                Sid: "S3BucketManagement",
-                Effect: "Allow",
-                Action: [
-                    "s3:CreateBucket",
-                    "s3:DeleteBucket",
-                    "s3:ListBucket",
-                    "s3:GetBucketLocation",
-                    "s3:GetBucketPolicy",
-                    "s3:PutBucketPolicy",
-                    "s3:DeleteBucketPolicy",
-                    "s3:GetBucketAcl",
-                    "s3:PutBucketAcl",
-                    "s3:GetBucketWebsite",
-                    "s3:PutBucketWebsite",
-                    "s3:GetBucketPublicAccessBlock",
-                    "s3:PutBucketPublicAccessBlock",
-                    "s3:GetLifecycleConfiguration",
-                    "s3:PutLifecycleConfiguration"
-                ],
-                Resource: "arn:aws:s3:::*"
-            },
-            {
-                Sid: "S3ObjectManagement",
-                Effect: "Allow",
-                Action: [
-                    "s3:PutObject",
-                    "s3:GetObject",
-                    "s3:DeleteObject",
-                    "s3:ListMultipartUploadParts",
-                    "s3:AbortMultipartUpload"
-                ],
-                Resource: "arn:aws:s3:::*/*"
-            }
-        ]
-    })
-});
-
 // Route53 hosted zone (data source - assumes it exists)
 const hostedZone = aws.route53.getZone({
     name: domainName,
