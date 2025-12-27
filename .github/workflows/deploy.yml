@@ -23,11 +23,11 @@ jobs:
         node-version: '24'
         cache: 'npm'
 
-    - name: Install playwright && machine dependencies
-      run: npx playwright install --with-deps
-
     - name: Install dependencies
-      run: npm install
+      run: npm ci
+
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
 
     - name: Run tests (CI optimized) - New Site
       run: npm run test:ci
@@ -56,12 +56,13 @@ jobs:
         cache: 'npm'
         cache-dependency-path: old-site/package-lock.json
 
-    - name: Install playwright && machine dependencies
-      run: npx playwright install --with-deps
-
     - name: Install old site dependencies
       working-directory: ./old-site
-      run: npm install
+      run: npm ci
+
+    - name: Install Playwright browsers for old site
+      working-directory: ./old-site
+      run: npx playwright install --with-deps
 
     - name: Run tests - Old Site
       working-directory: ./old-site
