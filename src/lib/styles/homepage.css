@@ -32,7 +32,7 @@
 :global(body) {
 	font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 	color: var(--ink);
-	background: var(--bg);
+	background: linear-gradient(135deg, #f8f9fc 0%, #f6f7fb 50%, #f4f5fa 100%);
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
 	padding-top: 0; /* Remove fixed nav padding */
@@ -41,11 +41,11 @@
 /* Main container */
 .wrap {
 	max-width: var(--maxw);
-	margin: clamp(16px, 3vh, 32px) auto;
-	padding: clamp(10px, 1.2vw, 14px);
+	margin: clamp(20px, 4vh, 40px) auto;
+	padding: clamp(12px, 1.5vw, 16px);
 	background: var(--card);
 	border-radius: var(--radius);
-	box-shadow: var(--shadow);
+	box-shadow: 0 12px 40px rgba(16,24,40,.08), 0 4px 12px rgba(16,24,40,.06);
 	position: relative;
 	overflow: hidden;
 }
@@ -62,79 +62,94 @@
 }
 
 .hero h1 {
-	font-size: clamp(36px, 6vw, 72px);
-	line-height: 1.02;
-	letter-spacing: -0.02em;
-	margin: 0 0 10px;
+	font-size: clamp(40px, 6.5vw, 80px);
+	font-weight: 800;
+	line-height: 1.05;
+	letter-spacing: -0.025em;
+	margin: 0 0 16px;
 	color: var(--ink);
 }
 
 .hero .tag {
-	font-size: clamp(18px, 2.4vw, 26px);
-	color: var(--ink-2);
-	opacity: 0.85;
-	margin: 0 0 18px;
+	font-size: clamp(20px, 2.5vw, 28px);
+	font-weight: 400;
+	color: var(--ink);
+	margin: 0 0 20px;
+	line-height: 1.4;
 }
 
 .hero .lead {
-	font-size: clamp(16px, 2vw, 20px);
+	font-size: clamp(17px, 2.1vw, 22px);
+	font-weight: 400;
 	color: var(--muted);
-	max-width: 44ch;
-	margin: 0 0 28px;
-	line-height: 1.6;
+	max-width: 42ch;
+	margin: 0 0 32px;
+	line-height: 1.5;
 }
 
 .cta {
 	display: inline-flex;
 	align-items: center;
-	gap: 10px;
-	padding: 14px 20px;
+	padding: 15px 28px;
 	border-radius: 999px;
-	font-weight: 600;
+	font-size: clamp(15px, 1.8vw, 17px);
+	font-weight: 500;
 	text-decoration: none;
-	border: 2px solid currentColor;
+	border: 2px solid var(--purple);
 	color: var(--purple);
-	background: #fff;
-	transition: box-shadow 0.18s ease, transform 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+	background: transparent;
+	transition: all 0.2s ease;
 }
 
 .cta:hover {
-	transform: translateY(-1px);
-	box-shadow: 0 8px 20px rgba(131,51,197,0.15);
-	color: var(--pink);
-	border-color: currentColor;
+	transform: translateY(-2px);
+	background: var(--purple);
+	color: #fff;
+	box-shadow: 0 8px 24px rgba(131,51,197,0.25);
 }
 
-/* Serpentine curve */
-.serpentine {
+/* Progress curves - Mathematical visualization */
+.progress-curves {
 	position: absolute;
-	inset: auto 0 0;
+	right: 8%;
+	top: 48%;
+	transform: translateY(-50%);
 	pointer-events: none;
 	z-index: 0;
-	display: flex;
-	justify-content: flex-end;
-	padding-right: clamp(0px, 2vw, 20px);
-	transform: translateY(18%);
+	width: clamp(440px, 56vw, 690px);
+	height: clamp(310px, 50vh, 470px);
 }
 
-.serpentine svg {
-	width: min(880px, 65vw);
-	height: auto;
-	opacity: 0.95;
-	filter: drop-shadow(0 12px 30px rgba(241,23,89,0.08)) drop-shadow(0 6px 18px rgba(131,51,197,0.10));
+.progress-curves svg {
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+	filter: drop-shadow(0 2px 8px rgba(131,51,197,0.06));
 }
 
 /* Responsive */
 @media (max-width: 920px) {
-	.hero { 
-		grid-template-columns: 1fr; 
+	.hero {
+		grid-template-columns: 1fr;
 	}
-	.serpentine { 
-		justify-content: center; 
-		transform: translateY(8%); 
+	.progress-curves {
+		width: 75vw;
+		height: 45vh;
+		right: 50%;
+		top: 55%;
+		transform: translate(50%, -50%);
+		opacity: 0.85;
 	}
-	.hero .lead { 
-		max-width: 60ch; 
+	.hero .lead {
+		max-width: 60ch;
+	}
+}
+
+@media (max-width: 640px) {
+	.progress-curves {
+		width: 85vw;
+		height: 40vh;
+		opacity: 0.75;
 	}
 }
 
