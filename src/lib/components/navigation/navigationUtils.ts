@@ -5,10 +5,11 @@ export interface NavItem {
 }
 
 export const navItems: NavItem[] = [
-	{ href: '/about', label: 'About' },
+	{ href: '/portfolio', label: 'Portfolio' },
 	{ href: '/services', label: 'Services' },
-	{ href: '/storyline', label: 'Our Story' },
-	{ href: '/contact', label: 'See how we work', isCTA: true }
+	{ href: '/studio', label: 'Studio' },
+	{ href: '/insights', label: 'Insights' },
+	{ href: '/contact', label: "Let's Build", isCTA: true }
 ];
 
 export function isActiveRoute(currentPath: string, itemPath: string): boolean {

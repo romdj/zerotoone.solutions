@@ -43,18 +43,6 @@
 		opacity: 1;
 	}
 	
-	:global(.cta-header) {
-		padding: 10px 16px;
-		border-radius: 999px;
-		border: 1.5px solid var(--border-medium);
-		transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.3s ease;
-	}
-	
-	:global(.cta-header:hover) {
-		background: var(--hover-bg);
-		transform: translateY(-1px);
-	}
-	
 	:global(.mobile-menu) {
 		display: none;
 	}
