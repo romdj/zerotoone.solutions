@@ -69,7 +69,7 @@ const loggingBucketOwnership = new aws.s3.BucketOwnershipControls("analytics-log
 });
 
 // Lifecycle rule to delete old logs after 90 days (keep costs low)
-const loggingBucketLifecycle = new aws.s3.BucketLifecycleConfigurationV2("analytics-logs-lifecycle", {
+const loggingBucketLifecycle = new aws.s3.BucketLifecycleConfiguration("analytics-logs-lifecycle", {
     bucket: loggingBucket.id,
     rules: [{
         id: "delete-old-logs",
@@ -81,7 +81,7 @@ const loggingBucketLifecycle = new aws.s3.BucketLifecycleConfigurationV2("analyt
 });
 
 // Grant CloudFront permission to write logs
-const loggingBucketAcl = new aws.s3.BucketAclV2("analytics-logs-acl", {
+const loggingBucketAcl = new aws.s3.BucketAcl("analytics-logs-acl", {
     bucket: loggingBucket.id,
     acl: "log-delivery-write"
 }, { dependsOn: [loggingBucketOwnership] });
