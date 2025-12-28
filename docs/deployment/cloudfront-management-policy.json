@@ -13,6 +13,17 @@
                 "cloudfront:ListInvalidations"
             ],
             "Resource": "*"
+        },
+        {
+            "Sid": "CloudWatchDashboardManagement",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:PutDashboard",
+                "cloudwatch:GetDashboard",
+                "cloudwatch:DeleteDashboards",
+                "cloudwatch:ListDashboards"
+            ],
+            "Resource": "*"
         }
     ]
 }
