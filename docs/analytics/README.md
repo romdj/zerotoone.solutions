@@ -22,6 +22,16 @@ This directory contains documentation for website analytics using **CloudFront A
 
 ## Quick Start
 
+### View Analytics Now
+
+```bash
+# Get CloudWatch Dashboard URL (real-time metrics)
+cd pulumi && pulumi stack output dashboardUrl
+
+# Or run the quick analytics script
+./scripts/view-analytics.sh
+```
+
 ### 1. Deploy Infrastructure (Pulumi)
 
 ```bash
@@ -32,6 +42,7 @@ pulumi up
 This creates:
 - ✅ S3 logging bucket (`analytics-{domainName}`)
 - ✅ CloudFront logging enabled
+- ✅ CloudWatch Dashboard (real-time metrics)
 - ✅ 90-day log retention (cost optimization)
 
 ### 2. Wait for First Logs (~30 minutes)
@@ -136,12 +147,12 @@ Use the 8 pre-built queries in [athena-setup.md](./athena-setup.md#common-analyt
 
 ## Limitations
 
-❌ **No real-time dashboard** (queries are on-demand)
+✅ **Real-time metrics** (CloudWatch Dashboard - requests, bandwidth, errors)
 ❌ **No session tracking** (IP-based, not cookie-based)
-❌ **Delayed data** (logs arrive 15-30 min after request)
-❌ **Manual queries** (must run SQL yourself)
+❌ **Delayed detailed logs** (arrive 15-30 min after request)
+❌ **Manual Athena queries** (must run SQL yourself for detailed analysis)
 
-**If you need real-time dashboards:** Consider adding GoatCounter (free, no infrastructure changes required)
+**If you need session tracking:** Consider adding GoatCounter (free, privacy-focused, no infrastructure changes)
 
 ---
 

@@ -331,6 +331,59 @@ const oldRecord = new aws.route53.Record("website-old-dns", {
     }]
 });
 
+// CloudWatch Dashboard for analytics
+const dashboard = new aws.cloudwatch.Dashboard("analytics-dashboard", {
+    dashboardName: `${domainName.replace(/\./g, "-")}-analytics`,
+    dashboardBody: pulumi.all([distribution.id, oldDistribution.id]).apply(([mainDistId, oldDistId]) => JSON.stringify({
+        widgets: [
+            // Main site traffic
+            {
+                type: "metric",
+                properties: {
+                    metrics: [
+                        ["AWS/CloudFront", "Requests", { stat: "Sum", label: "Total Requests" }],
+                    ],
+                    period: 300,
+                    stat: "Sum",
+                    region: "us-east-1",
+                    title: "Main Site - Requests",
+                    yAxis: { left: { min: 0 } },
+                    dimensions: { DistributionId: mainDistId }
+                }
+            },
+            // Bandwidth
+            {
+                type: "metric",
+                properties: {
+                    metrics: [
+                        ["AWS/CloudFront", "BytesDownloaded", { stat: "Sum", label: "Bytes Downloaded" }],
+                    ],
+                    period: 300,
+                    stat: "Sum",
+                    region: "us-east-1",
+                    title: "Main Site - Bandwidth",
+                    yAxis: { left: { min: 0 } }
+                }
+            },
+            // Error rate
+            {
+                type: "metric",
+                properties: {
+                    metrics: [
+                        ["AWS/CloudFront", "4xxErrorRate", { stat: "Average", label: "4xx Errors" }],
+                        [".", "5xxErrorRate", { stat: "Average", label: "5xx Errors" }]
+                    ],
+                    period: 300,
+                    stat: "Average",
+                    region: "us-east-1",
+                    title: "Error Rates",
+                    yAxis: { left: { min: 0, max: 100 } }
+                }
+            }
+        ]
+    }))
+});
+
 // Export important values
 export const bucketName = bucket.id;
 export const bucketWebsiteEndpoint = bucketWebsite.websiteEndpoint;
@@ -347,3 +400,5 @@ export const oldWebsiteUrl = `https://old.${domainName}`;
 // Analytics exports
 export const analyticsBucketName = loggingBucket.id;
 export const analyticsLogsPath = loggingBucket.id.apply(bucketId => `s3://${bucketId}/cloudfront-logs/`);
+export const dashboardUrl = dashboard.dashboardName.apply(name =>
+    `https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=${name}`);
