@@ -60,6 +60,14 @@ const loggingBucket = new aws.s3.Bucket("analytics-logs", {
     forceDestroy: true
 });
 
+// Enable ACLs on the logging bucket (required for CloudFront logging)
+const loggingBucketOwnership = new aws.s3.BucketOwnershipControls("analytics-logs-ownership", {
+    bucket: loggingBucket.id,
+    rule: {
+        objectOwnership: "BucketOwnerPreferred"
+    }
+});
+
 // Lifecycle rule to delete old logs after 90 days (keep costs low)
 const loggingBucketLifecycle = new aws.s3.BucketLifecycleConfigurationV2("analytics-logs-lifecycle", {
     bucket: loggingBucket.id,
@@ -76,7 +84,7 @@ const loggingBucketLifecycle = new aws.s3.BucketLifecycleConfigurationV2("analyt
 const loggingBucketAcl = new aws.s3.BucketAclV2("analytics-logs-acl", {
     bucket: loggingBucket.id,
     acl: "log-delivery-write"
-});
+}, { dependsOn: [loggingBucketOwnership] });
 
 // S3 bucket for static website hosting
 const bucket = new aws.s3.Bucket("website-bucket", {
