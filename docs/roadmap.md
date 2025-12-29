@@ -200,8 +200,15 @@ Sometimes the best move is to go against conventional wisdom. Dropbox's bold mig
 ```
 
 
-TODO
+
+
+Please navigate to `zerotoone.solutions` and `old.zerotoone.solutions` , and assess both websites in terms of the value proposition we have identified. Please make a new reports/ folder and store them by dates_version/<website_name>.report.md , so I can have a deeper look into those metrics
+
+
+I'd like to put in place some usage insights, what can we do to get basic usage metrics at a minimal costs? I really don't want for it to cost more than 1€ / month
 
 so when running npm run test, the workflow add the end launches a server to review the test cases. I'm afraid that since that track never finishes, it can end up in an unresolved state? perhaps we should have a test:ui and test:ci to differentiate the 2?
+
+TODO
 
 basic optimization (e.g., proper meta tags, descriptive titles, and alt text for images) is a good practice. It ensures your site is accessible and provides a better user experience.
