@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import '$lib/styles/theme.css';
+	import '$lib/styles/homepage.css';
 	import Navigation from '$lib/components/Navigation.svelte';
 
 	let { children } = $props();

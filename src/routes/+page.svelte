@@ -1,75 +1,132 @@
-<script lang="ts">
-	import '$lib/styles/homepage.css';
-	import { onMount } from 'svelte';
-
-	onMount(() => {
-		// Generate path data from mathematical functions
-		const generatePath = (fn: (x: number) => number, xMin: number, xMax: number, steps: number) => {
-			const points: string[] = [];
-			for (let i = 0; i <= steps; i++) {
-				const x = xMin + (xMax - xMin) * (i / steps);
-				const y = fn(x);
-				points.push(`${i === 0 ? 'M' : 'L'} ${x.toFixed(3)},${(-y).toFixed(3)}`); // Negative y for SVG coords
-			}
-			return points.join(' ');
-		};
-
-		// Bad: ln(x+1)
-		const badPath = generatePath((x) => Math.log(x + 1), -1, 6, 150);
-		const badPathElement = document.getElementById('bad-path');
-		if (badPathElement) badPathElement.setAttribute('d', badPath);
-
-		// Good: -1 + x + sin(x + π/2)
-		const goodPath = generatePath((x) => -1 + x + Math.sin(x + Math.PI/2), -1, 6, 150);
-		const goodPathElement = document.getElementById('good-path');
-		if (goodPathElement) goodPathElement.setAttribute('d', goodPath);
-	});
-</script>
-
 <svelte:head>
-	<title>Zero to One Solutions — Simplicity at Scale</title>
-	<meta name="description" content="Complex challenges deserve elegant solutions. By turning ideas into actionable plans, we connect vision to delivery.">
+	<title>Zero to One Solutions — Creating Tomorrow, Today</title>
+	<meta name="description" content="You bring the idea, we make it a reality. Zero to One Solutions combines technological know-how, expertise, and design thinking to deliver value from vision to production.">
 </svelte:head>
 
-<!-- Wireframe Reference -->
-<div style="max-width: 1200px; margin: 2rem auto; padding: 1rem; background: #f0f0f0; border-radius: 12px;">
-	<h2 style="margin: 0 0 1rem; font-family: Inter, sans-serif; color: #333;">Wireframe Reference</h2>
-	<img src="/assets/Images/inspiration/zerotoone.solutions-home.png" alt="Wireframe reference" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-</div>
+<!-- Hero Section -->
+<section class="hero">
+	<div class="container">
+		<h1 class="hero-headline">
+			<span class="gradient-text">Creating Tomorrow, Today</span>
+		</h1>
+		<p class="hero-subheadline">
+			You bring the idea, we make it a reality
+		</p>
+		<p class="hero-description">
+			Zero to One Solutions combines technological know-how, expertise,<br class="desktop-break">
+			and full-fledged design thinking to deliver value
+		</p>
+		<a href="/work" class="cta-button">
+			View Our Work
+		</a>
+	</div>
+</section>
 
-<div class="wrap">
-	<!-- Hero -->
-	<main class="hero" id="home">
-		<section>
-			<h1>Simplicity at Scale</h1>
-			<p class="tag">Complex challenges deserve elegant solutions.</p>
-			<p class="lead">By turning ideas into actionable plans,<br>we connect vision to delivery.</p>
-			<a class="cta" href="/contact" aria-label="Get in touch to start a project">
-				Get in Touch
-			</a>
-		</section>
-
-		<!-- Right column intentionally empty to respect the original composition -->
-		<aside aria-hidden="true"></aside>
-
-		<!-- Progress curves - Mathematical visualization -->
-		<div class="progress-curves" aria-hidden="true">
-			<svg viewBox="-1 -4.33 7 6.5" preserveAspectRatio="xMidYMid meet" role="img">
-				<defs>
-					<!-- Gradient for "good" architecture path -->
-					<linearGradient id="good-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-						<stop offset="0%" stop-color="#8333C5" stop-opacity="0.9"/>
-						<stop offset="50%" stop-color="#F11759" stop-opacity="0.95"/>
-						<stop offset="100%" stop-color="#D67D21" stop-opacity="0.9"/>
-					</linearGradient>
-				</defs>
-
-				<!-- Bad path: ln(x+1) - logarithmic slow growth -->
-				<path id="bad-path" fill="none" stroke="#999999" stroke-width="0.18" stroke-linecap="round" stroke-linejoin="round" opacity="0.65"/>
-
-				<!-- Good path: -1 + x + sin(x + π/2) - elegant growth -->
-				<path id="good-path" fill="none" stroke="url(#good-gradient)" stroke-width="0.21" stroke-linecap="round" stroke-linejoin="round"/>
-			</svg>
+<!-- Trusted Partners Section -->
+<section class="partners">
+	<div class="container">
+		<h2 class="section-heading">Empowering Those Who Shape the Future</h2>
+		<div class="logo-grid">
+			<div class="logo-card">
+				<span class="logo-placeholder">NIKE</span>
+			</div>
+			<div class="logo-card">
+				<span class="logo-placeholder">IBM</span>
+			</div>
+			<div class="logo-card">
+				<span class="logo-placeholder">PHILIPS</span>
+			</div>
+			<div class="logo-card">
+				<span class="logo-placeholder">LEVI'S</span>
+			</div>
+			<div class="logo-card">
+				<span class="logo-placeholder">ENGIE</span>
+			</div>
+			<div class="logo-card">
+				<span class="logo-placeholder">ELIA</span>
+			</div>
 		</div>
-	</main>
-</div>
+	</div>
+</section>
+
+<!-- What We Do Section -->
+<section class="what-we-do">
+	<div class="container">
+		<h2 class="section-heading">From Vision to Reality</h2>
+		<p class="section-description">
+			We transform ambitious ideas into production-ready solutions. Whether it's modernizing
+			legacy systems, building cloud-native platforms, or leading technical teams—we deliver
+			full-stack expertise from architecture to deployment.
+		</p>
+		<div class="capability-pills">
+			<span class="pill">Solution Architecture</span>
+			<span class="pill">Software Engineering</span>
+			<span class="pill">AI & Machine Learning</span>
+			<span class="pill">Technology Leadership</span>
+		</div>
+	</div>
+</section>
+
+<!-- Featured Work Section -->
+<section class="featured-work">
+	<div class="container">
+		<h2 class="section-heading">Selected Work</h2>
+		<div class="work-grid">
+			<a href="/work/nike" class="work-card">
+				<div class="work-card-content">
+					<div class="work-company">NIKE</div>
+					<h3 class="work-title">Supply Chain Transformation</h3>
+					<p class="work-description">
+						Led team of 12 to build event-driven platform for Nike's supply chain technology
+					</p>
+					<span class="work-link">View Case Study →</span>
+				</div>
+			</a>
+
+			<a href="/work/ibm" class="work-card">
+				<div class="work-card-content">
+					<div class="work-company">IBM</div>
+					<h3 class="work-title">IoT Solutions & Cloud Architecture</h3>
+					<p class="work-description">
+						Designed fully integrated IoT solution and data pipelines for enterprise clients
+					</p>
+					<span class="work-link">View Case Study →</span>
+				</div>
+			</a>
+
+			<a href="/work/philips" class="work-card">
+				<div class="work-card-content">
+					<div class="work-company">PHILIPS</div>
+					<h3 class="work-title">IoT Platform Architecture</h3>
+					<p class="work-description">
+						Built secure health platform services with AWS serverless architecture
+					</p>
+					<span class="work-link">View Case Study →</span>
+				</div>
+			</a>
+		</div>
+		<div class="work-cta">
+			<a href="/work" class="cta-button-secondary">
+				View All Work →
+			</a>
+		</div>
+	</div>
+</section>
+
+<!-- Final CTA Section -->
+<section class="final-cta">
+	<div class="container">
+		<h2 class="cta-heading">Ready to Build Something?</h2>
+		<p class="cta-subtext">
+			Let's discuss how we can bring your vision to reality
+		</p>
+		<div class="cta-buttons">
+			<a href="/contact" class="cta-button-white">
+				Get In Touch
+			</a>
+			<a href="/work" class="cta-button-outline">
+				View Our Work
+			</a>
+		</div>
+	</div>
+</section>
