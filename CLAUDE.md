@@ -115,7 +115,54 @@ npm run build        # Production build
 npm run preview      # Preview production build
 npm run lint         # Code linting (if configured)
 npm run typecheck    # TypeScript checking (if configured)
+npm run changelog    # Generate changelog from commits
+npm run release      # Create new release with version bump
 ```
+
+## Commit Message Standards
+
+**CRITICAL**: This repository REQUIRES conventional commit messages at all times.
+
+### Commit Message Format
+
+All commits MUST follow the conventional commits specification:
+
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+### Allowed Types
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `style`: Code style changes (formatting, semicolons, etc)
+- `refactor`: Code refactoring (neither fixes a bug nor adds a feature)
+- `perf`: Performance improvements
+- `test`: Adding or updating tests
+- `build`: Build system or dependency changes
+- `ci`: CI/CD configuration changes
+- `chore`: Other changes (maintenance tasks, etc)
+- `revert`: Revert a previous commit
+
+### Examples
+
+```bash
+feat: add dark mode toggle to navigation
+fix: resolve text visibility issue in dark mode
+docs: update homepage design documentation
+refactor: consolidate navigation CSS into shared file
+chore: update changelog
+```
+
+### Enforcement
+- **Husky** runs `commitlint` on every commit via `commit-msg` hook
+- Commits that don't follow the convention will be **rejected**
+- The CI/CD pipeline automatically generates `CHANGELOG.md` from conventional commits
+- Use `npm run changelog` to preview changelog locally
 
 ## Future Enhancements
 

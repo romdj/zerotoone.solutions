@@ -116,11 +116,13 @@ jobs:
     needs: build-dual-site
     runs-on: ubuntu-latest
     environment: production
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
-        
+        with:
+          fetch-depth: 0  # Fetch full history for changelog generation
+
       - name: Download production build
         uses: actions/download-artifact@v4.1.7
         with:
@@ -133,6 +135,23 @@ jobs:
           node-version: '24'
           cache: 'npm'
           cache-dependency-path: pulumi/package-lock.json
+
+      - name: Generate changelog
+        run: |
+          npm ci
+          npm run changelog
+
+      - name: Commit and push changelog
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          if [ -n "$(git status --porcelain CHANGELOG.md)" ]; then
+            git add CHANGELOG.md
+            git commit -m "chore: update changelog [skip ci]"
+            git push
+          else
+            echo "No changelog changes to commit"
+          fi
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
