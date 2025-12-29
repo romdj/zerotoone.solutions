@@ -1,49 +1,12 @@
-<script>
-  import { onMount } from 'svelte';
-  import { browser } from '$app/environment';
-  
-  let isDark = false;
-  
-  // Initialize theme on mount
-  onMount(() => {
-    if (browser) {
-      // Check for saved theme preference or default to light
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
-      isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
-      updateTheme();
-      
-      // Listen for system theme changes
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      mediaQuery.addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-          isDark = e.matches;
-          updateTheme();
-        }
-      });
-    }
-  });
-  
-  function toggleTheme() {
-    isDark = !isDark;
-    updateTheme();
-    
-    if (browser) {
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    }
-  }
-  
-  function updateTheme() {
-    if (browser) {
-      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-    }
-  }
+<script lang="ts">
+  import { theme } from '$lib/stores/theme';
+
+  $: isDark = $theme === 'dark';
 </script>
 
-<button 
-  class="theme-toggle" 
-  on:click={toggleTheme}
+<button
+  class="theme-toggle"
+  on:click={theme.toggle}
   aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
   title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
 >

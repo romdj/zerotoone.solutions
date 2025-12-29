@@ -59,7 +59,6 @@
 					href={item.href}
 					label={item.label}
 					dropdown={item.dropdown}
-					isMobile={true}
 					closeMenu={menuToggler.close}
 				/>
 			{:else}
