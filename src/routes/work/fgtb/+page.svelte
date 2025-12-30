@@ -282,9 +282,9 @@
 		--fgtb-text-light: #666666;
 	}
 
-	/* Hero section - Socialist red background */
+	/* Hero section - Let background image show through with default overlay */
 	.fgtb-corporate :global(.case-hero) {
-		background: linear-gradient(135deg, var(--fgtb-red), var(--fgtb-dark-red)) !important;
+		/* Background image set by CaseStudyLayout - don't override */
 	}
 
 	/* Title - Bold labor movement typography */
