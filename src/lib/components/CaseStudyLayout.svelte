@@ -6,21 +6,18 @@
 	export let title: string;
 	export let role: string;
 	export let tags: string[];
+	export let headerImage: string | undefined = undefined;
 </script>
 
 <main class="case-study">
 	<!-- Hero Section -->
-	<section class="case-hero">
+	<section class="case-hero" style={headerImage ? `background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${headerImage}');` : ''}>
 		<div class="container">
 			<a href="/work" class="back-link">← Back to Work</a>
 			<div class="company-logo-large">
 				<img src={logo} alt={company} />
 			</div>
 			<h1 class="case-title">{title}</h1>
-			<div class="case-meta">
-				<span class="meta-item"><strong>Company:</strong> {company}</span>
-				<span class="meta-item"><strong>Role:</strong> {role}</span>
-			</div>
 			<div class="case-tags">
 				{#each tags as tag}
 					<span class="pill">{tag}</span>
@@ -54,9 +51,13 @@
 
 	/* Hero Section */
 	.case-hero {
-		padding: 80px 0 60px;
+		padding: 120px 0 80px;
 		background: var(--gray-100);
 		border-bottom: 1px solid var(--gray-400);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		position: relative;
 	}
 
 	.back-link {
@@ -84,6 +85,7 @@
 		max-width: 300px;
 		width: auto;
 		object-fit: contain;
+		filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 	}
 
 	.case-title {
@@ -91,20 +93,8 @@
 		font-weight: 700;
 		line-height: 1.2;
 		margin: 0 0 24px 0;
-		color: var(--ink);
-	}
-
-	.case-meta {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 24px;
-		margin-bottom: 24px;
-		font-size: 16px;
-		color: var(--gray-600);
-	}
-
-	.meta-item strong {
-		color: var(--ink);
+		color: rgba(255, 255, 255, 0.95);
+		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 	}
 
 	.case-tags {
@@ -218,21 +208,12 @@
 	}
 
 	:global(html[data-theme="dark"]) .case-hero {
-		background: #1a1a1a;
+		background-color: #1a1a1a;
 		border-color: #333;
 	}
 
-	:global(html[data-theme="dark"]) .company-logo-large img {
-		filter: brightness(0) invert(1);
-	}
-
-	:global(html[data-theme="dark"]) .case-title,
 	:global(html[data-theme="dark"]) .case-content :global(h2),
 	:global(html[data-theme="dark"]) .case-content :global(h3) {
-		color: #f5f5f5;
-	}
-
-	:global(html[data-theme="dark"]) .meta-item strong {
 		color: #f5f5f5;
 	}
 
@@ -248,13 +229,12 @@
 
 	/* Responsive */
 	@media (max-width: 768px) {
-		.case-title {
-			font-size: 32px;
+		.case-hero {
+			padding: 80px 0 60px;
 		}
 
-		.case-meta {
-			flex-direction: column;
-			gap: 12px;
+		.case-title {
+			font-size: 32px;
 		}
 
 		.case-content :global(h2) {
