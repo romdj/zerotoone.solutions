@@ -1,5 +1,7 @@
 <script lang="ts">
 	import CaseStudyLayout from '$lib/components/CaseStudyLayout.svelte';
+
+	export let data;
 </script>
 
 <svelte:head>
@@ -9,10 +11,11 @@
 
 <CaseStudyLayout
 	company="Nike"
-	logo="/logos/NIKE_SWOOSH.svg"
+	logo="/logos/nike-swoosh-logo-paint-cropped.png"
 	title="Supply Chain Execution Platform"
 	role="Technical Architect"
 	tags={['Event-Driven Architecture', 'Supply Chain', 'AWS', 'Team Leadership', 'SAP S4/HANA', 'KAPPA Architecture']}
+	headerImage={data.headerImage}
 >
 	<!-- The Architectural Challenge -->
 	<section>

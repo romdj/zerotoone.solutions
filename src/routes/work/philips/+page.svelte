@@ -1,5 +1,7 @@
 <script lang="ts">
 	import CaseStudyLayout from '$lib/components/CaseStudyLayout.svelte';
+
+	export let data;
 </script>
 
 <svelte:head>
@@ -13,6 +15,7 @@
 	title="Healthcare Platform Backend Services"
 	role="Software Engineer"
 	tags={['Healthcare', 'IoT', 'Serverless', 'AWS', 'FHIR', 'IEC 62304', 'Medical Devices']}
+	headerImage={data.headerImage}
 >
 	<!-- The Architectural Challenge -->
 	<section>

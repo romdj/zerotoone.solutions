@@ -1,5 +1,7 @@
 <script lang="ts">
 	import CaseStudyLayout from '$lib/components/CaseStudyLayout.svelte';
+
+	export let data;
 </script>
 
 <svelte:head>
@@ -13,6 +15,7 @@
 	title="Enterprise Architecture Transformation"
 	role="Solution Architect (Enterprise Level)"
 	tags={['Enterprise Architecture', 'API Standards', 'Cloud Platforms', 'Organizational Change', 'Innovation Diffusion']}
+	headerImage={data.headerImage}
 >
 	<!-- The Context -->
 	<section>
