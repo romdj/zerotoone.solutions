@@ -447,11 +447,19 @@
 </div>
 
 <style>
+	/* Elia Corporate Brand Styling - Energy Infrastructure Design System */
 	:global(.elia-corporate) {
 		--elia-dark-blue-gray: #3D505A;
 		--elia-orange: #F58229;
 		--elia-text: #2a2a2a;
 		--elia-light-bg: #f9f7f5;
+		--elia-border: #d4d4d4;
+
+		/* Spacing system for industrial/technical aesthetic */
+		--elia-spacing-sm: 16px;
+		--elia-spacing-md: 24px;
+		--elia-spacing-lg: 40px;
+		--elia-spacing-xl: 60px;
 	}
 
 	:global(.elia-corporate) :global(section) {
@@ -561,5 +569,94 @@
 	:global(.elia-corporate strong) {
 		color: var(--elia-orange);
 		font-weight: 700;
+	}
+
+	/* Code blocks - technical styling */
+	:global(.elia-corporate code) {
+		background: var(--elia-light-bg);
+		color: var(--elia-dark-blue-gray);
+		padding: 3px 8px;
+		border-radius: 3px;
+		font-family: 'Monaco', 'Courier New', monospace;
+		font-size: 0.9em;
+		border: 1px solid var(--elia-border);
+	}
+
+	/* CTA Section - Industrial energy theme */
+	:global(.elia-corporate) :global(.case-cta) {
+		background: linear-gradient(135deg, var(--elia-dark-blue-gray) 0%, var(--elia-dark-blue-gray) 60%, var(--elia-orange) 100%);
+		position: relative;
+	}
+
+	:global(.elia-corporate) :global(.case-cta)::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+		opacity: 1;
+		z-index: 0;
+	}
+
+	:global(.elia-corporate) :global(.case-cta h2),
+	:global(.elia-corporate) :global(.case-cta p) {
+		color: #ffffff !important;
+		position: relative;
+		z-index: 1;
+	}
+
+	:global(.elia-corporate) :global(.case-cta .cta-button) {
+		background: var(--elia-orange);
+		color: #ffffff;
+		border: 2px solid var(--elia-orange);
+		border-radius: 4px;
+		padding: 14px 32px;
+		font-family: 'Inter', sans-serif;
+		font-weight: 600;
+		font-size: 16px;
+		transition: all 0.3s ease;
+		position: relative;
+		z-index: 1;
+	}
+
+	:global(.elia-corporate) :global(.case-cta .cta-button:hover) {
+		background: transparent;
+		color: #ffffff;
+		border-color: #ffffff;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(245, 130, 41, 0.4);
+	}
+
+	/* Tags/Pills - Energy theme */
+	:global(.elia-corporate) :global(.pill) {
+		background: var(--elia-dark-blue-gray) !important;
+		color: #ffffff !important;
+		font-family: 'Inter', sans-serif !important;
+		font-weight: 600 !important;
+		border-radius: 4px !important;
+		padding: 8px 16px !important;
+		font-size: 0.875rem !important;
+		border: none !important;
+		text-transform: uppercase !important;
+		letter-spacing: 0.5px !important;
+	}
+
+	:global(.elia-corporate) :global(.pill):nth-child(even) {
+		background: var(--elia-orange) !important;
+	}
+
+	/* Hero section - Industrial aesthetic */
+	:global(.elia-corporate) :global(.case-title) {
+		font-family: 'Inter', sans-serif !important;
+		font-weight: 700 !important;
+		letter-spacing: -0.02em !important;
+	}
+
+	/* Section headings - uppercase for industrial feel */
+	:global(.elia-corporate h2) {
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
 	}
 </style>
