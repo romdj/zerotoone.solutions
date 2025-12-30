@@ -123,6 +123,7 @@
 				{#each deepCaseStudies as study}
 					<a href="/work/{study.slug}" class="case-study-card featured">
 						<div class="card-content">
+							<div class="read-more-icon">→</div>
 							{#if study.image}
 								<div class="company-logo">
 									<img src={study.image} alt={study.company} />
@@ -136,9 +137,6 @@
 								{#each study.tags as tag}
 									<span class="pill">{tag}</span>
 								{/each}
-							</div>
-							<div class="read-more">
-								Read Case Study →
 							</div>
 						</div>
 					</a>
@@ -157,7 +155,7 @@
 
 			<div class="work-grid">
 				{#each lightweightCaseStudies as study}
-					<a href="/work/{study.slug}" class="work-card">
+					<div class="work-card">
 						<div class="card-content">
 							{#if study.image}
 								<div class="company-logo small">
@@ -174,7 +172,7 @@
 								{/each}
 							</div>
 						</div>
-					</a>
+					</div>
 				{/each}
 			</div>
 		</div>
@@ -226,9 +224,21 @@
 
 	.work-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		grid-template-columns: repeat(5, 1fr);
 		gap: 24px;
 		margin-top: 48px;
+	}
+
+	@media (max-width: 1400px) {
+		.work-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	@media (max-width: 900px) {
+		.work-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
 	}
 
 	.case-study-card,
@@ -240,6 +250,21 @@
 		text-decoration: none;
 		transition: all 0.3s ease;
 		display: block;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.case-study-card {
+		cursor: pointer;
+	}
+
+	.work-card {
+		cursor: default;
+	}
+
+	.card-content {
+		position: relative;
+		z-index: 1;
 	}
 
 	.case-study-card.featured {
@@ -252,6 +277,23 @@
 	.work-card:hover {
 		transform: translateY(-4px);
 		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+	}
+
+	.read-more-icon {
+		position: absolute;
+		top: 24px;
+		right: 24px;
+		font-size: 24px;
+		color: var(--white);
+		opacity: 0;
+		transition: all 0.3s ease;
+		transform: translateX(-8px);
+		z-index: 3;
+	}
+
+	.case-study-card:hover .read-more-icon {
+		opacity: 1;
+		transform: translateX(0);
 	}
 
 	.company-badge {
@@ -294,18 +336,39 @@
 		max-width: 150px;
 	}
 
+	.work-description {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(26, 26, 26, 0.95);
+		color: var(--white);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 32px;
+		text-align: center;
+		opacity: 0;
+		transition: all 0.3s ease;
+		z-index: 2;
+		border-radius: 12px;
+		font-size: 16px;
+		line-height: 1.6;
+	}
+
+	.case-study-card:hover .work-description,
+	.work-card:hover .work-description {
+		opacity: 1;
+	}
+
 	.tags {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 8px;
 		margin-top: 16px;
-	}
-
-	.read-more {
-		margin-top: 20px;
-		color: var(--pink);
-		font-weight: 600;
-		font-size: 14px;
+		max-height: 64px;
+		overflow: hidden;
 	}
 
 	/* CTA Section */
@@ -372,9 +435,20 @@
 		filter: brightness(0) invert(1);
 	}
 
+	:global(html[data-theme="dark"]) .read-more-icon {
+		color: var(--white);
+	}
+
+	:global(html[data-theme="dark"]) .work-description {
+		background: rgba(10, 10, 10, 0.95);
+	}
+
 	/* Responsive */
 	@media (max-width: 768px) {
-		.case-studies-grid,
+		.case-studies-grid {
+			grid-template-columns: 1fr;
+		}
+
 		.work-grid {
 			grid-template-columns: 1fr;
 		}
