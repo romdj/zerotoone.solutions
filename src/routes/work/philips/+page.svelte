@@ -7,7 +7,7 @@
 <svelte:head>
 	<title>Philips - Healthcare Platform Backend Services | Zero to One Solutions</title>
 	<meta name="description" content="Building the secure backbone for connected healthcare. Platform services managing medical device fleets, patient data flows, and real-time health monitoring with healthcare-grade compliance." />
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+	<!-- Philips uses Neue Frutiger World; fallback to Segoe UI and system fonts -->
 </svelte:head>
 
 <div class="philips-corporate">
@@ -327,6 +327,7 @@
 </div>
 
 <style>
+	/* Philips Corporate Brand Styling - Healthcare Design System */
 	:global(.philips-corporate) {
 		--philips-blue: #0B5ED7;
 		--philips-link-blue: #0066a1;
@@ -334,47 +335,58 @@
 		--philips-text-gray: #5d6678;
 		--philips-border-gray: #d2d1d4;
 		--philips-light-bg: #f5f5f5;
+
+		/* Philips spacing system */
+		--philips-spacing-a: 14px;
+		--philips-spacing-b: 20px;
+		--philips-spacing-c: 34px;
+		--philips-spacing-e: 86px;
 	}
 
+	/* Typography - Neue Frutiger World fallback stack (Segoe UI is similar) */
 	:global(.philips-corporate) :global(section) {
-		margin-bottom: 86px;
+		margin-bottom: var(--philips-spacing-e); /* 86px - Philips generous spacing */
 	}
 
+	/* H2 - LIGHT weight for Philips signature airy aesthetic */
 	:global(.philips-corporate h2) {
 		color: var(--philips-blue);
-		font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-		font-weight: 700;
-		font-size: 34px;
-		line-height: 40px;
-		letter-spacing: -0.5px;
-		margin-bottom: 24px;
+		font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+		font-weight: 300; /* LIGHT - Philips signature */
+		font-size: 48px; /* Larger, lighter headings */
+		line-height: 1.2;
+		letter-spacing: -0.02em;
+		margin-bottom: var(--philips-spacing-c);
 	}
 
 	:global(.philips-corporate h3) {
 		color: var(--philips-link-blue);
-		font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-		font-weight: 700;
-		font-size: 21px;
-		line-height: 26px;
-		letter-spacing: -0.2px;
+		font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+		font-weight: 400; /* Book weight for h3 */
+		font-size: 24px;
+		line-height: 1.3;
+		letter-spacing: -0.01em;
 		margin-top: 28px;
-		margin-bottom: 16px;
+		margin-bottom: var(--philips-spacing-b);
 	}
 
+	/* Body text - Book weight (regular) */
 	:global(.philips-corporate p) {
 		color: var(--philips-text-black);
-		font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+		font-weight: 400;
 		font-size: 17px;
-		line-height: 25px;
-		margin-bottom: 16px;
+		line-height: 1.65;
+		margin-bottom: var(--philips-spacing-b);
 	}
 
 	:global(.philips-corporate ul) {
 		color: var(--philips-text-black);
-		font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+		font-weight: 400;
 		font-size: 17px;
-		line-height: 25px;
-		margin-bottom: 16px;
+		line-height: 1.65;
+		margin-bottom: var(--philips-spacing-b);
 	}
 
 	:global(.philips-corporate li) {
@@ -434,6 +446,83 @@
 
 	:global(.philips-corporate strong) {
 		color: var(--philips-blue);
-		font-weight: 700;
+		font-weight: 600; /* Semi-bold, not too heavy */
+	}
+
+	/* Code blocks - clean, minimal */
+	:global(.philips-corporate code) {
+		background: var(--philips-light-bg);
+		color: var(--philips-link-blue);
+		padding: 3px 8px;
+		border-radius: 4px;
+		font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+		font-size: 0.9em;
+	}
+
+	/* Hero section - Light weight title */
+	:global(.philips-corporate) :global(.case-title) {
+		font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif !important;
+		font-weight: 300 !important; /* LIGHT weight for hero */
+		letter-spacing: -0.02em !important;
+	}
+
+	/* CTA Section - Philips healthcare blue gradient */
+	:global(.philips-corporate) :global(.case-cta) {
+		background: linear-gradient(135deg, var(--philips-blue) 0%, var(--philips-link-blue) 100%);
+	}
+
+	:global(.philips-corporate) :global(.case-cta h2),
+	:global(.philips-corporate) :global(.case-cta p) {
+		color: #ffffff !important;
+	}
+
+	:global(.philips-corporate) :global(.case-cta .cta-button) {
+		background: #ffffff;
+		color: var(--philips-blue);
+		border-radius: 4px; /* Slightly rounded */
+		padding: 16px 32px;
+		font-family: 'Segoe UI', sans-serif;
+		font-weight: 600;
+		font-size: 17px;
+		border: 2px solid #ffffff;
+		transition: all 0.3s ease;
+	}
+
+	:global(.philips-corporate) :global(.case-cta .cta-button:hover) {
+		background: transparent;
+		color: #ffffff;
+		border-color: #ffffff;
+		transform: translateY(-2px);
+		box-shadow: 0 8px 20px rgba(11, 94, 215, 0.3);
+	}
+
+	/* Tags/Pills - Clean Philips blue */
+	:global(.philips-corporate) :global(.pill) {
+		background: var(--philips-blue) !important;
+		color: #ffffff !important;
+		font-family: 'Segoe UI', sans-serif !important;
+		font-weight: 500 !important;
+		border-radius: 20px !important;
+		padding: 10px 20px !important;
+		font-size: 0.875rem !important;
+		border: none !important;
+		letter-spacing: 0.3px !important;
+	}
+
+	/* Light, airy aesthetic - generous white space */
+	:global(.philips-corporate) :global(.case-content) {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	/* Responsive adjustments */
+	@media (max-width: 768px) {
+		:global(.philips-corporate h2) {
+			font-size: 32px;
+		}
+
+		:global(.philips-corporate h3) {
+			font-size: 20px;
+		}
 	}
 </style>
