@@ -40,6 +40,15 @@
 			image: '/logos/Philips_plain-text.svg'
 		},
 		{
+			slug: 'fgtb',
+			company: 'ABVV-FGTB',
+			title: 'AS400 Mainframe Modernization',
+			description: 'Transforming Belgium\'s largest trade union from 30-year-old mainframe to modern cloud platform. New data architecture, security layer, and microfrontend serving 1M+ members—without stopping the business.',
+			tags: ['Legacy Modernization', 'Mainframe', 'CQRS', 'Microfrontends', 'Event Sourcing'],
+			type: 'deep',
+			image: '/logos/abvv-fgtb.png'
+		},
+		{
 			slug: 'ibm',
 			company: 'IBM',
 			title: 'IoT Solutions & Energy Analytics',
@@ -65,15 +74,6 @@
 			tags: ['IoT', 'Full-Stack', 'ELK Stack', 'Industrial Systems'],
 			type: 'lightweight',
 			image: '/logos/Logo-engie.svg'
-		},
-		{
-			slug: 'fgtb',
-			company: 'ABVV-FGTB',
-			title: 'AS400 Mainframe Modernization',
-			description: 'Leading the transformation of Belgium\'s largest trade union from 30-year-old mainframe to modern cloud platform. New data architecture, security layer, and frontend serving 1M+ members.',
-			tags: ['Legacy Modernization', 'Mainframe', 'CQRS', 'Microfrontends'],
-			type: 'lightweight',
-			image: '/logos/abvv-fgtb.png'
 		},
 		{
 			slug: 'extra-horizon',
