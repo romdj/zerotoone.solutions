@@ -12,15 +12,15 @@
 	}
 
 	const caseStudies: CaseStudy[] = [
-		{
-			slug: 'elia',
-			company: 'Elia',
-			title: 'Enterprise Architecture & Platform Modernization',
-			description: 'Architecting the future of energy infrastructure. Led 3 platform modernizations and established organization-wide standards for APIs, messaging, and cloud adoption.',
-			tags: ['Enterprise Architecture', 'API Standards', 'Cloud Platforms', 'Modernization'],
-			type: 'deep',
-			image: '/logos/ELIA_GROUP.svg'
-		},
+		// {
+		// 	slug: 'elia',
+		// 	company: 'Elia',
+		// 	title: 'Enterprise Architecture & Platform Modernization',
+		// 	description: 'Architecting the future of energy infrastructure. Led 3 platform modernizations and established organization-wide standards for APIs, messaging, and cloud adoption.',
+		// 	tags: ['Enterprise Architecture', 'API Standards', 'Cloud Platforms', 'Modernization'],
+		// 	type: 'deep',
+		// 	image: '/logos/ELIA_GROUP.svg'
+		// },
 		{
 			slug: 'nike',
 			company: 'Nike',
