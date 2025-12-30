@@ -368,24 +368,33 @@
 		line-height: 1.75;
 	}
 
+	/* Hero section - use Futura for title */
+	.nike-corporate :global(.case-title) {
+		font-family: Futura, 'Futura PT', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+		font-weight: 700 !important;
+		text-transform: uppercase !important;
+		letter-spacing: 0.02em !important;
+	}
+
 	/* Headings - Nike's minimal black/white aesthetic */
 	.nike-corporate :global(.case-content h2) {
 		color: var(--nike-text-primary);
-		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		font-family: Futura, 'Futura PT', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-weight: 700;
 		font-size: 3rem; /* 48px - Nike uses large, bold headings */
 		line-height: 1.2;
 		letter-spacing: -0.02em;
 		margin-bottom: var(--nike-spacing-md);
+		text-transform: uppercase; /* Nike often uses uppercase for major headings */
 	}
 
 	.nike-corporate :global(.case-content h3) {
 		color: var(--nike-text-primary);
-		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-weight: 500;
+		font-family: Futura, 'Futura PT', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		font-weight: 600;
 		font-size: 1.625rem; /* 26px */
 		line-height: 1.3;
-		letter-spacing: -0.01em;
+		letter-spacing: 0.02em;
 		margin-bottom: var(--nike-spacing-sm);
 	}
 
@@ -483,15 +492,16 @@
 		transform: none; /* Nike doesn't use transform on hover */
 	}
 
-	/* Tags - minimal black/white */
+	/* Tags - minimal black/white (force override with higher specificity) */
 	.nike-corporate :global(.pill) {
-		background: var(--nike-text-primary);
-		color: var(--nike-text-on-dark);
-		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-weight: 500;
-		border-radius: 80px;
-		padding: 8px 16px;
-		font-size: 0.875rem;
+		background: var(--nike-text-primary) !important;
+		color: var(--nike-text-on-dark) !important;
+		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+		font-weight: 500 !important;
+		border-radius: 80px !important;
+		padding: 8px 16px !important;
+		font-size: 0.875rem !important;
+		border: none !important;
 	}
 
 	/* Section spacing */
