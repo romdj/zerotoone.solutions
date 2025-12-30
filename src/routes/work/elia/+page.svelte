@@ -15,7 +15,6 @@
 		company="Elia Group"
 		logo="/logos/ELIA_GROUP.svg"
 		title="Enterprise Architecture Transformation"
-		role="Solution Architect (Enterprise Level)"
 		tags={['Enterprise Architecture', 'API Standards', 'Cloud Platforms', 'Organizational Change', 'Innovation Diffusion']}
 		headerImage={data.headerImage}
 	>

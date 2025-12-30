@@ -4,7 +4,6 @@
 	export let company: string;
 	export let logo: string;
 	export let title: string;
-	export let role: string;
 	export let tags: string[];
 	export let headerImage: string | undefined = undefined;
 </script>

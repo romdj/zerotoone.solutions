@@ -20,7 +20,6 @@
 		company="Nike"
 		logo="/logos/nike-swoosh-logo-paint-cropped.png"
 		title="Supply Chain Execution Platform"
-		role="Technical Architect"
 		tags={['Event-Driven Architecture', 'Supply Chain', 'AWS', 'Team Leadership', 'SAP S4/HANA', 'KAPPA Architecture']}
 		headerImage={data.headerImage}
 	>

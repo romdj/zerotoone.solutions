@@ -31,7 +31,6 @@
 				<span class="logo-placeholder">NIKE</span>
 			</div>
 			<div class="logo-card">
-				<span class="logo-placeholder">IBM</span>
 			</div>
 			<div class="logo-card">
 				<span class="logo-placeholder">PHILIPS</span>
@@ -78,17 +77,6 @@
 					<h3 class="work-title">Supply Chain Transformation</h3>
 					<p class="work-description">
 						Led team of 12 to build event-driven platform for Nike's supply chain technology
-					</p>
-					<span class="work-link">View Case Study →</span>
-				</div>
-			</a>
-
-			<a href="/work/ibm" class="work-card">
-				<div class="work-card-content">
-					<div class="work-company">IBM</div>
-					<h3 class="work-title">IoT Solutions & Cloud Architecture</h3>
-					<p class="work-description">
-						Designed fully integrated IoT solution and data pipelines for enterprise clients
 					</p>
 					<span class="work-link">View Case Study →</span>
 				</div>

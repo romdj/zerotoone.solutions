@@ -13,7 +13,6 @@
 	company="Philips"
 	logo="/logos/Philips_plain-text.svg"
 	title="Healthcare Platform Backend Services"
-	role="Software Engineer"
 	tags={['Healthcare', 'IoT', 'Serverless', 'AWS', 'FHIR', 'IEC 62304', 'Medical Devices']}
 	headerImage={data.headerImage}
 >

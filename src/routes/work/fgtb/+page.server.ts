@@ -1,5 +1,5 @@
 export async function load() {
 	return {
-		headerImage: undefined
+		headerImage: '/assets/fgtb/fgtb_LaurieDieffembacqBELGA.jpg'
 	};
 }

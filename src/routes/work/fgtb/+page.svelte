@@ -9,11 +9,11 @@
 	<meta name="description" content="Transforming Belgium's largest trade union from 30-year-old AS400 mainframe to modern cloud platform. CQRS, event sourcing, and microfrontends serving 1M+ members without stopping the business." />
 </svelte:head>
 
+<div class="fgtb-corporate">
 <CaseStudyLayout
 	company="ABVV-FGTB"
 	logo="/logos/abvv-fgtb.png"
 	title="AS400 Mainframe Modernization"
-	role="Lead Solution Architect"
 	tags={['Legacy Modernization', 'Mainframe', 'CQRS', 'Microfrontends', 'Event Sourcing', 'AS400']}
 	headerImage={data.headerImage}
 >
@@ -270,8 +270,120 @@
 		</ul>
 	</section>
 </CaseStudyLayout>
+</div>
 
 <style>
-	/* FGTB uses professional, institutional styling - Belgian trade union aesthetic */
-	/* No flashy corporate branding, just clean and trustworthy */
+	/* FGTB/ABVV Corporate Brand Styling - Socialist Labor Union Design */
+	.fgtb-corporate {
+		--fgtb-red: #e82712;
+		--fgtb-dark-red: #c71f0f;
+		--fgtb-black: #1a1a1a;
+		--fgtb-text: #1a1a1a;
+		--fgtb-text-light: #666666;
+	}
+
+	/* Hero section - Socialist red background */
+	.fgtb-corporate :global(.case-hero) {
+		background: linear-gradient(135deg, var(--fgtb-red), var(--fgtb-dark-red)) !important;
+	}
+
+	/* Title - Bold labor movement typography */
+	.fgtb-corporate :global(.case-title) {
+		font-family: 'Oscine', 'Helvetica', 'Arial', sans-serif !important;
+		font-weight: 700 !important;
+		color: #ffffff !important;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	/* H2 - Strong red headers with black underline */
+	.fgtb-corporate :global(.case-content h2) {
+		font-family: 'Oscine', 'Helvetica', 'Arial', sans-serif;
+		font-weight: 700;
+		font-size: 2.5rem;
+		color: var(--fgtb-red);
+		border-bottom: 3px solid var(--fgtb-black);
+		padding-bottom: 12px;
+		margin-bottom: 24px;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	/* H3 - Red accent */
+	.fgtb-corporate :global(.case-content h3) {
+		font-family: 'Oscine', 'Helvetica', 'Arial', sans-serif;
+		font-weight: 600;
+		color: var(--fgtb-red);
+	}
+
+	/* Tags/Pills - Red socialist banners */
+	.fgtb-corporate :global(.pill) {
+		background: var(--fgtb-red) !important;
+		color: #ffffff !important;
+		border: none !important;
+		border-radius: 2px !important;
+		font-family: 'Oscine', 'Helvetica', 'Arial', sans-serif;
+		text-transform: uppercase;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 0.5px;
+	}
+
+	/* Highlight boxes - Red accent stripe */
+	.fgtb-corporate :global(.highlight-box) {
+		background: #fff5f5 !important;
+		border-left: 4px solid var(--fgtb-red) !important;
+		border-radius: 0 !important;
+	}
+
+	.fgtb-corporate :global(.highlight-box strong) {
+		color: var(--fgtb-red);
+	}
+
+	/* CTA Button - Black on red background */
+	.fgtb-corporate :global(.case-cta) {
+		background: var(--fgtb-red) !important;
+	}
+
+	.fgtb-corporate :global(.case-cta .cta-button) {
+		background: var(--fgtb-black) !important;
+		color: #ffffff !important;
+		border-radius: 2px !important;
+		text-transform: uppercase;
+		font-weight: 700;
+		letter-spacing: 1px;
+	}
+
+	.fgtb-corporate :global(.case-cta .cta-button:hover) {
+		background: #000000 !important;
+		transform: translateY(-2px);
+	}
+
+	/* Body text - High contrast for accessibility */
+	.fgtb-corporate :global(.case-content p),
+	.fgtb-corporate :global(.case-content li) {
+		color: var(--fgtb-text);
+		font-family: 'Oscine', 'Helvetica', 'Arial', sans-serif;
+	}
+
+	/* Code snippets - Black monospace */
+	.fgtb-corporate :global(code) {
+		background: #f5f5f5;
+		color: var(--fgtb-black);
+		padding: 2px 6px;
+		border-radius: 2px;
+		font-family: 'Courier New', monospace;
+		font-weight: 600;
+	}
+
+	/* Two-column sections */
+	.fgtb-corporate :global(.two-column) {
+		gap: 32px;
+	}
+
+	.fgtb-corporate :global(.two-column h3) {
+		color: var(--fgtb-red);
+		border-bottom: 2px solid var(--fgtb-black);
+		padding-bottom: 8px;
+	}
 </style>
