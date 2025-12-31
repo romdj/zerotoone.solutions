@@ -202,8 +202,8 @@ const distribution = new aws.cloudfront.Distribution("website-cdn", {
     customErrorResponses: [
         {
             errorCode: 404,
-            responseCode: 404,
-            responsePagePath: "/404.html"
+            responseCode: 200,
+            responsePagePath: "/index.html" // Handle SPA client-side routing
         },
         {
             errorCode: 403,
