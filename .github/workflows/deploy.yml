@@ -136,21 +136,22 @@ jobs:
           cache: 'npm'
           cache-dependency-path: pulumi/package-lock.json
 
+      - name: Configure Git identity
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
       - name: Generate changelog
         run: |
           npm ci
           npm run changelog
 
-      - name: Commit and push changelog
+      - name: Push changelog if updated
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
           if [ -n "$(git status --porcelain CHANGELOG.md)" ]; then
-            git add CHANGELOG.md
-            git commit -m "chore: update changelog [skip ci]"
             git push
           else
-            echo "No changelog changes to commit"
+            echo "No changelog changes to push"
           fi
 
       - name: Configure AWS Credentials
