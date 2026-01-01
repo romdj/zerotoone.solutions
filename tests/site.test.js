@@ -42,15 +42,18 @@ test.describe('Zero to One Solutions Website', () => {
   test('contact page loads correctly', async ({ page }) => {
     await page.goto(`${BASE_URL}/contact`);
 
-    await expect(page.locator('h1')).toContainText('Get in Touch');
-    await expect(page.locator('text=Contact form coming soon')).toBeVisible();
+    await expect(page.locator('h1')).toContainText('Let\'s Work Together');
+    await expect(page.locator('text=Choose the path that fits your needs')).toBeVisible();
+    await expect(page.locator('text=Enterprise Solutions')).toBeVisible();
   });
 
   test('about page shows professional journey', async ({ page }) => {
     await page.goto(`${BASE_URL}/about`);
 
-    await expect(page.locator('h1')).toContainText('About');
+    await expect(page.locator('h1')).toContainText('About Zero to One');
     await expect(page.locator('text=Transforming complexity into clarity')).toBeVisible();
+    await expect(page.locator('text=Our Story')).toBeVisible();
+    await expect(page.locator('text=What Drives Us')).toBeVisible();
   });
 
   test('navigation works across all pages', async ({ page }) => {
@@ -60,9 +63,11 @@ test.describe('Zero to One Solutions Website', () => {
 
     await page.goto(`${BASE_URL}/contact`);
     await expect(page).toHaveURL(`${BASE_URL}/contact`);
+    await expect(page.locator('h1')).toContainText('Let\'s Work Together');
 
     await page.goto(`${BASE_URL}/about`);
     await expect(page).toHaveURL(`${BASE_URL}/about`);
+    await expect(page.locator('h1')).toContainText('About Zero to One');
 
     // Test back to home
     await page.goto(BASE_URL);

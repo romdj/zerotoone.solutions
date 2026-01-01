@@ -63,8 +63,8 @@ test.describe('Mobile Navigation and Functionality', () => {
     await page.goto(`${BASE_URL}/contact`);
 
     // Check contact page content
-    await expect(page.locator('h1')).toContainText('Get in Touch');
-    await expect(page.locator('text=Contact form coming soon')).toBeVisible();
+    await expect(page.locator('h1')).toContainText('Let\'s Work Together');
+    await expect(page.locator('text=Choose the path that fits your needs')).toBeVisible();
   });
 
   test('about page loads correctly on mobile', async ({ page }) => {
@@ -72,7 +72,7 @@ test.describe('Mobile Navigation and Functionality', () => {
     await page.goto(`${BASE_URL}/about`);
 
     // Check about page content
-    await expect(page.locator('h1')).toContainText('About');
+    await expect(page.locator('h1')).toContainText('About Zero to One');
     await expect(page.locator('text=Transforming complexity into clarity')).toBeVisible();
   });
 
@@ -99,11 +99,11 @@ test.describe('Mobile Navigation and Functionality', () => {
 
     await page.goto(`${BASE_URL}/contact`);
     await expect(page).toHaveURL(`${BASE_URL}/contact`);
-    await expect(page.locator('h1')).toContainText('Get in Touch');
+    await expect(page.locator('h1')).toContainText('Let\'s Work Together');
 
     await page.goto(`${BASE_URL}/about`);
     await expect(page).toHaveURL(`${BASE_URL}/about`);
-    await expect(page.locator('h1')).toContainText('About');
+    await expect(page.locator('h1')).toContainText('About Zero to One');
 
     // Back to home
     await page.goto(BASE_URL);
