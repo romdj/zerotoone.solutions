@@ -402,3 +402,101 @@ export const analyticsBucketName = loggingBucket.id;
 export const analyticsLogsPath = loggingBucket.id.apply(bucketId => `s3://${bucketId}/cloudfront-logs/`);
 export const dashboardUrl = dashboard.dashboardName.apply(name =>
     `https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=${name}`);
+
+// ==============================================================================
+// Metrics Collection Lambda
+// ==============================================================================
+
+// IAM role for Lambda
+const metricsLambdaRole = new aws.iam.Role("metrics-lambda-role", {
+    assumeRolePolicy: JSON.stringify({
+        Version: "2012-10-17",
+        Statement: [{
+            Action: "sts:AssumeRole",
+            Principal: {
+                Service: "lambda.amazonaws.com"
+            },
+            Effect: "Allow"
+        }]
+    })
+});
+
+// Attach CloudWatch read permissions
+const metricsLambdaCloudWatchPolicy = new aws.iam.RolePolicy("metrics-lambda-cloudwatch-policy", {
+    role: metricsLambdaRole.id,
+    policy: JSON.stringify({
+        Version: "2012-10-17",
+        Statement: [{
+            Effect: "Allow",
+            Action: [
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:ListMetrics"
+            ],
+            Resource: "*"
+        }]
+    })
+});
+
+// Attach S3 write permissions for the main bucket
+const metricsLambdaS3Policy = new aws.iam.RolePolicy("metrics-lambda-s3-policy", {
+    role: metricsLambdaRole.id,
+    policy: bucket.arn.apply(bucketArn => JSON.stringify({
+        Version: "2012-10-17",
+        Statement: [{
+            Effect: "Allow",
+            Action: [
+                "s3:PutObject",
+                "s3:PutObjectAcl"
+            ],
+            Resource: `${bucketArn}/metrics.json`
+        }]
+    }))
+});
+
+// Attach basic Lambda execution role
+const metricsLambdaBasicPolicy = new aws.iam.RolePolicyAttachment("metrics-lambda-basic-policy", {
+    role: metricsLambdaRole.id,
+    policyArn: "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+});
+
+// Lambda function
+const metricsLambda = new aws.lambda.Function("metrics-collector", {
+    code: new pulumi.asset.AssetArchive({
+        ".": new pulumi.asset.FileArchive("../metrics/lambda")
+    }),
+    runtime: "nodejs20.x",
+    role: metricsLambdaRole.arn,
+    handler: "metrics-collector.handler",
+    timeout: 60,
+    environment: {
+        variables: {
+            DISTRIBUTION_ID: distribution.id,
+            BUCKET_NAME: bucket.id,
+            AWS_REGION: "us-east-1"
+        }
+    }
+}, { dependsOn: [metricsLambdaCloudWatchPolicy, metricsLambdaS3Policy, metricsLambdaBasicPolicy] });
+
+// EventBridge rule to trigger Lambda daily at midnight UTC
+const metricsScheduleRule = new aws.cloudwatch.EventRule("metrics-daily-schedule", {
+    description: "Trigger metrics collection daily at midnight UTC",
+    scheduleExpression: "cron(0 0 * * ? *)" // Every day at midnight UTC
+});
+
+// Permission for EventBridge to invoke Lambda
+const metricsLambdaPermission = new aws.lambda.Permission("metrics-lambda-permission", {
+    action: "lambda:InvokeFunction",
+    function: metricsLambda.name,
+    principal: "events.amazonaws.com",
+    sourceArn: metricsScheduleRule.arn
+});
+
+// EventBridge target
+const metricsScheduleTarget = new aws.cloudwatch.EventTarget("metrics-schedule-target", {
+    rule: metricsScheduleRule.name,
+    arn: metricsLambda.arn
+});
+
+// Metrics Lambda exports
+export const metricsLambdaArn = metricsLambda.arn;
+export const metricsLambdaName = metricsLambda.name;
