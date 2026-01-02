@@ -497,6 +497,86 @@ const metricsScheduleTarget = new aws.cloudwatch.EventTarget("metrics-schedule-t
     arn: metricsLambda.arn
 });
 
+// IAM policy for GitHub Actions to deploy Lambda infrastructure
+// This policy should be attached to the github-actions-s3-website role
+const githubActionsLambdaPolicy = new aws.iam.Policy("github-actions-lambda-policy", {
+    name: "GitHubActionsLambdaDeployment",
+    description: "Permissions for GitHub Actions to deploy Lambda functions and related infrastructure",
+    policy: JSON.stringify({
+        Version: "2012-10-17",
+        Statement: [
+            {
+                Effect: "Allow",
+                Action: [
+                    // Lambda permissions
+                    "lambda:CreateFunction",
+                    "lambda:DeleteFunction",
+                    "lambda:GetFunction",
+                    "lambda:GetFunctionConfiguration",
+                    "lambda:UpdateFunctionCode",
+                    "lambda:UpdateFunctionConfiguration",
+                    "lambda:ListVersionsByFunction",
+                    "lambda:PublishVersion",
+                    "lambda:AddPermission",
+                    "lambda:RemovePermission",
+                    "lambda:GetPolicy",
+                    "lambda:TagResource",
+                    "lambda:UntagResource",
+                    "lambda:ListTags"
+                ],
+                Resource: "*"
+            },
+            {
+                Effect: "Allow",
+                Action: [
+                    // IAM role permissions (for creating Lambda execution roles)
+                    "iam:CreateRole",
+                    "iam:DeleteRole",
+                    "iam:GetRole",
+                    "iam:PassRole",
+                    "iam:PutRolePolicy",
+                    "iam:DeleteRolePolicy",
+                    "iam:GetRolePolicy",
+                    "iam:ListRolePolicies",
+                    "iam:ListAttachedRolePolicies",
+                    "iam:AttachRolePolicy",
+                    "iam:DetachRolePolicy",
+                    "iam:TagRole",
+                    "iam:UntagRole"
+                ],
+                Resource: "*"
+            },
+            {
+                Effect: "Allow",
+                Action: [
+                    // EventBridge permissions
+                    "events:PutRule",
+                    "events:DeleteRule",
+                    "events:DescribeRule",
+                    "events:EnableRule",
+                    "events:DisableRule",
+                    "events:PutTargets",
+                    "events:RemoveTargets",
+                    "events:ListTargetsByRule",
+                    "events:ListRules",
+                    "events:TagResource",
+                    "events:UntagResource"
+                ],
+                Resource: "*"
+            }
+        ]
+    })
+});
+
+// Attach the policy to the existing GitHub Actions role
+const githubActionsLambdaPolicyAttachment = new aws.iam.RolePolicyAttachment("github-actions-lambda-policy-attachment", {
+    role: "github-actions-s3-website", // Existing role name
+    policyArn: githubActionsLambdaPolicy.arn
+});
+
+// Export the policy ARN for reference
+export const githubActionsLambdaPolicyArn = githubActionsLambdaPolicy.arn;
+
 // Metrics Lambda exports
 export const metricsLambdaArn = metricsLambda.arn;
 export const metricsLambdaName = metricsLambda.name;
