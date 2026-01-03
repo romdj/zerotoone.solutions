@@ -53,7 +53,8 @@
         "events:ListTargetsByRule",
         "events:ListRules",
         "events:TagResource",
-        "events:UntagResource"
+        "events:UntagResource",
+        "events:ListTagsForResource"
       ],
       "Resource": "*"
     }
