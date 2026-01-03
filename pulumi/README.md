@@ -40,11 +40,13 @@ npm run destroy
 
 The project uses these configuration values:
 
-- `aws:region`: AWS region (default: us-east-1)
+- `aws:region`: AWS region (default: eu-north-1)
+  - **Note**: ACM certificates must be in us-east-1 for CloudFront (AWS requirement)
+  - CloudFront metrics are reported to us-east-1 regardless of origin region
 - `zerotoone-solutions:domainName`: Primary domain name
 - `zerotoone-solutions:additionalDomains`: Additional domains (optional)
 
-For production, these are set in `Pulumi.production.yaml`.
+For production, these are set in `Pulumi.production.yaml` and GitHub secrets.
 
 ## GitHub Actions Deployment
 

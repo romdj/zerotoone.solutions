@@ -401,7 +401,7 @@ export const oldWebsiteUrl = `https://old.${domainName}`;
 export const analyticsBucketName = loggingBucket.id;
 export const analyticsLogsPath = loggingBucket.id.apply(bucketId => `s3://${bucketId}/cloudfront-logs/`);
 export const dashboardUrl = dashboard.dashboardName.apply(name =>
-    `https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=${name}`);
+    `https://console.aws.amazon.com/cloudwatch/home?region=eu-north-1#dashboards:name=${name}`);
 
 // ==============================================================================
 // Metrics Collection Lambda
@@ -471,8 +471,8 @@ const metricsLambda = new aws.lambda.Function("metrics-collector", {
     environment: {
         variables: {
             DISTRIBUTION_ID: distribution.id,
-            BUCKET_NAME: bucket.id,
-            AWS_REGION: "us-east-1"
+            BUCKET_NAME: bucket.id
+            // AWS_REGION is automatically set by Lambda based on deployment region
         }
     }
 }, { dependsOn: [metricsLambdaCloudWatchPolicy, metricsLambdaS3Policy, metricsLambdaBasicPolicy] });

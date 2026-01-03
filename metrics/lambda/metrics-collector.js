@@ -7,14 +7,14 @@ let s3;
 
 function getCloudWatchClient() {
     if (!cloudwatch) {
-        cloudwatch = new CloudWatchClient({ region: process.env.AWS_REGION || 'us-east-1' });
+        cloudwatch = new CloudWatchClient({ region: process.env.AWS_REGION || 'eu-north-1' });
     }
     return cloudwatch;
 }
 
 function getS3Client() {
     if (!s3) {
-        s3 = new S3Client({ region: process.env.AWS_REGION || 'us-east-1' });
+        s3 = new S3Client({ region: process.env.AWS_REGION || 'eu-north-1' });
     }
     return s3;
 }

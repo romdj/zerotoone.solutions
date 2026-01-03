@@ -51,7 +51,7 @@ The Lambda function requires these environment variables (set by Pulumi):
 
 - `DISTRIBUTION_ID` - CloudFront distribution ID to query metrics for
 - `BUCKET_NAME` - S3 bucket to upload metrics.json to
-- `AWS_REGION` - AWS region (us-east-1)
+- `AWS_REGION` - AWS region (eu-north-1)
 - `AWS_LAMBDA_FUNCTION_NAME` - Automatically set by Lambda runtime
 
 ## IAM Permissions Required
@@ -116,7 +116,7 @@ For testing purposes, invoke manually:
 ```bash
 aws lambda invoke \
   --function-name metrics-collector \
-  --region us-east-1 \
+  --region eu-north-1 \
   output.json
 ```
 

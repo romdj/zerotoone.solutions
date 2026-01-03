@@ -35,7 +35,7 @@ describe('Metrics Collector Lambda', () => {
             ...originalEnv,
             DISTRIBUTION_ID: 'test-dist-id',
             BUCKET_NAME: 'test-bucket',
-            AWS_REGION: 'us-east-1',
+            AWS_REGION: 'eu-north-1',
             AWS_LAMBDA_FUNCTION_NAME: 'test-function'
         };
 
