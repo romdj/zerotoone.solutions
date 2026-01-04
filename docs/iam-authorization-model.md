@@ -101,14 +101,26 @@ Each role should have:
 
 ## Current State and Action Items
 
-### Immediate Actions Required
+### Completed Actions
 
-1. **Deploy IAM Policy for GitHub Actions** (BLOCKING)
-   - The `GitHubActionsLambdaDeployment` policy exists in code but isn't deployed
-   - Need admin/elevated permissions to create this policy
-   - Once created, Lambda deployment will work in CI/CD
+1. ✅ **GitHubActionsLambdaDeployment Policy Deployed**
+   - Created manually via AWS CLI as policy version v2
+   - Attached to `github-actions-s3-website` role
+   - Includes Lambda, IAM, and EventBridge permissions
 
-2. **Fix Local Development User Route53 Access**
+2. ✅ **S3 Website GitHub Actions Policy Updated**
+   - Updated to version v13 with analytics bucket permissions
+   - Added CloudWatch permissions for metrics collection
+   - All three buckets (main, old, analytics) now covered
+
+3. ✅ **Region Migration to eu-north-1 (Stockholm)**
+   - All infrastructure migrated from us-east-1 to eu-north-1
+   - ACM certificate remains in us-east-1 (CloudFront requirement)
+   - S3 buckets emptied and ready for recreation in new region
+
+### Pending Actions
+
+1. **Fix Local Development User Route53 Access**
    - Add Route53 read permissions to `romdj-dev` user
    - Required for local Pulumi deployments
 
