@@ -37,3 +37,6 @@ playwright-report/
 .last-run.json
 
 # old/ directory removed - now using old-site/ which is tracked
+
+# Collaboration logs
+.claude/collaboration-logs/
