@@ -450,7 +450,7 @@ const metricsLambda = new aws.lambda.Function("metrics-collector", {
     code: new pulumi.asset.AssetArchive({
         ".": new pulumi.asset.FileArchive("../metrics/lambda")
     }),
-    runtime: "nodejs24.x",
+    runtime: "nodejs22.x",
     role: metricsLambdaRole.arn,
     handler: "metrics-collector.handler",
     timeout: 60,
