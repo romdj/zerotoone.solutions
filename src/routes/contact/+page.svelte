@@ -68,8 +68,8 @@
 					make the right technical decisions from day one.
 				</p>
 				<div style="margin-bottom: 1rem;">
-					<a href="/incubator" class="cta-button" style="display: inline-block; text-decoration: none;">
-						Learn About Incubator
+					<a href="/in-house" class="cta-button" style="display: inline-block; text-decoration: none;">
+						Learn About In-House Services
 					</a>
 				</div>
 				<p style="font-size: 0.875rem; color: var(--text-secondary);">
@@ -182,8 +182,8 @@
 					Do you work with startups?
 				</h3>
 				<p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.9375rem;">
-					Absolutely! Check out our <a href="/incubator" style="color: var(--gradient-primary);">Startup Incubator</a>
-					program designed specifically for early-stage companies.
+					Absolutely! Check out our <a href="/in-house" style="color: var(--gradient-primary);">In-House Services</a>
+					designed specifically for early-stage companies and startups.
 				</p>
 			</div>
 

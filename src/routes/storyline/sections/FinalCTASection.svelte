@@ -105,7 +105,7 @@
         <span class="btn-icon">💬</span>
       </a>
       
-      <a href="/portfolio" class="cta-secondary-btn">
+      <a href="/work" class="cta-secondary-btn">
         <span class="btn-text">Explore Case Studies</span>
         <span class="btn-icon">📚</span>
       </a>

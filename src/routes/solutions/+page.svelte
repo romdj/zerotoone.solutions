@@ -70,7 +70,7 @@
 			<p class="cta-text">
 				Join Nike, IBM, Philips and other industry leaders who trust their most critical transformations to proven expertise.
 			</p>
-			<a href="/portfolio" class="btn btn-primary">
+			<a href="/work" class="btn btn-primary">
 				View Case Studies
 			</a>
 		</div>

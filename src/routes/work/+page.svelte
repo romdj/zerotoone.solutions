@@ -123,7 +123,6 @@
 				{#each deepCaseStudies as study}
 					<a href="/work/{study.slug}" class="case-study-card featured">
 						<div class="card-content">
-							<div class="read-more-icon">→</div>
 							{#if study.image}
 								<div class="company-logo">
 									<img src={study.image} alt={study.company} />
@@ -206,39 +205,46 @@
 
 	/* Case Studies Section */
 	.case-studies-section {
-		padding: 80px 0;
+		padding: 60px 0;
 		background: var(--white);
 	}
 
 	.additional-work-section {
-		padding: 80px 0;
+		padding: 60px 0;
 		background: var(--gray-100);
 	}
 
 	.case-studies-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		grid-template-columns: repeat(2, 1fr);
 		gap: 32px;
 		margin-top: 48px;
+		justify-items: center;
 	}
 
 	.work-grid {
-		display: grid;
-		grid-template-columns: repeat(5, 1fr);
+		display: flex;
 		gap: 24px;
 		margin-top: 48px;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		-webkit-overflow-scrolling: touch;
+		padding-bottom: 20px;
 	}
 
-	@media (max-width: 1400px) {
-		.work-grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
+	.work-grid::-webkit-scrollbar {
+		height: 8px;
 	}
 
-	@media (max-width: 900px) {
-		.work-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
+	.work-grid::-webkit-scrollbar-track {
+		background: var(--gray-200);
+		border-radius: 4px;
+	}
+
+	.work-grid::-webkit-scrollbar-thumb {
+		background: linear-gradient(135deg, var(--pink), var(--purple));
+		border-radius: 4px;
 	}
 
 	.case-study-card,
@@ -252,6 +258,8 @@
 		display: block;
 		position: relative;
 		overflow: hidden;
+		width: 100%;
+		max-width: 500px;
 	}
 
 	.case-study-card {
@@ -260,6 +268,8 @@
 
 	.work-card {
 		cursor: default;
+		flex: 0 0 350px;
+		scroll-snap-align: start;
 	}
 
 	.card-content {
@@ -277,23 +287,6 @@
 	.work-card:hover {
 		transform: translateY(-4px);
 		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-	}
-
-	.read-more-icon {
-		position: absolute;
-		top: 24px;
-		right: 24px;
-		font-size: 24px;
-		color: var(--white);
-		opacity: 0;
-		transition: all 0.3s ease;
-		transform: translateX(-8px);
-		z-index: 3;
-	}
-
-	.case-study-card:hover .read-more-icon {
-		opacity: 1;
-		transform: translateX(0);
 	}
 
 	.company-badge {
@@ -412,49 +405,73 @@
 	/* Dark mode support */
 	:global(html[data-theme="dark"]) .work-page,
 	:global(html[data-theme="dark"]) .case-studies-section {
-		background: #0a0a0a;
+		background: #0a0a0a !important;
 	}
 
 	:global(html[data-theme="dark"]) .additional-work-section {
-		background: #1a1a1a;
+		background: #1a1a1a !important;
 	}
 
 	:global(html[data-theme="dark"]) .case-study-card,
 	:global(html[data-theme="dark"]) .work-card {
-		background: #1a1a1a;
-		border-color: #333;
+		background: #1a1a1a !important;
+		border-color: #333 !important;
 	}
 
 	:global(html[data-theme="dark"]) .case-study-card.featured {
 		background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
-		            linear-gradient(135deg, var(--pink), var(--purple)) border-box;
+		            linear-gradient(135deg, var(--pink), var(--purple)) border-box !important;
 	}
 
 	/* Logo visibility in dark mode */
 	:global(html[data-theme="dark"]) .company-logo img {
-		filter: brightness(0) invert(1);
-	}
-
-	:global(html[data-theme="dark"]) .read-more-icon {
-		color: var(--white);
+		filter: brightness(0) invert(1) !important;
 	}
 
 	:global(html[data-theme="dark"]) .work-description {
-		background: rgba(10, 10, 10, 0.95);
+		background: rgba(10, 10, 10, 0.95) !important;
 	}
 
 	/* Responsive */
 	@media (max-width: 768px) {
-		.case-studies-grid {
-			grid-template-columns: 1fr;
+		.case-studies-section,
+		.additional-work-section {
+			padding: 40px 0;
 		}
 
-		.work-grid {
+		.case-studies-grid {
 			grid-template-columns: 1fr;
+			gap: 20px;
+			justify-items: center;
+		}
+
+		.case-study-card,
+		.work-card {
+			padding: 24px;
+			width: 100%;
+			max-width: 100%;
+		}
+
+		.work-card {
+			flex: 0 0 280px;
+		}
+
+		.work-title {
+			font-size: 18px;
+		}
+
+		.company-logo {
+			height: 50px;
+			margin-bottom: 16px;
 		}
 
 		.cta-heading {
 			font-size: 32px;
+		}
+
+		.tags {
+			gap: 6px;
+			margin-top: 12px;
 		}
 	}
 </style>

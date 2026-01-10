@@ -125,7 +125,7 @@
 		<p class="section-description">
 			Our multidisciplinary interests inform how we solve problems
 		</p>
-		<div class="work-grid" style="margin-top: 3rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+		<div class="interest-grid" style="margin-top: 3rem;">
 			<div class="card-brand">
 				<h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">
 					📷 Photography

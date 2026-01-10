@@ -2,11 +2,16 @@
 	import '$lib/styles/homepage.css';
 
 	const techStack = [
-		{ category: 'Cloud Platforms', items: ['AWS', 'Azure', 'GCP', 'Multi-Cloud Architecture'] },
-		{ category: 'Languages', items: ['Python', 'TypeScript', 'Java', 'Scala', 'Node.js', '.NET', 'Go'] },
-		{ category: 'Architecture', items: ['Event-Driven', 'Microservices', 'Serverless', 'KAPPA', 'CQRS', 'Domain-Driven Design'] },
-		{ category: 'Data Engineering', items: ['Snowflake', 'Databricks', 'Spark', 'Data Lakes', 'Real-Time Streams', 'ETL/ELT'] },
-		{ category: 'Infrastructure', items: ['Kubernetes', 'Docker', 'Terraform', 'CloudFormation', 'CI/CD', 'GitOps'] }
+		{ category: 'Cloud Platforms', items: ['AWS', 'Azure', 'GCP', 'Multi-Cloud Architecture', 'Hybrid Cloud', 'Edge Computing'] },
+		{ category: 'Languages & Frameworks', items: ['Python', 'TypeScript', 'Java', 'Scala', 'Node.js', '.NET', 'Go', 'Rust', 'React', 'Vue', 'Svelte', 'Next.js'] },
+		{ category: 'Architecture Patterns', items: ['Event-Driven', 'Microservices', 'Serverless', 'KAPPA', 'CQRS', 'Domain-Driven Design', 'Hexagonal Architecture', 'Event Sourcing'] },
+		{ category: 'Data Engineering', items: ['Snowflake', 'Databricks', 'Spark', 'Data Lakes', 'Real-Time Streams', 'ETL/ELT', 'Kafka', 'Kinesis', 'Redshift', 'BigQuery'] },
+		{ category: 'Databases', items: ['PostgreSQL', 'MySQL', 'MongoDB', 'DynamoDB', 'Redis', 'ElasticSearch', 'Neo4j', 'TimescaleDB', 'Cassandra'] },
+		{ category: 'Message Queues & Streaming', items: ['Kafka', 'RabbitMQ', 'SQS', 'SNS', 'EventBridge', 'PubSub', 'Kinesis', 'NATS'] },
+		{ category: 'Infrastructure & DevOps', items: ['Kubernetes', 'Docker', 'Terraform', 'Pulumi', 'CloudFormation', 'CI/CD', 'GitOps', 'ArgoCD', 'Jenkins', 'GitHub Actions'] },
+		{ category: 'Monitoring & Observability', items: ['Datadog', 'New Relic', 'Prometheus', 'Grafana', 'CloudWatch', 'ELK Stack', 'OpenTelemetry', 'Sentry'] },
+		{ category: 'Security & Compliance', items: ['IAM', 'RBAC', 'OAuth2/OIDC', 'Zero Trust', 'Encryption at Rest/Transit', 'SOC2', 'HIPAA', 'GDPR', 'Penetration Testing'] },
+		{ category: 'AI/ML & Analytics', items: ['TensorFlow', 'PyTorch', 'SageMaker', 'LangChain', 'OpenAI API', 'Vector Databases', 'MLOps', 'Feature Stores'] }
 	];
 
 	const domainExpertise = [
@@ -52,35 +57,177 @@
 		<div class="container">
 			<h2 class="section-heading">Where You Are Right Now</h2>
 
-			<div class="journey-scenarios">
-				<div class="scenario">
-					<h3>The Founder with an Idea</h3>
-					<p>
-						You know your industry inside-out. You've identified a problem worth billions. You can describe the solution—but you're not a technical co-founder. You need someone who can translate your vision into architecture, into code, into a product users will pay for.
-					</p>
-					<p class="insight">
-						<strong>What we bring:</strong> The technical co-founder skillset without the equity split. We architect, build, and deploy your MVP—then help you hire and scale the team that takes it further.
-					</p>
-				</div>
+			<!-- Founder Packages -->
+			<div class="scenario-section">
+				<h3 class="scenario-title">The Founder with an Idea</h3>
+				<p class="scenario-intro">
+					You know your industry inside-out. You've identified a problem worth billions. You can describe the solution—but you're not a technical co-founder. You need someone who can translate your vision into architecture, into code, into a product users will pay for.
+				</p>
 
-				<div class="scenario">
-					<h3>The Exec with a Moonshot</h3>
-					<p>
-						You're inside a corporation that moves slowly. You see the opportunity—a new product line, a platform play, a venture spinout. You have budget, you have mandate, but corporate IT can't move fast enough.
-					</p>
-					<p class="insight">
-						<strong>What we bring:</strong> Venture velocity with enterprise rigor. We build like a startup (weeks, not quarters) while maintaining the compliance, security, and integration your organization requires.
-					</p>
-				</div>
+				<div class="packages-table">
+					<div class="package-card">
+						<h4 class="package-name">MVP Sprint</h4>
+						<p class="package-duration">4-8 weeks</p>
+						<p class="package-description">
+							Validate your idea fast. We build a working prototype to test with real users and investors.
+						</p>
+						<ul class="package-includes">
+							<li>Technical feasibility analysis</li>
+							<li>Minimum viable feature set</li>
+							<li>Cloud-hosted deployment</li>
+							<li>Basic analytics integration</li>
+							<li>Investor demo package</li>
+						</ul>
+					</div>
 
-				<div class="scenario">
-					<h3>The Team Ready to Scale</h3>
-					<p>
-						You've built the product. You've found product-market fit. Now you need to scale—10x users, 100x data, global operations. Your current architecture is buckling. Your team is firefighting.
-					</p>
-					<p class="insight">
-						<strong>What we bring:</strong> Platform thinking at scale. We've built systems processing millions of events daily for Nike, managed device fleets for Philips, architected infrastructure for national energy grids. We know the patterns, the pitfalls, the proven paths.
-					</p>
+					<div class="package-card featured">
+						<div class="popular-badge">Most Popular</div>
+						<h4 class="package-name">Product Launch</h4>
+						<p class="package-duration">3-6 months</p>
+						<p class="package-description">
+							Full product development from architecture to market launch. Production-ready system with paying customers.
+						</p>
+						<ul class="package-includes">
+							<li>Complete system architecture</li>
+							<li>Production-grade infrastructure</li>
+							<li>User authentication & payments</li>
+							<li>Mobile + web applications</li>
+							<li>Compliance & security setup</li>
+							<li>Team hiring guidance</li>
+						</ul>
+					</div>
+
+					<div class="package-card">
+						<h4 class="package-name">Fractional CTO</h4>
+						<p class="package-duration">6-12 months</p>
+						<p class="package-description">
+							Technical leadership as a service. We build your product AND your technical organization.
+						</p>
+						<ul class="package-includes">
+							<li>Ongoing architecture & strategy</li>
+							<li>Team recruitment & mentorship</li>
+							<li>Investor & board technical advisor</li>
+							<li>Technology roadmap planning</li>
+							<li>Vendor & partner evaluation</li>
+							<li>Transition to internal CTO</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Executive Packages -->
+			<div class="scenario-section">
+				<h3 class="scenario-title">The Exec with a Moonshot</h3>
+				<p class="scenario-intro">
+					You're inside a corporation that moves slowly. You see the opportunity—a new product line, a platform play, a venture spinout. You have budget, you have mandate, but corporate IT can't move fast enough.
+				</p>
+
+				<div class="packages-table">
+					<div class="package-card">
+						<h4 class="package-name">Innovation Sprint</h4>
+						<p class="package-duration">6-10 weeks</p>
+						<p class="package-description">
+							Rapid prototyping with enterprise integration. Prove the concept without disrupting existing systems.
+						</p>
+						<ul class="package-includes">
+							<li>Enterprise architecture review</li>
+							<li>Prototype development</li>
+							<li>SSO & security integration</li>
+							<li>Compliance documentation</li>
+							<li>Executive stakeholder demos</li>
+						</ul>
+					</div>
+
+					<div class="package-card featured">
+						<div class="popular-badge">Most Popular</div>
+						<h4 class="package-name">Platform Build</h4>
+						<p class="package-duration">4-9 months</p>
+						<p class="package-description">
+							Full platform with enterprise-grade reliability, security, and integration capabilities.
+						</p>
+						<ul class="package-includes">
+							<li>Scalable cloud architecture</li>
+							<li>Enterprise system integration</li>
+							<li>Security & compliance (SOC2, GDPR)</li>
+							<li>Multi-region deployment</li>
+							<li>Monitoring & observability</li>
+							<li>Team training & documentation</li>
+						</ul>
+					</div>
+
+					<div class="package-card">
+						<h4 class="package-name">Venture Studio</h4>
+						<p class="package-duration">12+ months</p>
+						<p class="package-description">
+							Corporate venture building. We co-create the new business unit from technology to market strategy.
+						</p>
+						<ul class="package-includes">
+							<li>Business model design</li>
+							<li>Product development sprint zero to launch</li>
+							<li>Go-to-market strategy</li>
+							<li>P&L and unit economics modeling</li>
+							<li>Spinout preparation (if needed)</li>
+							<li>Board advisory participation</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Scale Packages -->
+			<div class="scenario-section">
+				<h3 class="scenario-title">The Team Ready to Scale</h3>
+				<p class="scenario-intro">
+					You've built the product. You've found product-market fit. Now you need to scale—10x users, 100x data, global operations. Your current architecture is buckling. Your team is firefighting.
+				</p>
+
+				<div class="packages-table">
+					<div class="package-card">
+						<h4 class="package-name">Scale Assessment</h4>
+						<p class="package-duration">2-3 weeks</p>
+						<p class="package-description">
+							Comprehensive architecture review identifying bottlenecks and creating scale roadmap.
+						</p>
+						<ul class="package-includes">
+							<li>Performance profiling & load testing</li>
+							<li>Architecture bottleneck analysis</li>
+							<li>Database optimization review</li>
+							<li>Cost optimization opportunities</li>
+							<li>Detailed remediation roadmap</li>
+						</ul>
+					</div>
+
+					<div class="package-card featured">
+						<div class="popular-badge">Most Popular</div>
+						<h4 class="package-name">Platform Re-architecture</h4>
+						<p class="package-duration">3-6 months</p>
+						<p class="package-description">
+							Rebuild critical paths for 10x-100x scale without stopping the business.
+						</p>
+						<ul class="package-includes">
+							<li>Microservices decomposition</li>
+							<li>Database sharding & caching</li>
+							<li>Event-driven architecture</li>
+							<li>Zero-downtime migration</li>
+							<li>Team upskilling & pair programming</li>
+							<li>Ongoing architecture advisory</li>
+						</ul>
+					</div>
+
+					<div class="package-card">
+						<h4 class="package-name">Enterprise Modernization</h4>
+						<p class="package-duration">6-12 months</p>
+						<p class="package-description">
+							Complete platform transformation to cloud-native, event-driven, globally distributed architecture.
+						</p>
+						<ul class="package-includes">
+							<li>Legacy system migration strategy</li>
+							<li>Multi-region cloud deployment</li>
+							<li>Real-time data pipelines</li>
+							<li>Advanced observability & SRE</li>
+							<li>Team structure & process design</li>
+							<li>Internal platform engineering setup</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -277,15 +424,6 @@
 					</p>
 					<a href="/work/philips" class="example-link">Read the story →</a>
 				</div>
-
-				<div class="example-card">
-					<h3>Elia Grid Modernization</h3>
-					<p class="example-scope">From legacy to cloud-native</p>
-					<p>
-						Led enterprise architecture transformation for national energy infrastructure. Established standards, modernized 3 platforms, enabled Belgium's energy transition.
-					</p>
-					<a href="/work/elia" class="example-link">Read the story →</a>
-				</div>
 			</div>
 		</div>
 	</section>
@@ -391,6 +529,114 @@
 		color: var(--pink);
 	}
 
+	/* Package Tables */
+	.scenario-section {
+		margin-bottom: 80px;
+	}
+
+	.scenario-title {
+		font-size: 28px;
+		font-weight: 700;
+		margin: 0 0 16px 0;
+		color: var(--ink);
+	}
+
+	.scenario-intro {
+		font-size: 17px;
+		line-height: 1.7;
+		color: var(--gray-600);
+		margin: 0 0 32px 0;
+		max-width: 900px;
+	}
+
+	.packages-table {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.package-card {
+		background: var(--white);
+		border: 2px solid var(--gray-400);
+		border-radius: 12px;
+		padding: 32px;
+		position: relative;
+		transition: all 0.3s ease;
+	}
+
+	.package-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+	}
+
+	.package-card.featured {
+		border-color: var(--purple);
+		background: linear-gradient(var(--white), var(--white)) padding-box,
+		            linear-gradient(135deg, var(--pink), var(--purple)) border-box;
+	}
+
+	.popular-badge {
+		position: absolute;
+		top: -12px;
+		right: 24px;
+		background: linear-gradient(135deg, var(--pink), var(--purple));
+		color: var(--white);
+		padding: 6px 16px;
+		border-radius: 20px;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 0.5px;
+		text-transform: uppercase;
+	}
+
+	.package-name {
+		font-size: 22px;
+		font-weight: 700;
+		margin: 0 0 8px 0;
+		color: var(--ink);
+	}
+
+	.package-duration {
+		font-size: 14px;
+		color: var(--purple);
+		font-weight: 600;
+		margin: 0 0 16px 0;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.package-description {
+		font-size: 15px;
+		line-height: 1.6;
+		color: var(--gray-600);
+		margin: 0 0 24px 0;
+		border-bottom: 1px solid var(--gray-300);
+		padding-bottom: 20px;
+	}
+
+	.package-includes {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.package-includes li {
+		font-size: 14px;
+		line-height: 1.8;
+		color: var(--gray-700);
+		margin-bottom: 8px;
+		padding-left: 24px;
+		position: relative;
+	}
+
+	.package-includes li:before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		color: var(--purple);
+		font-weight: 700;
+	}
+
 	/* Collaboration Approach */
 	.collaboration-approach {
 		padding: 80px 0;
@@ -398,9 +644,10 @@
 
 	.collaboration-phases {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		grid-template-columns: repeat(2, 1fr);
 		gap: 32px;
 		margin-top: 48px;
+		justify-items: center;
 	}
 
 	.phase {
@@ -408,6 +655,8 @@
 		padding: 32px;
 		background: var(--gray-100);
 		border-radius: 8px;
+		width: 100%;
+		max-width: 500px;
 	}
 
 	.phase-number {
@@ -748,37 +997,82 @@
 
 	/* Dark mode */
 	:global(html[data-theme="dark"]) .in-house-page {
-		background: #0a0a0a;
+		background: #0a0a0a !important;
 	}
 
 	:global(html[data-theme="dark"]) .reader-journey,
 	:global(html[data-theme="dark"]) .expertise-stack,
 	:global(html[data-theme="dark"]) .case-examples {
-		background: #1a1a1a;
+		background: #1a1a1a !important;
 	}
 
 	:global(html[data-theme="dark"]) .scenario,
 	:global(html[data-theme="dark"]) .example-card {
-		background: #0a0a0a;
-		border-color: #333;
+		background: #0a0a0a !important;
+		border-color: #333 !important;
 	}
 
 	:global(html[data-theme="dark"]) .phase,
 	:global(html[data-theme="dark"]) .venture-stage,
 	:global(html[data-theme="dark"]) .insight {
-		background: #0a0a0a;
+		background: #0a0a0a !important;
 	}
 
 	:global(html[data-theme="dark"]) .tech-pill {
-		background: #1a1a1a;
-		border-color: #333;
+		background: #1a1a1a !important;
+		border-color: #333 !important;
 	}
 
 	:global(html[data-theme="dark"]) .stage-outcome {
-		background: #1a1a1a;
+		background: #1a1a1a !important;
+	}
+
+	:global(html[data-theme="dark"]) .package-card {
+		background: #1a1a1a !important;
+		border-color: #333 !important;
+	}
+
+	:global(html[data-theme="dark"]) .package-card.featured {
+		background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+		            linear-gradient(135deg, var(--pink), var(--purple)) border-box !important;
+	}
+
+	:global(html[data-theme="dark"]) .package-name,
+	:global(html[data-theme="dark"]) .scenario-title {
+		color: #f5f5f5 !important;
+	}
+
+	:global(html[data-theme="dark"]) .package-description,
+	:global(html[data-theme="dark"]) .scenario-intro,
+	:global(html[data-theme="dark"]) .package-includes li {
+		color: #d0d0d0 !important;
+	}
+
+	:global(html[data-theme="dark"]) .collaboration-approach {
+		background: #0a0a0a !important;
+	}
+
+	:global(html[data-theme="dark"]) .expertise-category {
+		background: #0a0a0a !important;
+		border-color: #333 !important;
+	}
+
+	:global(html[data-theme="dark"]) .final-cta-inhouse {
+		background: #0a0a0a !important;
 	}
 
 	/* Responsive */
+	@media (max-width: 1024px) and (min-width: 769px) {
+		.packages-table {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.package-card.featured {
+			grid-column: span 2;
+			max-width: none;
+		}
+	}
+
 	@media (max-width: 768px) {
 		.hero-headline {
 			font-size: 36px;
@@ -788,8 +1082,48 @@
 			font-size: 18px;
 		}
 
+		.scenario-title {
+			font-size: 24px;
+		}
+
+		.scenario-intro {
+			font-size: 16px;
+		}
+
+		.packages-table {
+			grid-template-columns: 1fr;
+			gap: 20px;
+			justify-items: center;
+		}
+
+		.package-card {
+			padding: 24px;
+			width: 100%;
+			max-width: 100%;
+		}
+
+		.package-name {
+			font-size: 20px;
+		}
+
+		.collaboration-phases {
+			grid-template-columns: 1fr;
+			justify-items: center;
+		}
+
+		.phase {
+			padding: 24px;
+			width: 100%;
+			max-width: 100%;
+		}
+
 		.expertise-grid {
 			grid-template-columns: 1fr;
+			justify-items: center;
+		}
+
+		.tech-pill, .stack-items {
+			font-size: 12px;
 		}
 
 		.venture-journey {
