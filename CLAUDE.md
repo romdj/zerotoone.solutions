@@ -10,11 +10,10 @@ This is the **zerotoone.solutions** repository - a professional Svelte website f
 
 ### Navigation Structure
 - **Home** (`/`) - Hero with trusted partners section
-- **Solutions** (`/solutions`) - Enterprise solutions by business challenge
-- **Portfolio** (`/portfolio`) - Company-led case studies and innovation projects  
+- **Work** (`/work`) - Enterprise case studies and transformations
+- **In-House** (`/in-house/products`) - Startup and product development services
 - **About** (`/about`) - Professional journey and beyond architecture interests
-- **Resources** (`/resources`) - Thought leadership content (placeholder)
-- **Startup Incubator** (`/incubator`) - Technology strategy for startups
+- **Contact** (`/contact`) - Multiple contact paths and consultation booking
 
 ### Key Features Implemented
 - **Trusted Partners Section**: Prominent display of Nike, IBM, Philips, Levi's, Engie, Elia
@@ -49,25 +48,32 @@ This is the **zerotoone.solutions** repository - a professional Svelte website f
 ```
 src/
 ├── routes/
-│   ├── +layout.svelte          # Global layout with favicon and fonts
-│   ├── +page.svelte             # Homepage with partners section
-│   ├── solutions/+page.svelte   # Enterprise solutions (renamed from services)
-│   ├── portfolio/+page.svelte   # Company-led case studies
-│   ├── about/+page.svelte       # Comprehensive about with interests
-│   ├── resources/+page.svelte   # Thought leadership (placeholder)
-│   └── incubator/+page.svelte   # Startup consulting services
-├── lib/styles/
-│   ├── components.css           # Modular component styles
-│   └── animations.css           # Animation utilities
-└── app.css                      # Main CSS entry point
+│   ├── +layout.svelte                    # Global layout with navigation, favicon, fonts
+│   ├── +page.svelte                       # Homepage with partners section
+│   ├── work/+page.svelte                  # Enterprise case studies
+│   ├── in-house/products/+page.svelte     # Startup packages and services
+│   ├── about/+page.svelte                 # Professional journey and interests
+│   ├── contact/+page.svelte               # Contact paths and consultation booking
+│   └── storyline/+page.svelte             # Alternative homepage narrative (experimental)
+├── lib/
+│   ├── components/
+│   │   └── Navigation.svelte              # Main navigation component
+│   ├── styles/
+│   │   ├── homepage.css                   # Global styles and dark mode
+│   │   ├── navigation.css                 # Navigation-specific styles
+│   │   └── theme.css                      # Theme system utilities
+│   └── stores/
+│       └── theme.ts                       # Dark/light theme store
+└── app.css                                # Tailwind base + utility classes
 ```
 
 ### CSS Architecture
 - **Hybrid Approach**: Tailwind utilities + custom CSS components
-- **@layer components**: Modular component organization
-- **Brand Variables**: Consistent color system throughout
+- **CSS Variables**: Centralized color system with dark mode support
+- **Dark Mode**: Theme toggle with comprehensive dark theme coverage across all pages
+- **Global vs Scoped**: Global CSS files (homepage.css, navigation.css) use direct selectors, component `<style>` blocks use `:global()` wrapper
 - **Animation System**: Float, fade-in, and gradient-shift effects
-- **Responsive Design**: Mobile-first approach
+- **Responsive Design**: Mobile-first approach with breakpoints at 768px (mobile) and 1024px (tablet)
 
 ## Content Strategy
 
@@ -98,19 +104,21 @@ src/
 - **CSS Loading Issues**: Moved critical styles outside @layer
 - **Brand Integration**: Consistent gradient system implementation
 - **Favicon Creation**: SVG matching logo 3 design
+- **Dark Mode Implementation**: Fixed CSS specificity issues by removing `:global()` wrappers from global CSS files and adding `!important` flags for proper dark theme rendering
 
 ### Current Status
 - ✅ All core pages implemented
 - ✅ Brand integration complete
 - ✅ Responsive design functional
 - ✅ Social links integrated
+- ✅ Dark mode fully implemented
 - ⏳ Resources page content (placeholder)
 - ⏳ Animation implementations (placeholder)
 
 ## Development Commands
 
 ```bash
-npm run dev          # Development server (port 5173)
+npm run dev          # Development server (port 12000)
 npm run build        # Production build
 npm run preview      # Preview production build
 npm run lint         # Code linting (if configured)
@@ -118,6 +126,8 @@ npm run typecheck    # TypeScript checking (if configured)
 npm run changelog    # Generate changelog from commits
 npm run release      # Create new release with version bump
 ```
+
+**Note**: A development server instance is expected to always be running on port 12000 during active development.
 
 ## Commit Message Standards
 
