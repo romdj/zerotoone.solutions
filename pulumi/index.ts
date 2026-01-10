@@ -437,21 +437,7 @@ const metricsLambdaCloudWatchPolicy = new aws.iam.RolePolicy("metrics-lambda-clo
     })
 });
 
-// Attach S3 write permissions for the main bucket
-const metricsLambdaS3Policy = new aws.iam.RolePolicy("metrics-lambda-s3-policy", {
-    role: metricsLambdaRole.id,
-    policy: bucket.arn.apply(bucketArn => JSON.stringify({
-        Version: "2012-10-17",
-        Statement: [{
-            Effect: "Allow",
-            Action: [
-                "s3:PutObject",
-                "s3:PutObjectAcl"
-            ],
-            Resource: `${bucketArn}/metrics.json`
-        }]
-    }))
-});
+// Note: S3 write permissions removed - metrics.json collection disabled
 
 // Attach basic Lambda execution role
 const metricsLambdaBasicPolicy = new aws.iam.RolePolicyAttachment("metrics-lambda-basic-policy", {
@@ -464,18 +450,18 @@ const metricsLambda = new aws.lambda.Function("metrics-collector", {
     code: new pulumi.asset.AssetArchive({
         ".": new pulumi.asset.FileArchive("../metrics/lambda")
     }),
-    runtime: "nodejs20.x",
+    runtime: "nodejs24.x",
     role: metricsLambdaRole.arn,
     handler: "metrics-collector.handler",
     timeout: 60,
     environment: {
         variables: {
-            DISTRIBUTION_ID: distribution.id,
-            BUCKET_NAME: bucket.id
+            DISTRIBUTION_ID: distribution.id
             // AWS_REGION is automatically set by Lambda based on deployment region
+            // Note: BUCKET_NAME removed - S3 upload disabled
         }
     }
-}, { dependsOn: [metricsLambdaCloudWatchPolicy, metricsLambdaS3Policy, metricsLambdaBasicPolicy] });
+}, { dependsOn: [metricsLambdaCloudWatchPolicy, metricsLambdaBasicPolicy] });
 
 // EventBridge rule to trigger Lambda daily at midnight UTC
 const metricsScheduleRule = new aws.cloudwatch.EventRule("metrics-daily-schedule", {

@@ -1,9 +1,8 @@
 const { CloudWatchClient, GetMetricStatisticsCommand } = require("@aws-sdk/client-cloudwatch");
-const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+// S3 client removed - metrics.json upload disabled
 
-// Initialize clients lazily to allow for easier testing
+// Initialize CloudWatch client lazily to allow for easier testing
 let cloudwatch;
-let s3;
 
 function getCloudWatchClient() {
     if (!cloudwatch) {
@@ -12,19 +11,12 @@ function getCloudWatchClient() {
     return cloudwatch;
 }
 
-function getS3Client() {
-    if (!s3) {
-        s3 = new S3Client({ region: process.env.AWS_REGION || 'eu-north-1' });
-    }
-    return s3;
-}
-
 exports.handler = async (event) => {
     console.log('Starting metrics collection...');
 
     const distributionId = process.env.DISTRIBUTION_ID;
-    const bucketName = process.env.BUCKET_NAME;
     const functionName = process.env.AWS_LAMBDA_FUNCTION_NAME;
+    // Note: BUCKET_NAME removed - S3 upload disabled
 
     const now = new Date();
     const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
@@ -74,18 +66,9 @@ exports.handler = async (event) => {
             }
         };
 
-        // Upload to S3
-        const uploadParams = {
-            Bucket: bucketName,
-            Key: 'metrics.json',
-            Body: JSON.stringify(metrics, null, 2),
-            ContentType: 'application/json',
-            CacheControl: 'public, max-age=3600'
-        };
-
-        await getS3Client().send(new PutObjectCommand(uploadParams));
-
-        console.log('Metrics successfully uploaded to S3');
+        // S3 upload disabled - metrics.json collection removed
+        // The Lambda still collects metrics from CloudWatch for logging/debugging
+        console.log('Metrics collected:', JSON.stringify(metrics, null, 2));
 
         return {
             statusCode: 200,

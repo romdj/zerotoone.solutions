@@ -1,6 +1,8 @@
 # Metrics Collector Lambda Function
 
-AWS Lambda function that collects CloudWatch and CloudFront metrics and publishes them to S3 for the metrics dashboard.
+AWS Lambda function that collects CloudWatch and CloudFront metrics.
+
+**Note: S3 upload is currently disabled - metrics are only logged to CloudWatch for debugging purposes.**
 
 ## Overview
 
@@ -8,7 +10,7 @@ This Lambda function runs daily at midnight UTC (configurable via EventBridge) a
 1. Queries CloudWatch for CloudFront metrics (requests, bandwidth, errors)
 2. Tracks its own invocation count (meta!)
 3. Aggregates data over 30-day rolling windows
-4. Uploads `metrics.json` to the S3 website bucket
+4. ~~Uploads `metrics.json` to the S3 website bucket~~ **DISABLED** - Logs metrics to CloudWatch instead
 
 ## Structure
 
@@ -50,7 +52,7 @@ The project maintains 80%+ coverage threshold for:
 The Lambda function requires these environment variables (set by Pulumi):
 
 - `DISTRIBUTION_ID` - CloudFront distribution ID to query metrics for
-- `BUCKET_NAME` - S3 bucket to upload metrics.json to
+- ~~`BUCKET_NAME`~~ - **REMOVED** - S3 upload disabled
 - `AWS_REGION` - AWS region (eu-north-1)
 - `AWS_LAMBDA_FUNCTION_NAME` - Automatically set by Lambda runtime
 
@@ -58,15 +60,15 @@ The Lambda function requires these environment variables (set by Pulumi):
 
 - `cloudwatch:GetMetricStatistics` - Read CloudWatch metrics
 - `cloudwatch:ListMetrics` - List available metrics
-- `s3:PutObject` - Upload metrics.json to S3
-- `s3:PutObjectAcl` - Set public-read ACL on metrics.json
+- ~~`s3:PutObject`~~ - **REMOVED** - S3 upload disabled
+- ~~`s3:PutObjectAcl`~~ - **REMOVED** - S3 upload disabled
 - `logs:CreateLogGroup` - CloudWatch Logs (standard Lambda)
 - `logs:CreateLogStream` - CloudWatch Logs (standard Lambda)
 - `logs:PutLogEvents` - CloudWatch Logs (standard Lambda)
 
 ## Output Format
 
-The function generates `metrics.json` with this structure:
+The function collects metrics (logged to CloudWatch) with this structure:
 
 ```json
 {

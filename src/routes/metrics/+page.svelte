@@ -6,20 +6,9 @@
 	let lastUpdated = new Date();
 
 	onMount(async () => {
-		try {
-			const response = await fetch('/metrics.json');
-			if (response.ok) {
-				metricsData = await response.json();
-				lastUpdated = new Date(metricsData.lastUpdated);
-			}
-		} catch (error) {
-			console.log('Using mock data');
-		} finally {
-			if (!metricsData) {
-				metricsData = generateMockData();
-			}
-			loading = false;
-		}
+		// Use mock data for now (metrics.json collection disabled)
+		metricsData = generateMockData();
+		loading = false;
 	});
 
 	function generateMockData() {
