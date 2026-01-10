@@ -54,6 +54,7 @@ test.describe('Zero to One Solutions Website', () => {
     await expect(page.locator('text=Transforming complexity into clarity')).toBeVisible();
     await expect(page.locator('text=Our Story')).toBeVisible();
     await expect(page.locator('text=What Drives Us')).toBeVisible();
+    await expect(page.locator('text=Beyond the Code')).toBeVisible();
   });
 
   test('navigation works across all pages', async ({ page }) => {
@@ -98,5 +99,71 @@ test.describe('Zero to One Solutions Website', () => {
     // Check hero content is responsive
     await expect(page.locator('.hero')).toBeVisible();
     await expect(page.locator('.cta-button')).toBeVisible();
+  });
+
+  test('in-house products page shows package offerings', async ({ page }) => {
+    await page.goto(`${BASE_URL}/in-house/products`);
+
+    // Check hero section
+    await expect(page.locator('h1')).toContainText('You Have the Vision');
+
+    // Check all three scenario sections are present
+    await expect(page.locator('text=The Founder with an Idea')).toBeVisible();
+    await expect(page.locator('text=The Exec with a Moonshot')).toBeVisible();
+    await expect(page.locator('text=The Team Ready to Scale')).toBeVisible();
+
+    // Check package cards are present (should have 9 total: 3 per scenario)
+    const packageCards = page.locator('.package-card');
+    await expect(packageCards).toHaveCount(9);
+
+    // Check featured packages are marked (should have 3)
+    const featuredPackages = page.locator('.package-card.featured');
+    await expect(featuredPackages).toHaveCount(3);
+
+    // Check Technical Mastery section is visible
+    await expect(page.locator('text=Technical Mastery')).toBeVisible();
+  });
+
+  test('work page displays case studies with updated layout', async ({ page }) => {
+    await page.goto(`${BASE_URL}/work`);
+
+    // Check hero section
+    await expect(page.locator('h1')).toContainText('Enterprise Solutions');
+
+    // Check Featured Transformations section
+    await expect(page.locator('text=Featured Transformations')).toBeVisible();
+
+    // Check case study cards are present
+    const caseStudyCards = page.locator('.case-study-card');
+    await expect(caseStudyCards.first()).toBeVisible();
+
+    // Check Additional Client Work section
+    await expect(page.locator('text=Additional Client Work')).toBeVisible();
+
+    // Check work cards have horizontal scroll container
+    const workGrid = page.locator('.work-grid');
+    await expect(workGrid).toBeVisible();
+  });
+
+  test('removed pages return 404 or redirect', async ({ page }) => {
+    // Test that incubator page no longer exists
+    const incubatorResponse = await page.goto(`${BASE_URL}/incubator`);
+    expect(incubatorResponse?.status()).toBe(404);
+
+    // Test that portfolio page no longer exists
+    const portfolioResponse = await page.goto(`${BASE_URL}/portfolio`);
+    expect(portfolioResponse?.status()).toBe(404);
+  });
+
+  test('contact page links to in-house instead of incubator', async ({ page }) => {
+    await page.goto(`${BASE_URL}/contact`);
+
+    // Check that links point to /in-house instead of /incubator
+    const inHouseLinks = page.locator('a[href="/in-house"]');
+    await expect(inHouseLinks.first()).toBeVisible();
+
+    // Ensure no incubator links exist
+    const incubatorLinks = page.locator('a[href="/incubator"]');
+    await expect(incubatorLinks).toHaveCount(0);
   });
 });
